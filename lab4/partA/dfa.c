@@ -11,11 +11,9 @@ int main()
 	goto LOOP;
 	*/
 	char c;
-	char str[10];
 STATE_1:
 	printf("state 1\n");
-	scanf("%s", str);
-	c=str[0];	
+	scanf("%c", &c);	
 	if(c=='a'){
 		
 		printf("1: Moving to state 2\n");
@@ -27,8 +25,7 @@ STATE_1:
 	}
 STATE_2:
 	printf("state 2\n");
-	scanf("%s", str);
-	c=str[0];
+	scanf("%c", &c);
 	if(c=='a'){
 		printf("2: Moving to state 3\n");
 		goto STATE_3;

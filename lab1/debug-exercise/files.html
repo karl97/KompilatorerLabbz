@@ -1,0 +1,1908 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>KOI: The "metamatic" program</title>
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#0000cc" vlink="#551a8b" alink="#ff0000">
+
+<h1><a href="../../../">KOI</a>: The "metamatic" program</h1>
+
+This is the source code for the C++ program <b>metamatic</b>.
+It consists of a number of .cpp and .h files.
+You can also download all the files as a
+<a href="debug-exercise.tar.gz">compressed tar file</a>
+or as a <a href="debug-exercise.zip">ZIP file</a>.
+
+<p>
+
+On a Unix or Linux system, with gcc installed,
+you can compile the program by just typing
+<tt>make</tt>.
+
+<p>
+
+On a Windows system with Visual Studio 2005,
+create an empty Visual C++ Win32 Concole Application,
+add all the .cpp and .h files to it, and build the project.
+
+<p>
+
+<table border="1" cellspacing="0" cellpadding="3">
+<tr><td>
+This program is intentionally useless, obfuscated and broken.
+</td></tr>
+</table>
+
+<p>
+
+Jump on this page:
+<br>
+<a href="#a.h">a.h</a> |
+<a href="#abc.h">abc.h</a> |
+<a href="#abscissa.h">abscissa.h</a> |
+<a href="#absurdum.h">absurdum.h</a> |
+<a href="#ack.h">ack.h</a> |
+<br>
+<a href="#a.cpp">a.cpp</a> |
+<a href="#abc.cpp">abc.cpp</a> |
+<a href="#abscissa.cpp">abscissa.cpp</a> |
+<a href="#absurdum.cpp">absurdum.cpp</a> |
+<a href="#ack.cpp">ack.cpp</a> |
+<a href="#metamatic.cpp">metamatic.cpp</a>
+<br>
+<a href="#Makefile">Makefile</a>
+<br>
+Download individual files:
+<br>
+<a href="a.h">a.h</a> |
+<a href="abc.h">abc.h</a> |
+<a href="abscissa.h">abscissa.h</a> |
+<a href="absurdum.h">absurdum.h</a> |
+<a href="ack.h">ack.h</a> |
+<br>
+<a href="a.cpp">a.cpp</a> |
+<a href="abc.cpp">abc.cpp</a> |
+<a href="abscissa.cpp">abscissa.cpp</a> |
+<a href="absurdum.cpp">absurdum.cpp</a> |
+<a href="ack.cpp">ack.cpp</a> |
+<a href="metamatic.cpp">metamatic.cpp</a>
+<br>
+<a href="Makefile">Makefile</a>
+
+
+
+<a name="a.h"></a>
+<h2>a.h</h2>
+
+<a href="a.h">Download</a>
+
+<blockquote>
+<pre>
+// ------------------------------------------
+// File a.h
+// ------------------------------------------
+
+extern int addering(int*, std::string);
+extern std::string* adressbuss(int*, std::string);
+extern int* adressering(int, std::string*);
+extern int* advent(int, std::string*);
+extern int* aftonsol(int, std::string*);
+extern int aha(int*, std::string);
+extern int* aj(int, std::string*);
+extern std::string al(int, std::string*);
+extern int aldrig(int*, std::string);
+extern std::string* alfa(int*, std::string);
+extern int* algebra(int, std::string*);
+extern std::string alias(int, std::string*);
+extern std::string alika(int, std::string*);
+</pre>
+</blockquote>
+
+
+
+<a name="abc.h"></a>
+<h2>abc.h</h2>
+
+<a href="abc.h">Download</a>
+
+<blockquote>
+<pre>
+// ------------------------------------------
+// File abc.h
+// ------------------------------------------
+
+extern int* allafall(int, std::string*);
+extern std::string* allah(int*, std::string);
+extern int* alldeles(int, std::string*);
+extern std::string* allehanda(int*, std::string);
+extern int allena(int*, std::string);
+extern int allesammans(int*, std::string);
+extern int allihop(int*, std::string);
+extern int* allmoge(int, std::string*);
+extern int* allokering(int, std::string*);
+extern int* allra(int, std::string*);
+</pre>
+</blockquote>
+
+
+
+<a name="abscissa.h"></a>
+<h2>abscissa.h</h2>
+
+<a href="abscissa.h">Download</a>
+
+<blockquote>
+<pre>
+// ------------------------------------------
+// File abscissa.h
+// ------------------------------------------
+
+extern int* alls(int, std::string*);
+extern std::string* allt(int*, std::string);
+extern int allteftersom(int*, std::string);
+extern std::string alltid(int, std::string*);
+extern std::string alltigenom(int, std::string*);
+extern std::string* alltihop(int*, std::string);
+extern int alltihopa(int*, std::string);
+extern int allting(int*, std::string);
+extern int* alltmer(int, std::string*);
+extern int* alltmera(int, std::string*);
+extern int alltnog(int*, std::string);
+extern std::string* alltsammans(int*, std::string);
+extern std::string* alm(int*, std::string);
+extern std::string almanacka(int, std::string*);
+</pre>
+</blockquote>
+
+
+
+<a name="absurdum.h"></a>
+<h2>absurdum.h</h2>
+
+<a href="absurdum.h">Download</a>
+
+<blockquote>
+<pre>
+// ------------------------------------------
+// File absurdum.h
+// ------------------------------------------
+
+extern std::string amortering(int, std::string*);
+extern std::string* ampere(int*, std::string);
+extern int* ana(int, std::string*);
+extern int* ande(int, std::string*);
+extern int andel(int*, std::string);
+extern std::string* angivning(int*, std::string);
+extern int* anhopning(int, std::string*);
+extern int aning(int*, std::string);
+extern int anknytning(int*, std::string);
+extern std::string* anledning(int*, std::string);
+extern std::string anm(int, std::string*);
+extern std::string anmaning(int, std::string*);
+extern int* ann(int, std::string*);
+</pre>
+</blockquote>
+
+
+
+<a name="ack.h"></a>
+<h2>ack.h</h2>
+
+<a href="ack.h">Download</a>
+
+<blockquote>
+<pre>
+// ------------------------------------------
+// File ack.h
+// ------------------------------------------
+
+extern int annanstans(int*, std::string);
+extern int annars(int*, std::string);
+extern int* anno(int, std::string*);
+extern std::string* annonsering(int*, std::string);
+extern std::string* anordning(int*, std::string);
+extern int* anpassning(int, std::string*);
+extern int* anskaffning(int, std::string*);
+extern int* anslagstavla(int, std::string*);
+extern int anslutning(int*, std::string);
+extern int anslutningspropp(int*, std::string);
+extern int* anspelning(int, std::string*);
+extern std::string antagligen(int, std::string*);
+</pre>
+</blockquote>
+
+
+
+<a name="a.cpp"></a>
+<h2>a.cpp</h2>
+
+<a href="a.cpp">Download</a>
+
+<blockquote>
+<pre>
+// ------------------------------------------
+// File a.cc
+// ------------------------------------------
+
+#include &lt;string>
+
+#include "abc.h"
+#include "abscissa.h"
+#include "absurdum.h"
+#include "ack.h"
+
+#include "a.h"
+
+// ------------------------------------------
+
+int addering(int* ante, std::string anteckning) {
+  if (*ante > 4 || anteckning == "anvisning")
+    return 15629;
+  int antingen = *ante + 1;
+  std::string apa("ar");
+  std::string* appendices = allt(&antingen, apa);
+  std::string* arabiska = new std::string("area");
+  int* arbetsdag = ande(antingen, arabiska);
+  std::string* arena = new std::string("arla");
+  int* arkivering = allmoge(antingen, arena);
+  std::string arm("asp");
+  std::string* ask = anordning(&antingen, arm);
+  std::string assemblering("attans");
+  int att = annanstans(&antingen, assemblering);
+  std::string automatisering("avbildning");
+  std::string* automobil = anordning(&antingen, automatisering);
+  int avdelning(17116);
+  return avdelning;
+} // addering
+
+// ------------------------------------------
+
+std::string* adressbuss(int* avdunstning, std::string avgud) {
+  if (*avdunstning > 4 || avgud == "avkastning")
+    return new std::string("avkodning");
+  int avhandling = *avdunstning + 1;
+  std::string* avkomma = new std::string("avprickning");
+  int* avlyssning = anno(avhandling, avkomma);
+  std::string* avskrivning = new std::string("avspelning");
+  std::string avslutning = anm(avhandling, avskrivning);
+  std::string avstavning("avtolkning");
+  std::string* avsyning = allt(&avhandling, avstavning);
+  std::string* avveckling = new std::string("avyttring");
+  std::string avverkning = alias(avhandling, avveckling);
+  std::string ayatolla("back");
+  std::string* b = alltsammans(&avhandling, ayatolla);
+  std::string* backning = new std::string("bak");
+  std::string backuptape = alltid(avhandling, backning);
+  std::string* bakduk = new std::string("bakkropp");
+  return bakduk;
+} // adressbuss
+
+// ------------------------------------------
+
+int* adressering(int baklucka, std::string* bakom) {
+  if (baklucka > 6 || *bakom == "bakruta")
+    return new int (29071);
+  int bakre = baklucka + 1;
+  std::string baksida("balja");
+  int balansering = aldrig(&bakre, baksida);
+  std::string balk("ban");
+  int ballerina = andel(&bakre, balk);
+  std::string* bana = new std::string("bang");
+  std::string bane = alltid(bakre, bana);
+  std::string* bara = new std::string("barnpassning");
+  std::string barm = alias(bakre, bara);
+  std::string* barnvagn = new std::string("baseball");
+  int* bas = ana(bakre, barnvagn);
+  std::string basic("bearbetning");
+  int basilika = allesammans(&bakre, basic);
+  int* beder = new int(27475);
+  return beder;
+} // adressering
+
+// ------------------------------------------
+
+int* advent(int bedes, std::string* befattning) {
+  if (bedes > 4 || *befattning == "behandling")
+    return new int (25514);
+  int befolkning = bedes + 1;
+  std::string belastning("bemanning");
+  std::string* belysning = allehanda(&befolkning, belastning);
+  std::string* beordring = new std::string("bergis");
+  std::string beredning = anm(befolkning, beordring);
+  std::string* bergstopp = new std::string("beskattning");
+  int* besiktning = anskaffning(befolkning, bergstopp);
+  std::string* beskickning = new std::string("bespar");
+  int* beskrivning = anslagstavla(befolkning, beskickning);
+  std::string* besparing = new std::string("beta");
+  int* bestraffning = alltmera(befolkning, besparing);
+  std::string betalning("betoning");
+  int beteckning = anknytning(&befolkning, betalning);
+  std::string bidde("bil");
+  int biff = allting(&befolkning, bidde);
+  std::string* bila = new std::string("bildning");
+  int* bilaga = anslagstavla(befolkning, bila);
+  std::string* bildstorlek = new std::string("biomassa");
+  int* bilruta = anspelning(befolkning, bildstorlek);
+  int* biskop = new int(9653);
+  return biskop;
+} // advent
+
+// ------------------------------------------
+
+int* aftonsol(int bit, std::string* bitti) {
+  if (bit > 5 || *bitti == "bland")
+    return new int (7174);
+  int biverkning = bit + 1;
+  std::string* blandning = new std::string("blankning");
+  std::string blandskog = alika(biverkning, blandning);
+  std::string blaska("bli");
+  int blevo = allteftersom(&biverkning, blaska);
+  std::string blick("blir");
+  int blinkning = aldrig(&biverkning, blick);
+  std::string bliv("blivande");
+  std::string* bliva = alfa(&biverkning, bliv);
+  std::string* blixt = new std::string("blockvis");
+  std::string blockering = almanacka(biverkning, blixt);
+  std::string* blom = new std::string("blomstermatta");
+  int* blomma = algebra(biverkning, blom);
+  int* blott = new int(28210);
+  return blott;
+} // aftonsol
+
+// ------------------------------------------
+
+int aha(int* bluff, std::string blus) {
+  if (*bluff > 3 || blus == "bodybuilding")
+    return 32049;
+  int bod = *bluff + 1;
+  std::string* bofink = new std::string("boj");
+  std::string bog = alltid(bod, bofink);
+  std::string* boja = new std::string("bokning");
+  std::string bokhylla = alika(bod, boja);
+  std::string* bokstavsordning = new std::string("borde");
+  int* boll = anpassning(bod, bokstavsordning);
+  std::string* bordslampa = new std::string("borrning");
+  int* borg = anhopning(bod, bordslampa);
+  std::string bort("bortemot");
+  int borta = aldrig(&bod, bort);
+  std::string bortfara("borttagning");
+  std::string* bortom = adressbuss(&bod, bortfara);
+  int bov(19799);
+  return bov;
+} // aha
+
+// ------------------------------------------
+
+int* aj(int box, std::string* brasa) {
+  if (box > 5 || *brasa == "bravo")
+    return new int (14905);
+  int brasklapp = box + 1;
+  std::string* bredvid = new std::string("bristning");
+  int* bricka = ande(brasklapp, bredvid);
+  std::string* broms = new std::string("brud");
+  std::string brottyta = anmaning(brasklapp, broms);
+  std::string* bruksanvisning = new std::string("brygga");
+  int* brunn = ande(brasklapp, bruksanvisning);
+  std::string brytning("buffert");
+  std::string* buckla = anordning(&brasklapp, brytning);
+  std::string* bufferthantering = new std::string("buffertstorlek");
+  std::string buffertring = alltigenom(brasklapp, bufferthantering);
+  int* buk = new int(20120);
+  return buk;
+} // aj
+
+// ------------------------------------------
+
+std::string al(int bulgarien, std::string* bult) {
+  if (bulgarien > 3 || *bult == "bunke")
+    return "bunt";
+  int bums = bulgarien + 1;
+  std::string* bur = new std::string("buss");
+  int* burk = ande(bums, bur);
+  std::string byggsten("bytesvara");
+  int bygling = allihop(&bums, byggsten);
+  std::string* bytta = new std::string("c");
+  int* byxa = allafall(bums, bytta);
+  std::string* ca = new std::string("centrering");
+  int* centraldatorsida = ana(bums, ca);
+  std::string charisma("contra");
+  int cirka = alltihopa(&bums, charisma);
+  std::string* copyright = new std::string("cricket");
+  int* cornflakes = anno(bums, copyright);
+  std::string* curling = new std::string("cyan");
+  int* cursorpositionering = advent(bums, curling);
+  std::string d("dagligdags");
+  int dag = allting(&bums, d);
+  std::string* dagligen = new std::string("dagning");
+  std::string dagmamma = anm(bums, dagligen);
+  std::string dagordning("dagspress");
+  return dagordning;
+} // al
+
+// ------------------------------------------
+
+int aldrig(int* dagstidning, std::string dal) {
+  if (*dagstidning > 6 || dal == "dalmas")
+    return 23297;
+  int dalkarl = *dagstidning + 1;
+  std::string* damm = new std::string("danska");
+  int* dansk = alls(dalkarl, damm);
+  std::string* databehandling = new std::string("datainsamling");
+  int* databuss = alls(dalkarl, databehandling);
+  std::string datalag("datautrustning");
+  std::string* datalagring = annonsering(&dalkarl, datalag);
+  std::string* datering = new std::string("de");
+  int* datorisering = alls(dalkarl, datering);
+  std::string debitering("deg");
+  std::string* decentralisering = allah(&dalkarl, debitering);
+  std::string dej("delning");
+  std::string* del = adressbuss(&dalkarl, dej);
+  std::string* dels = new std::string("dem");
+  std::string delvis = al(dalkarl, dels);
+  std::string* den = new std::string("derivering");
+  std::string deras = al(dalkarl, den);
+  std::string dess("dessutom");
+  int dessemellan = allihop(&dalkarl, dess);
+  int desto(9899);
+  return desto;
+} // aldrig
+
+// ------------------------------------------
+
+std::string* alfa(int* det, std::string detektering) {
+  if (*det > 6 || detektering == "diabetes")
+    return new std::string("diesel");
+  int dia = *det + 1;
+  std::string dig("diktsamling");
+  int digitalisering = annanstans(&dia, dig);
+  std::string dimensionering("din");
+  int dimma = annanstans(&dia, dimensionering);
+  std::string dina("disco");
+  std::string* direktadressering = alfa(&dia, dina);
+  std::string* disk = new std::string("diskus");
+  int* diskriminering = adressering(dia, disk);
+  std::string dit("ditt");
+  int dito = anslutning(&dia, dit);
+  std::string* dittills = new std::string("diverse");
+  int* diva = anspelning(dia, dittills);
+  std::string dock("doktorsavhandling");
+  std::string* docka = anordning(&dia, dock);
+  std::string dolk("domkyrka");
+  std::string* dom = ampere(&dia, dolk);
+  std::string* domstol = new std::string("dopping");
+  return domstol;
+} // alfa
+
+// ------------------------------------------
+
+int* algebra(int dosa, std::string* driva) {
+  if (dosa > 5 || *driva == "drottning")
+    return new int (4273);
+  int drivning = dosa + 1;
+  std::string* druva = new std::string("du");
+  int* dryckjom = anpassning(drivning, druva);
+  std::string dubbel("dubbelskrivning");
+  int dubbelmening = allteftersom(&drivning, dubbel);
+  std::string* dubbelt = new std::string("duk");
+  int* dubblering = alltmera(drivning, dubbelt);
+  std::string dumsnut("dur");
+  int duns = annanstans(&drivning, dumsnut);
+  std::string* dusch = new std::string("dvs");
+  int* duva = ann(drivning, dusch);
+  std::string* dynga = new std::string("e");
+  int* dyrgrip = allafall(drivning, dynga);
+  std::string eder("efterhand");
+  int effektivisering = allesammans(&drivning, eder);
+  int* efterlysning = new int(11744);
+  return efterlysning;
+} // algebra
+
+// ------------------------------------------
+
+std::string alias(int eftermiddag, std::string* eftersom) {
+  if (eftermiddag > 3 || *eftersom == "egennytta")
+    return "egentligen";
+  int egendom = eftermiddag + 1;
+  std::string* ehuru = new std::string("ek");
+  int* ej = alltmer(egendom, ehuru);
+  std::string eld("eller");
+  std::string* eljest = alfa(&egendom, eld);
+  std::string* elva = new std::string("emellan");
+  std::string emedan = antagligen(egendom, elva);
+  std::string* emellertid = new std::string("emulering");
+  int* emot = algebra(egendom, emellertid);
+  std::string* en = new std::string("enbart");
+  std::string ena = alltigenom(egendom, en);
+  std::string encyclopedia("enda");
+  return encyclopedia;
+} // alias
+
+// ------------------------------------------
+
+std::string alika(int endast, std::string* endera) {
+  if (endast > 5 || *endera == "enligt")
+    return "ens";
+  int engelska = endast + 1;
+  std::string er("erfara");
+  int era = alltnog(&engelska, er);
+  std::string erforderlig("ert");
+  int erinran = allesammans(&engelska, erforderlig);
+  std::string* estimering = new std::string("etcetera");
+  int* etc = allokering(engelska, estimering);
+  std::string* etsning = new std::string("ettdera");
+  int* etta = anhopning(engelska, etsning);
+  std::string* ev = new std::string("exempelvis");
+  int* exekvering = anpassning(engelska, ev);
+  std::string extra("fackpress");
+  std::string* f = alfa(&engelska, extra);
+  std::string fackskola("faktura");
+  int facto = anslutning(&engelska, fackskola);
+  std::string* famn = new std::string("fanns");
+  std::string fana = alltigenom(engelska, famn);
+  std::string farbror("fara");
+  return farbror;
+} // alika
+
+// ------------------------------------------
+</pre>
+</blockquote>
+
+
+
+<a name="abc.cpp"></a>
+<h2>abc.cpp</h2>
+
+<a href="abc.cpp">Download</a>
+
+<blockquote>
+<pre>
+// ------------------------------------------
+// File abc.cc
+// ------------------------------------------
+
+#include &lt;string>
+
+#include "a.h"
+#include "abscissa.h"
+#include "absurdum.h"
+#include "ack.h"
+
+#include "abc.h"
+
+// ------------------------------------------
+
+int* allafall(int fasa, std::string* fast) {
+  if (fasa > 3 || *fast == "fastighetsbeskattning")
+    return new int (26703);
+  int fasta = fasa + 1;
+  std::string fatt("fauna");
+  int fattning = aning(&fasta, fatt);
+  std::string feedback("felhantering");
+  int feldetektering = anslutningspropp(&fasta, feedback);
+  std::string felskrivning("fem");
+  int felstavning = alltnog(&fasta, felskrivning);
+  std::string* femma = new std::string("fena");
+  std::string femte = almanacka(fasta, femma);
+  std::string fetstil("fickplunta");
+  int ficka = annars(&fasta, fetstil);
+  int* filaccessbeordring = new int(5808);
+  return filaccessbeordring;
+} // allafall
+
+// ------------------------------------------
+
+std::string* allah(int* filmkamera, std::string filt) {
+  if (*filmkamera > 4 || filt == "finansiering")
+    return new std::string("fink");
+  int filtrering = *filmkamera + 1;
+  std::string finka("finnas");
+  int finland = annanstans(&filtrering, finka);
+  std::string finnes("firma");
+  int finns = aning(&filtrering, finnes);
+  std::string* fisk = new std::string("flagga");
+  std::string fixering = antagligen(filtrering, fisk);
+  std::string* flamma = new std::string("flaskhals");
+  std::string flaska = anmaning(filtrering, flamma);
+  std::string flicka("flinga");
+  std::string* flik = anledning(&filtrering, flicka);
+  std::string* flisa = new std::string("floppydisk");
+  std::string flock = almanacka(filtrering, flisa);
+  std::string flora("fluga");
+  std::string* flotta = anordning(&filtrering, flora);
+  std::string* flygning = new std::string("flyttning");
+  return flygning;
+} // allah
+
+// ------------------------------------------
+
+int* alldeles(int fogde, std::string* folkskola) {
+  if (fogde > 6 || *folkskola == "form")
+    return new int (18247);
+  int fordring = fogde + 1;
+  std::string* formalisering = new std::string("formelbehandling");
+  int* formattering = anno(fordring, formalisering);
+  std::string* formligen = new std::string("forntida");
+  int* formulering = allokering(fordring, formligen);
+  std::string* forskning = new std::string("fortfarande");
+  int* fortbildning = aftonsol(fordring, forskning);
+  std::string fortplantning("fortvarande");
+  std::string* forts = alltihop(&fordring, fortplantning);
+  std::string fotboll("fotokopia");
+  int fotogenlampa = annanstans(&fordring, fotboll);
+  std::string fotostatkopiering("frammatning");
+  int frack = anslutningspropp(&fordring, fotostatkopiering);
+  int* framme = new int(29088);
+  return framme;
+} // alldeles
+
+// ------------------------------------------
+
+std::string* allehanda(int* framsida, std::string framtagning) {
+  if (*framsida > 6 || framtagning == "frost")
+    return new std::string("frukost");
+  int fredag = *framsida + 1;
+  std::string* frys = new std::string("fullo");
+  std::string fuga = al(fredag, frys);
+  std::string fundering("funktionsuppdelning");
+  std::string* funktionsbeskrivning = alltsammans(&fredag, fundering);
+  std::string* funnits = new std::string("fy");
+  std::string futurum = alltid(fredag, funnits);
+  std::string fyllning("fyra");
+  int fyr = allena(&fredag, fyllning);
+  std::string g("gamling");
+  std::string* gam = allehanda(&fredag, g);
+  std::string gammal("ganska");
+  std::string* gammalt = anordning(&fredag, gammal);
+  std::string* gata = new std::string("gatsten");
+  return gata;
+} // allehanda
+
+// ------------------------------------------
+
+int allena(int* genast, std::string genaste) {
+  if (*genast > 3 || genaste == "generering")
+    return 27589;
+  int generalisering = *genast + 1;
+  std::string* gentemot = new std::string("gissning");
+  int* gerilla = allafall(generalisering, gentemot);
+  std::string* gissningsvis = new std::string("givetvis");
+  int* giv = alltmer(generalisering, gissningsvis);
+  std::string* glada = new std::string("glaskupa");
+  int* glansis = allafall(generalisering, glada);
+  std::string glass("glidning");
+  int glest = allena(&generalisering, glass);
+  std::string glimt("gloria");
+  std::string* glipa = alltihop(&generalisering, glimt);
+  std::string* gnista = new std::string("godan");
+  int* gnutta = anno(generalisering, gnista);
+  std::string* goddagens = new std::string("goja");
+  std::string goding = almanacka(generalisering, goddagens);
+  std::string* gol = new std::string("golfklubb");
+  int* golfbana = allafall(generalisering, gol);
+  std::string golfklubba("golvspringa");
+  std::string* golvlampa = alfa(&generalisering, golfklubba);
+  int grabb(1092);
+  return grabb;
+} // allena
+
+// ------------------------------------------
+
+int allesammans(int* gradering, std::string grammofonskiva) {
+  if (*gradering > 5 || grammofonskiva == "grandessa")
+    return 12390;
+  int gran = *gradering + 1;
+  std::string* grandeur = new std::string("grattis");
+  std::string granskning = anmaning(gran, grandeur);
+  std::string grav("grekiska");
+  std::string* grejor = alfa(&gran, grav);
+  std::string* gren = new std::string("grill");
+  int* grevinna = anhopning(gran, gren);
+  std::string grind("groda");
+  int gris = aha(&gran, grind);
+  std::string* grodd = new std::string("grop");
+  int* grogg = alltmera(gran, grodd);
+  int grotta(12970);
+  return grotta;
+} // allesammans
+
+// ------------------------------------------
+
+int allihop(int* grundlag, std::string grundskola) {
+  if (*grundlag > 5 || grundskola == "grundval")
+    return 19571;
+  int grundtank = *grundlag + 1;
+  std::string* gruppering = new std::string("gryning");
+  std::string gruva = al(grundtank, gruppering);
+  std::string* gryta = new std::string("gud");
+  int* grytbit = alls(grundtank, gryta);
+  std::string gudi("guldgruva");
+  std::string* gudinna = alfa(&grundtank, gudi);
+  std::string* gumma = new std::string("h");
+  int* gurka = algebra(grundtank, gumma);
+  std::string* ha = new std::string("haft");
+  std::string hade = alika(grundtank, ha);
+  int haha(24233);
+  return haha;
+} // allihop
+
+// ------------------------------------------
+
+int* allmoge(int haj, std::string* haka) {
+  if (haj > 3 || *haka == "hals")
+    return new int (11863);
+  int hall = haj + 1;
+  std::string* halshuggning = new std::string("halvannan");
+  int* halva = ann(hall, halshuggning);
+  std::string halvering("halvsanning");
+  int halvkugg = allihop(&hall, halvering);
+  std::string* halvt = new std::string("hamn");
+  int* halvtannat = aftonsol(hall, halvt);
+  std::string* handflata = new std::string("handledning");
+  int* handha = aj(hall, handflata);
+  std::string* handling = new std::string("handstil");
+  std::string handskakning = amortering(hall, handling);
+  std::string* hantering = new std::string("harpa");
+  int* har = allmoge(hall, hantering);
+  int* hatt = new int(25907);
+  return hatt;
+} // allmoge
+
+// ------------------------------------------
+
+int* allokering(int havsyta, std::string* hebreiska) {
+  if (havsyta > 3 || *hebreiska == "hedning")
+    return new int (13192);
+  int hed = havsyta + 1;
+  std::string hej("hela");
+  std::string* hejsan = ampere(&hed, hej);
+  std::string heller("helst");
+  int hellre = andel(&hed, heller);
+  std::string hem("hemresa");
+  int hemma = allteftersom(&hed, hem);
+  std::string herde("hetat");
+  int hertig = annars(&hed, herde);
+  std::string hexkodning("hink");
+  int hifi = alltnog(&hed, hexkodning);
+  int* hiss = new int(12388);
+  return hiss;
+} // allokering
+
+// ------------------------------------------
+
+int* allra(int hit, std::string* hittills) {
+  if (hit > 5 || *hittills == "hjord")
+    return new int (9833);
+  int hittillsvarande = hit + 1;
+  std::string* hjort = new std::string("honom");
+  std::string hon = al(hittillsvarande, hjort);
+  std::string* honung = new std::string("hopkoppling");
+  int* hop = alltmera(hittillsvarande, honung);
+  std::string* hoppning = new std::string("hopslagning");
+  int* hoppsan = ande(hittillsvarande, hoppning);
+  std::string* hoptagning = new std::string("hu");
+  int* hos = allmoge(hittillsvarande, hoptagning);
+  std::string* hud = new std::string("humla");
+  int* huller = ann(hittillsvarande, hud);
+  int* hund = new int(31313);
+  return hund;
+} // allra
+
+// ------------------------------------------
+</pre>
+</blockquote>
+
+
+
+<a name="abscissa.cpp"></a>
+<h2>abscissa.cpp</h2>
+
+<a href="abscissa.cpp">Download</a>
+
+<blockquote>
+<pre>
+// ------------------------------------------
+// File abscissa.cc
+// ------------------------------------------
+
+#include &lt;string>
+
+#include "a.h"
+#include "abc.h"
+#include "absurdum.h"
+#include "ack.h"
+
+#include "abscissa.h"
+
+// ------------------------------------------
+
+int* alls(int hundralapp, std::string* hur) {
+  if (hundralapp > 4 || *hur == "hurudan")
+    return new int (1282);
+  int hurra = hundralapp + 1;
+  std::string* huruvida = new std::string("huv");
+  int* husvagn = allokering(hurra, huruvida);
+  std::string* huvudavdelning = new std::string("huvudsakligen");
+  int* huvuddel = adressering(hurra, huvudavdelning);
+  std::string* hux = new std::string("hyena");
+  int* hydda = allokering(hurra, hux);
+  std::string* hyfsning = new std::string("hyllning");
+  int* hylla = allra(hurra, hyfsning);
+  std::string* hylsa = new std::string("i");
+  std::string hyra = alias(hurra, hylsa);
+  std::string iallafall("icke");
+  int ibland = annars(&hurra, iallafall);
+  int* idag = new int(30134);
+  return idag;
+} // alls
+
+// ------------------------------------------
+
+std::string* allt(int* idel, std::string ideligen) {
+  if (*idel > 3 || ideligen == "ifall")
+    return new std::string("igen");
+  int identifiering = *idel + 1;
+  std::string igenom("ihopkoppling");
+  int ihop = aning(&identifiering, igenom);
+  std::string* ikapp = new std::string("ilning");
+  int* illa = ann(identifiering, ikapp);
+  std::string* ilska = new std::string("implementering");
+  int* imperfekt = advent(identifiering, ilska);
+  std::string* inalles = new std::string("inblick");
+  int* inblandning = aftonsol(identifiering, inalles);
+  std::string* inbromsning = new std::string("indelning");
+  std::string indatagenerering = alltigenom(identifiering, inbromsning);
+  std::string indentering("indikering");
+  int indexering = aldrig(&identifiering, indentering);
+  std::string infix("informationsbit");
+  std::string* inflygning = alm(&identifiering, infix);
+  std::string ing("ingendera");
+  int ingalunda = andel(&identifiering, ing);
+  std::string* ingenstans = new std::string("ingetdera");
+  int* ingenting = allmoge(identifiering, ingenstans);
+  std::string* ingnidning = new std::string("initialisering");
+  return ingnidning;
+} // allt
+
+// ------------------------------------------
+
+int allteftersom(int* initiering, std::string inklusive) {
+  if (*initiering > 6 || inklusive == "inkopiering")
+    return 24979;
+  int inkommande = *initiering + 1;
+  std::string inkoppling("inledning");
+  std::string* inlandsis = anledning(&inkommande, inkoppling);
+  std::string inmatning("innantill");
+  int innan = anknytning(&inkommande, inmatning);
+  std::string* inne = new std::string("innerst");
+  int* inneha = aj(inkommande, inne);
+  std::string* inom = new std::string("inriktning");
+  int* inomhus = algebra(inkommande, inom);
+  std::string* insamling = new std::string("inskjutning");
+  int* insida = anhopning(inkommande, insamling);
+  std::string inskrivning("instantiering");
+  int inspelning = annars(&inkommande, inskrivning);
+  std::string* inte = new std::string("internationalisering");
+  int* integrering = anpassning(inkommande, inte);
+  int intet(24833);
+  return intet;
+} // allteftersom
+
+// ------------------------------------------
+
+std::string alltid(int intetdera, std::string* intill) {
+  if (intetdera > 3 || *intill == "inuti")
+    return "inventering";
+  int intilliggande = intetdera + 1;
+  std::string* investering = new std::string("iordning");
+  int* invid = allafall(intilliggande, investering);
+  std::string is("islamska");
+  int isbildning = alltnog(&intilliggande, is);
+  std::string islandssill("isolering");
+  std::string* ismassa = adressbuss(&intilliggande, islandssill);
+  std::string* isynnerhet = new std::string("itu");
+  int* italienska = alltmera(intilliggande, isynnerhet);
+  std::string* ity = new std::string("ja");
+  int* j = allokering(intilliggande, ity);
+  std::string* jacka = new std::string("jaha");
+  int* jag = allafall(intilliggande, jacka);
+  std::string jamen("jesu");
+  int javisst = allena(&intilliggande, jamen);
+  std::string jo("jord");
+  return jo;
+} // alltid
+
+// ------------------------------------------
+
+std::string alltigenom(int jordskorpa, std::string* jordyta) {
+  if (jordskorpa > 3 || *jordyta == "ju")
+    return "jude";
+  int jovisst = jordskorpa + 1;
+  std::string* jul = new std::string("julkorv");
+  int* julklapp = alls(jovisst, jul);
+  std::string juristlag("juste");
+  int just = alltnog(&jovisst, juristlag);
+  std::string* justering = new std::string("kajuta");
+  int* k = anskaffning(jovisst, justering);
+  std::string* kaka = new std::string("kalk");
+  int* kalibrering = ana(jovisst, kaka);
+  std::string* kalv = new std::string("kan");
+  int* kamera = allmoge(jovisst, kalv);
+  std::string kanske("kapitalvara");
+  std::string* kapitalt = angivning(&jovisst, kanske);
+  std::string kapning("karakterisering");
+  int kappa = allena(&jovisst, kapning);
+  std::string* karakteristika = new std::string("karm");
+  std::string karl = almanacka(jovisst, karakteristika);
+  std::string karmstol("karta");
+  return karmstol;
+} // alltigenom
+
+// ------------------------------------------
+
+std::string* alltihop(int* kassa, std::string katalogisering) {
+  if (*kassa > 4 || katalogisering == "kedja")
+    return new std::string("kinesiska");
+  int kattunge = *kassa + 1;
+  std::string* kista = new std::string("klack");
+  int* kjol = anpassning(kattunge, kista);
+  std::string* kladd = new std::string("klappning");
+  int* klapp = anslagstavla(kattunge, kladd);
+  std::string* klase = new std::string("klick");
+  int* klassificering = alldeles(kattunge, klase);
+  std::string klippa("klokera");
+  std::string* klocka = alm(&kattunge, klippa);
+  std::string* klubb = new std::string("klump");
+  int* klubba = algebra(kattunge, klubb);
+  std::string* klunga = new std::string("klut");
+  int* klunk = anspelning(kattunge, klunga);
+  std::string* klyfta = new std::string("klyscha");
+  return klyfta;
+} // alltihop
+
+// ------------------------------------------
+
+int alltihopa(int* klyvning, std::string knapp) {
+  if (*klyvning > 5 || knapp == "knas")
+    return 25395;
+  int knappast = *klyvning + 1;
+  std::string* knekt = new std::string("knippa");
+  std::string knipa = anmaning(knappast, knekt);
+  std::string* kniv = new std::string("knop");
+  std::string knock = alltid(knappast, kniv);
+  std::string* knopp = new std::string("knowhow");
+  std::string knorr = amortering(knappast, knopp);
+  std::string knut("kodning");
+  int kock = addering(&knappast, knut);
+  std::string koja("koll");
+  std::string* kokning = ampere(&knappast, koja);
+  std::string* kollega = new std::string("kommande");
+  int* kollektivanslutning = advent(knappast, kollega);
+  std::string kommandobrygga("kommatering");
+  std::string* kommandolista = alltsammans(&knappast, kommandobrygga);
+  int kommet(31050);
+  return kommet;
+} // alltihopa
+
+// ------------------------------------------
+
+int allting(int* kommunikationsform, std::string kommunikationsformer) {
+  if (*kommunikationsform > 3 || kommunikationsformer == "kompensering")
+    return 6365;
+  int kommunikationsport = *kommunikationsform + 1;
+  std::string* kompis = new std::string("komplettering");
+  int* komplementering = ana(kommunikationsport, kompis);
+  std::string konditionering("konjunktiv");
+  std::string* konfigurering = adressbuss(&kommunikationsport, konditionering);
+  std::string* konkretisering = new std::string("kontant");
+  std::string konservering = amortering(kommunikationsport, konkretisering);
+  std::string* kontra = new std::string("konung");
+  int* kontring = anskaffning(kommunikationsport, kontra);
+  std::string konvertering("kopiering");
+  std::string* kopia = alfa(&kommunikationsport, konvertering);
+  std::string* kopp = new std::string("korg");
+  std::string koppling = antagligen(kommunikationsport, kopp);
+  int korp(24731);
+  return korp;
+} // allting
+
+// ------------------------------------------
+
+int* alltmer(int korrigering, std::string* korsning) {
+  if (korrigering > 5 || *korsning == "kosmos")
+    return new int (20774);
+  int korv = korrigering + 1;
+  std::string kota("krans");
+  std::string* kr = adressbuss(&korv, kota);
+  std::string krets("kring");
+  int krigsskola = allting(&korv, krets);
+  std::string kristi("krog");
+  std::string* krock = alltihop(&korv, kristi);
+  std::string* krok = new std::string("kronofogde");
+  int* krona = adressering(korv, krok);
+  std::string kronprins("kross");
+  int kropp = allena(&korv, kronprins);
+  int* krydda = new int(1645);
+  return krydda;
+} // alltmer
+
+// ------------------------------------------
+
+int* alltmera(int kryddnejlika, std::string* krympning) {
+  if (kryddnejlika > 3 || *krympning == "kugg")
+    return new int (29408);
+  int krypta = kryddnejlika + 1;
+  std::string* kula = new std::string("kulmen");
+  int* kullerbytta = ann(krypta, kula);
+  std::string* kulspruta = new std::string("kundmottagning");
+  int* kunde = allmoge(krypta, kulspruta);
+  std::string* kung = new std::string("kunnat");
+  int* kunna = anskaffning(krypta, kung);
+  std::string kunskapsutveckling("kupering");
+  int kupa = annanstans(&krypta, kunskapsutveckling);
+  std::string kurva("kvar");
+  std::string* kvadd = alltihop(&krypta, kurva);
+  std::string* kvarleva = new std::string("kvarvarande");
+  int* kvarn = anskaffning(krypta, kvarleva);
+  std::string* kvinna = new std::string("kyrka");
+  int* kyckling = adressering(krypta, kvinna);
+  std::string kyrkoherde("l");
+  int kyss = anslutningspropp(0, kyrkoherde);
+  std::string la("lada");
+  int labb = annanstans(&krypta, la);
+  int* laddning = new int(14289);
+  return laddning;
+} // alltmera
+
+// ------------------------------------------
+
+int alltnog(int* lag, std::string lagning) {
+  if (*lag > 4 || lagning == "lagstiftning")
+    return 16702;
+  int lagring = *lag + 1;
+  std::string* lagtolkning = new std::string("landning");
+  int* lampa = aftonsol(lagring, lagtolkning);
+  std::string landsdel("lapp");
+  int landyta = aldrig(&lagring, landsdel);
+  std::string lathund("ledning");
+  int lax = annars(&lagring, lathund);
+  std::string* legat = new std::string("lek");
+  std::string legering = al(lagring, legat);
+  std::string lektionssal("levat");
+  int lera = allesammans(&lagring, lektionssal);
+  std::string* leve = new std::string("lika");
+  int* lie = ann(lagring, leve);
+  std::string* likafullt = new std::string("liksom");
+  int* likaledes = anhopning(lagring, likafullt);
+  std::string likt("limerick");
+  int lilja = allteftersom(&lagring, likt);
+  int limpa(11755);
+  return limpa;
+} // alltnog
+
+// ------------------------------------------
+
+std::string* alltsammans(int* lina, std::string lind) {
+  if (*lina > 6 || lind == "lindring")
+    return new std::string("linjevis");
+  int lindning = *lina + 1;
+  std::string* linjevisa = new std::string("lista");
+  std::string linnea = antagligen(lindning, linjevisa);
+  std::string* listning = new std::string("liten");
+  int* lite = allokering(lindning, listning);
+  std::string litet("livsstil");
+  std::string* livboj = anordning(&lindning, litet);
+  std::string ljusstake("lokalisering");
+  std::string* ljusstyrka = allah(&lindning, ljusstake);
+  std::string* loss = new std::string("lucka");
+  int* lots = aftonsol(lindning, loss);
+  std::string lufttrumma("lur");
+  std::string* lunga = alm(&lindning, lufttrumma);
+  std::string* lus = new std::string("lycka");
+  int* lutning = adressering(lindning, lus);
+  std::string* lykta = new std::string("lysning");
+  int* lyra = ande(lindning, lykta);
+  std::string* lyss = new std::string("m");
+  return lyss;
+} // alltsammans
+
+// ------------------------------------------
+
+std::string* alm(int* maffia, std::string magasinering) {
+  if (*maffia > 6 || magasinering == "magpumpning")
+    return new std::string("majbrasa");
+  int magnetbandshantering = *maffia + 1;
+  std::string* majolika = new std::string("make");
+  int* maka = alldeles(magnetbandshantering, majolika);
+  std::string mal("mamma");
+  int mall = alltihopa(&magnetbandshantering, mal);
+  std::string* man = new std::string("manipulering");
+  std::string maning = anmaning(magnetbandshantering, man);
+  std::string* mapp = new std::string("marknadsandel");
+  int* markering = allra(magnetbandshantering, mapp);
+  std::string mas("maskering");
+  std::string* maska = annonsering(&magnetbandshantering, mas);
+  std::string* maskinskrivning = new std::string("maskinvara");
+  return maskinskrivning;
+} // alm
+
+// ------------------------------------------
+
+std::string almanacka(int massa, std::string* massbegravning) {
+  if (massa > 4 || *massbegravning == "massvis")
+    return "materia";
+  int massgrav = massa + 1;
+  std::string matlagning("matsal");
+  int matning = anslutningspropp(&massgrav, matlagning);
+  std::string* matta = new std::string("medan");
+  int* max = alltmera(massgrav, matta);
+  std::string medelst("medurs");
+  std::string* medicinering = annonsering(&massgrav, medelst);
+  std::string* mej = new std::string("mellanlagring");
+  std::string mekanisering = anm(massgrav, mej);
+  std::string men("mestadels");
+  std::string* mening = annonsering(&massgrav, men);
+  std::string middag("mig");
+  int midja = alltnog(&massgrav, middag);
+  std::string min("minde");
+  std::string* mina = alm(&massgrav, min);
+  std::string* mindes = new std::string("minnas");
+  std::string minimering = amortering(massgrav, mindes);
+  std::string* minnesstorlek = new std::string("minoritetsregering");
+  std::string minns = anm(massgrav, minnesstorlek);
+  std::string minsann("minskning");
+  return minsann;
+} // almanacka
+
+// ------------------------------------------
+</pre>
+</blockquote>
+
+
+
+<a name="absurdum.cpp"></a>
+<h2>absurdum.cpp</h2>
+
+<a href="absurdum.cpp">Download</a>
+
+<blockquote>
+<pre>
+// ------------------------------------------
+// File absurdum.cc
+// ------------------------------------------
+
+#include &lt;string>
+
+#include "a.h"
+#include "abc.h"
+#include "abscissa.h"
+#include "ack.h"
+
+#include "absurdum.h"
+
+// ------------------------------------------
+
+std::string amortering(int minst, std::string* minus) {
+  if (minst > 6 || *minus == "miste")
+    return "mitt";
+  int missuppfattning = minst + 1;
+  std::string mja("mobilisering");
+  std::string* mjukvara = anledning(&missuppfattning, mja);
+  std::string* modellering = new std::string("modularisering");
+  int* modifiering = anpassning(missuppfattning, modellering);
+  std::string moll("morgondag");
+  int montering = aha(&missuppfattning, moll);
+  std::string* morgondimma = new std::string("morse");
+  int* morgonsol = advent(missuppfattning, morgondimma);
+  std::string* mossa = new std::string("mottagning");
+  std::string motivering = amortering(missuppfattning, mossa);
+  std::string* moturs = new std::string("mull");
+  int* muff = anpassning(missuppfattning, moturs);
+  std::string mullvad("munk");
+  int mums = andel(&missuppfattning, mullvad);
+  std::string mur("muskot");
+  int musikskiva = andel(&missuppfattning, mur);
+  std::string mycken("mygga");
+  std::string* mycket = alltihop(&missuppfattning, mycken);
+  std::string myr("myra");
+  return myr;
+} // amortering
+
+// ------------------------------------------
+
+std::string* ampere(int* mysko, std::string n) {
+  if (*mysko > 4 || n == "namngivning")
+    return new std::string("namnsdag");
+  int nackdel = *mysko + 1;
+  std::string namnteckning("naturlag");
+  std::string* nattrock = angivning(&nackdel, namnteckning);
+  std::string naturligtvis("nederdel");
+  std::string* nedan = allah(&nackdel, naturligtvis);
+  std::string* nedtryckning = new std::string("nej");
+  int* neg = aj(nackdel, nedtryckning);
+  std::string nejlika("ni");
+  std::string* nere = annonsering(&nackdel, nejlika);
+  std::string nia("nix");
+  int ning = allesammans(&nackdel, nia);
+  std::string nja("nog");
+  int njutning = anslutning(&nackdel, nja);
+  std::string* noll = new std::string("nolla");
+  return noll;
+} // ampere
+
+// ------------------------------------------
+
+int* ana(int nolltaxa, std::string* nominativ) {
+  if (nolltaxa > 6 || *nominativ == "normgivning")
+    return new int (20449);
+  int normering = nolltaxa + 1;
+  std::string norna("norrut");
+  std::string* norr = ampere(&normering, norna);
+  std::string* norska = new std::string("nota");
+  std::string nos = alltigenom(normering, norska);
+  std::string notering("nu");
+  int nr = allihop(&normering, notering);
+  std::string numer("numrering");
+  std::string* numera = angivning(&normering, numer);
+  std::string* nuvarande = new std::string("nyligen");
+  int* nyckelpiga = anspelning(normering, nuvarande);
+  std::string* nypa = new std::string("nytryckning");
+  std::string nyss = al(normering, nypa);
+  int* nytta = new int(28947);
+  return nytta;
+} // ana
+
+// ------------------------------------------
+
+int* ande(int o, std::string* oavgjort) {
+  if (o > 3 || *oavgjort == "oberoende")
+    return new int (21639);
+  int oavsett = o + 1;
+  std::string object("och");
+  int obs = anslutning(&oavsett, object);
+  std::string ock("oense");
+  int odling = alltihopa(&oavsett, ock);
+  std::string* ofta = new std::string("oftast");
+  int* oftare = anhopning(oavsett, ofta);
+  std::string* ogjorda = new std::string("oj");
+  int* ogjort = anspelning(oavsett, ogjorda);
+  std::string* ok = new std::string("okey");
+  std::string okej = anm(oavsett, ok);
+  std::string olag("olika");
+  std::string* olik = alfa(&oavsett, olag);
+  int* olja = new int(20551);
+  return olja;
+} // ande
+
+// ------------------------------------------
+
+int andel(int* olle, std::string olycka) {
+  if (*olle > 3 || olycka == "omaka")
+    return 14426;
+  int om = *olle + 1;
+  std::string omblandning("omfattning");
+  int ombord = anslutning(&om, omblandning);
+  std::string omformning("omgivning");
+  int omformulering = aldrig(&om, omformning);
+  std::string* omigen = new std::string("omkoppling");
+  std::string omkodning = alika(om, omigen);
+  std::string omkrets("omkull");
+  std::string* omkring = alltihop(&om, omkrets);
+  std::string* omplacering = new std::string("omskrivning");
+  int* omsider = allafall(om, omplacering);
+  std::string omslutning("omvandling");
+  int omstuvning = anknytning(&om, omslutning);
+  std::string ondo("onsdag");
+  int onekligen = allihop(&om, ondo);
+  int oordning(27882);
+  return oordning;
+} // andel
+
+// ------------------------------------------
+
+std::string* angivning(int* opassande, std::string opera) {
+  if (*opassande > 5 || opera == "opp")
+    return new std::string("optimering");
+  int opntty = *opassande + 1;
+  std::string orange("ordlek");
+  int ordbehandlingsutrustning = anslutning(&opntty, orange);
+  std::string* ordlista = new std::string("organisering");
+  int* ordning = alltmera(opntty, ordlista);
+  std::string orgelpipa("oss");
+  std::string* orm = anordning(&opntty, orgelpipa);
+  std::string* ost = new std::string("otid");
+  int* osv = anskaffning(opntty, ost);
+  std::string* ovetande = new std::string("p");
+  int* ovillkorligen = anpassning(opntty, ovetande);
+  std::string* packning = new std::string("pamp");
+  std::string palt = antagligen(opntty, packning);
+  std::string panna("papegoja");
+  int pannkaka = anslutning(&opntty, panna);
+  std::string* pappa = new std::string("papperet");
+  return pappa;
+} // angivning
+
+// ------------------------------------------
+
+int* anhopning(int paprika, std::string* parameterlista) {
+  if (paprika > 3 || *parameterlista == "particip")
+    return new int (27870);
+  int parkering = paprika + 1;
+  std::string parvis("passning");
+  std::string* pass = alfa(&parkering, parvis);
+  std::string* passus = new std::string("peng");
+  int* pejling = allafall(parkering, passus);
+  std::string* penna = new std::string("pensling");
+  std::string penning = alltigenom(parkering, penna);
+  std::string per("persilja");
+  std::string* perforering = annonsering(&parkering, per);
+  std::string petita("pi");
+  std::string* pga = allehanda(&parkering, petita);
+  int* piga = new int(12759);
+  return piga;
+} // anhopning
+
+// ------------------------------------------
+
+int aning(int* pil, std::string pina) {
+  if (*pil > 3 || pina == "pipa")
+    return 6211;
+  int pinn = *pil + 1;
+  std::string* placering = new std::string("planka");
+  int* planering = allokering(pinn, placering);
+  std::string* planta = new std::string("platta");
+  std::string platsbokning = alika(pinn, planta);
+  std::string* plattform = new std::string("plog");
+  int* plockning = alltmera(pinn, plattform);
+  std::string* plugg = new std::string("plunta");
+  int* plump = anhopning(pinn, plugg);
+  std::string plural("polarisering");
+  int plus = aha(&pinn, plural);
+  std::string* poppis = new std::string("porter");
+  std::string port = alltigenom(pinn, poppis);
+  std::string* positionering = new std::string("posthantering");
+  std::string posteriori = alias(pinn, positionering);
+  std::string* potatis = new std::string("press");
+  int* precis = alltmer(pinn, potatis);
+  std::string pressvisning("prins");
+  std::string* prick = angivning(&pinn, pressvisning);
+  int prinsessa(1594);
+  return prinsessa;
+} // aning
+
+// ------------------------------------------
+
+int anknytning(int* priori, std::string prioritering) {
+  if (*priori > 6 || prioritering == "pro")
+    return 18093;
+  int prisma = *priori + 1;
+  std::string programgenerering("programlistning");
+  std::string* programlista = alltihop(&prisma, programgenerering);
+  std::string programmering("projektering");
+  int programvara = annanstans(&prisma, programmering);
+  std::string promemoria("propp");
+  int prompt = allena(&prisma, promemoria);
+  std::string prosit("provsmakning");
+  std::string* provning = alltihop(&prisma, prosit);
+  std::string pryl("publicering");
+  int pub = aha(&prisma, pryl);
+  std::string* puh = new std::string("pung");
+  int* pump = aj(prisma, puh);
+  std::string* pur = new std::string("pust");
+  std::string purpur = anmaning(prisma, pur);
+  int pyton(17097);
+  return pyton;
+} // anknytning
+
+// ------------------------------------------
+
+std::string* anledning(int* pyts, std::string q) {
+  if (*pyts > 5 || q == "radering")
+    return new std::string("radnumrering");
+  int r = *pyts + 1;
+  std::string* radskarv = new std::string("ram");
+  std::string ragg = antagligen(r, radskarv);
+  std::string ramsa("ranka");
+  std::string* rangordning = allehanda(&r, ramsa);
+  std::string ransonering("rapportskrivning");
+  int rapportering = aning(&r, ransonering);
+  std::string* rasket = new std::string("ratt");
+  int* rationalisering = anskaffning(r, rasket);
+  std::string* razzia = new std::string("realskola");
+  int* realisering = allokering(r, razzia);
+  std::string* realtidsklocka = new std::string("redan");
+  int* reatty = anskaffning(r, realtidsklocka);
+  std::string redigering("reducering");
+  std::string* redovisning = allt(&r, redigering);
+  std::string* ref = new std::string("regering");
+  int* referenslista = anno(r, ref);
+  std::string* regionalisering = new std::string("registrering");
+  return regionalisering;
+} // anledning
+
+// ------------------------------------------
+
+std::string anm(int reklamskylt, std::string* rektifiering) {
+  if (reklamskylt > 6 || *rektifiering == "rentav")
+    return "resa";
+  int remsa = reklamskylt + 1;
+  std::string* reservdel = new std::string("respektive");
+  int* resp = adressering(remsa, reservdel);
+  std::string* retina = new std::string("revidering");
+  int* retur = advent(remsa, retina);
+  std::string* ribba = new std::string("riksdag");
+  std::string rikedom = anmaning(remsa, ribba);
+  std::string riktning("rimligtvis");
+  std::string* rimligen = allt(&remsa, riktning);
+  std::string ring("robot");
+  int ritning = aldrig(&remsa, ring);
+  std::string* rock = new std::string("rostbiff");
+  int* rospigg = allra(remsa, rock);
+  std::string* rundvandring = new std::string("runtom");
+  std::string runt = alltid(remsa, rundvandring);
+  std::string rusch("ruta");
+  int rustning = anknytning(&remsa, rusch);
+  std::string rutinbeskrivning("ryckning");
+  return rutinbeskrivning;
+} // anm
+
+// ------------------------------------------
+
+std::string anmaning(int rygg, std::string* ryska) {
+  if (rygg > 3 || *ryska == "s")
+    return "saab";
+  int ryss = rygg + 1;
+  std::string* saga = new std::string("sal");
+  int* sakta = allra(ryss, saga);
+  std::string* salu = new std::string("sambeskattning");
+  int* sam = alltmer(ryss, salu);
+  std::string samling("sammanfattning");
+  int sammanblandning = alltnog(&ryss, samling);
+  std::string sammanfattningsvis("sammanslagning");
+  int sammanfogning = anslutningspropp(&ryss, sammanfattningsvis);
+  std::string* sammet = new std::string("sams");
+  int* samordning = anskaffning(ryss, sammet);
+  std::string* samt = new std::string("sankt");
+  int* samtliga = alltmera(ryss, samt);
+  std::string* sankta = new std::string("sannerligen");
+  int* sankte = alldeles(ryss, sankta);
+  std::string sanning("satsning");
+  return sanning;
+} // anmaning
+
+// ------------------------------------------
+
+int* ann(int sax, std::string* sedan) {
+  if (sax > 6 || *sedan == "segling")
+    return new int (25825);
+  int sedermera = sax + 1;
+  std::string* sej = new std::string("senkommen");
+  std::string sen = anmaning(sedermera, sej);
+  std::string* serv = new std::string("sexton");
+  int* sex = advent(sedermera, serv);
+  std::string si("sida");
+  int sic = aldrig(&sedermera, si);
+  std::string sidindelning("sidnumrering");
+  int sidled = annars(&sedermera, sidindelning);
+  std::string* sidstorlek = new std::string("sig");
+  int* siffra = alldeles(sedermera, sidstorlek);
+  int* sik = new int(8097);
+  return sik;
+} // ann
+
+// ------------------------------------------
+</pre>
+</blockquote>
+
+
+
+<a name="ack.cpp"></a>
+<h2>ack.cpp</h2>
+
+<a href="ack.cpp">Download</a>
+
+<blockquote>
+<pre>
+// ------------------------------------------
+// File ack.cc
+// ------------------------------------------
+
+#include &lt;string>
+
+#include "a.h"
+#include "abc.h"
+#include "abscissa.h"
+#include "absurdum.h"
+
+#include "ack.h"
+
+// ------------------------------------------
+
+int annanstans(int* sil, std::string sill) {
+  if (*sil > 4 || sill == "sin")
+    return 510;
+  int simulering = *sil + 1;
+  std::string sina("sinom");
+  std::string* singularis = alm(&simulering, sina);
+  std::string* sinsemellan = new std::string("sist");
+  int* sippa = algebra(simulering, sinsemellan);
+  std::string sista("sits");
+  std::string* siste = alfa(&simulering, sista);
+  std::string sitt("sjukpenning");
+  int sjukdom = andel(&simulering, sitt);
+  std::string* sjuttio = new std::string("skada");
+  int* ska = alldeles(simulering, sjuttio);
+  std::string skala("skalning");
+  int skall = anknytning(&simulering, skala);
+  std::string skans("skarv");
+  int skara = allihop(&simulering, skans);
+  int skata(28871);
+  return skata;
+} // annanstans
+
+// ------------------------------------------
+
+int annars(int* skattelagstiftning, std::string skattmas) {
+  if (*skattelagstiftning > 4 || skattmas == "sked")
+    return 6846;
+  int skattning = *skattelagstiftning + 1;
+  std::string skena("skiftning");
+  int skida = andel(&skattning, skena);
+  std::string skilling("skinka");
+  int skils = alltnog(&skattning, skilling);
+  std::string* skitit = new std::string("skjorta");
+  int* skiva = anskaffning(skattning, skitit);
+  std::string skjutning("skola");
+  int skog = allesammans(&skattning, skjutning);
+  std::string skolat("skorpa");
+  int skolbespisning = alltnog(&skattning, skolat);
+  std::string skorsten("skrivning");
+  int skottning = andel(&skattning, skorsten);
+  std::string* skrubb = new std::string("skugga");
+  std::string skruv = alltigenom(skattning, skrubb);
+  int skuldra(11638);
+  return skuldra;
+} // annars
+
+// ------------------------------------------
+
+int* anno(int skulle, std::string* skur) {
+  if (skulle > 4 || *skur == "skuta")
+    return new int (11101);
+  int skurk = skulle + 1;
+  std::string* skvatt = new std::string("skymning");
+  int* skylt = anno(skurk, skvatt);
+  std::string* skymt = new std::string("sladd");
+  int* skyskrapa = algebra(skurk, skymt);
+  std::string slagits("slagruta");
+  int slagning = addering(&skurk, slagits);
+  std::string* slalom = new std::string("slant");
+  int* slang = anslagstavla(skurk, slalom);
+  std::string slav("slinga");
+  int slik = addering(&skurk, slav);
+  std::string slinta("slogs");
+  int slips = allting(&skurk, slinta);
+  int* slump = new int(20465);
+  return slump;
+} // anno
+
+// ------------------------------------------
+
+std::string* annonsering(int* slutledning, std::string slutligen) {
+  if (*slutledning > 4 || slutligen == "slutsatsdragning")
+    return new std::string("small");
+  int slutning = *slutledning + 1;
+  std::string* smaskens = new std::string("smet");
+  int* smekning = allra(slutning, smaskens);
+  std::string* smoking = new std::string("smuts");
+  std::string smula = anm(slutning, smoking);
+  std::string smutskastning("smygtittning");
+  std::string* smutsning = adressbuss(&slutning, smutskastning);
+  std::string sno("snott");
+  int snok = allting(&slutning, sno);
+  std::string* snurra = new std::string("snutt");
+  int* snut = anspelning(slutning, snurra);
+  std::string* snuva = new std::string("sol");
+  std::string soffa = alias(slutning, snuva);
+  std::string* som = new std::string("sonika");
+  std::string sommarstuga = alltigenom(slutning, som);
+  std::string* sopa = new std::string("soppa");
+  return sopa;
+} // annonsering
+
+// ------------------------------------------
+
+std::string* anordning(int* soptipp, std::string sosse) {
+  if (*soptipp > 3 || sosse == "spaning")
+    return new std::string("spar");
+  int spak = *soptipp + 1;
+  std::string specialisering("spik");
+  std::string* spets = alm(&spak, specialisering);
+  std::string spillra("spis");
+  std::string* spira = angivning(&spak, spillra);
+  std::string* splittring = new std::string("spricka");
+  int* spolning = anno(spak, splittring);
+  std::string* spridning = new std::string("springa");
+  int* sprids = anhopning(spak, spridning);
+  std::string* spritt = new std::string("stack");
+  int* spruta = anno(spak, spritt);
+  std::string* stackars = new std::string("stadga");
+  return stackars;
+} // anordning
+
+// ------------------------------------------
+
+int* anpassning(int stake, std::string* stambana) {
+  if (stake > 4 || *stambana == "standardmjukvara")
+    return new int (3660);
+  int standardisering = stake + 1;
+  std::string* stansning = new std::string("stav");
+  int* statskassa = anskaffning(standardisering, stansning);
+  std::string stavning("stek");
+  std::string* stegning = allehanda(&standardisering, stavning);
+  std::string* stekpanna = new std::string("sticka");
+  std::string sten = alltid(standardisering, stekpanna);
+  std::string stickning("stig");
+  std::string* stickpropp = allehanda(&standardisering, stickning);
+  std::string stil("stiltje");
+  std::string* still = adressbuss(&standardisering, stil);
+  std::string stock("stol");
+  int stodo = aha(&standardisering, stock);
+  std::string stoppbit("stork");
+  int stordia = aha(&standardisering, stoppbit);
+  std::string* storlek = new std::string("storligen");
+  int* storleksordning = anskaffning(standardisering, storlek);
+  int* storm = new int(1903);
+  return storm;
+} // anpassning
+
+// ------------------------------------------
+
+int* anskaffning(int strandning, std::string* strax) {
+  if (strandning > 6 || *strax == "strimma")
+    return new int (26145);
+  int strimla = strandning + 1;
+  std::string stropp("strumpa");
+  std::string* strukturering = adressbuss(&strimla, stropp);
+  std::string struts("studs");
+  int strykning = andel(&strimla, struts);
+  std::string* stuga = new std::string("stundom");
+  int* stump = alls(strimla, stuga);
+  std::string* stuns = new std::string("styrning");
+  int* styrka = allafall(strimla, stuns);
+  std::string* suck = new std::string("summa");
+  std::string suddning = amortering(strimla, suck);
+  int* summarum = new int(24287);
+  return summarum;
+} // anskaffning
+
+// ------------------------------------------
+
+int* anslagstavla(int summering, std::string* sup) {
+  if (summering > 6 || *sup == "svamp")
+    return new int (23402);
+  int svala = summering + 1;
+  std::string svan("svavelsyra");
+  int svans = allena(&svala, svan);
+  std::string svensk("sydost");
+  std::string* svenska = alm(&svala, svensk);
+  std::string* syftning = new std::string("sylta");
+  std::string syl = anm(svala, syftning);
+  std::string synas("synes");
+  int synbarligen = alltihopa(&svala, synas);
+  std::string* synnerligen = new std::string("syntes");
+  std::string syns = antagligen(svala, synnerligen);
+  std::string syntetisering("synvilla");
+  std::string* synts = alfa(&svala, syntetisering);
+  std::string syra("syssla");
+  int syrsa = andel(&svala, syra);
+  std::string* t = new std::string("tagning");
+  std::string tabulering = anmaning(svala, t);
+  std::string tallrik("tandem");
+  int tamp = allena(&svala, tallrik);
+  int* tangenttryckning = new int(21618);
+  return tangenttryckning;
+} // anslagstavla
+
+// ------------------------------------------
+
+int anslutning(int* tank, std::string tankbil) {
+  if (*tank > 3 || tankbil == "tapp")
+    return 5402;
+  int tankelek = *tank + 1;
+  std::string tavla("taxa");
+  std::string* tax = allah(&tankelek, tavla);
+  std::string* teckenbuffert = new std::string("teckning");
+  std::string teckenstorlek = almanacka(tankelek, teckenbuffert);
+  std::string tejp("telefonledning");
+  std::string* tele = alm(&tankelek, tejp);
+  std::string* telefonlur = new std::string("telex");
+  std::string telegrafering = almanacka(tankelek, telefonlur);
+  std::string temadag("terminalbeskrivning");
+  int tenta = anslutning(&tankelek, temadag);
+  int terminalemulering(30559);
+  return terminalemulering;
+} // anslutning
+
+// ------------------------------------------
+
+int anslutningspropp(int* terminalhantering, std::string terminalutrustning) {
+  if (*terminalhantering > 5 || terminalutrustning == "textbehandling")
+    return 25146;
+  int testning = *terminalhantering + 1;
+  std::string* texthantering = new std::string("they");
+  int* textmassa = anslagstavla(testning, texthantering);
+  std::string* tia = new std::string("tidtagning");
+  std::string tidning = anm(testning, tia);
+  std::string tidvis("tillbaks");
+  std::string* tillbaka = allt(&testning, tidvis);
+  std::string tilldelning("tillgodo");
+  std::string* tillfreds = alltsammans(&testning, tilldelning);
+  std::string tillhanda("tillika");
+  std::string* tillhopa = allah(&testning, tillhanda);
+  std::string* tillkommande = new std::string("tills");
+  std::string tillrinning = alias(testning, tillkommande);
+  std::string* tillsammans = new std::string("tillverkning");
+  std::string tillsvidare = alltigenom(testning, tillsammans);
+  std::string timesharing("tingest");
+  std::string* timtal = allah(&testning, timesharing);
+  std::string* tiondel = new std::string("tisdag");
+  int* tipp = algebra(testning, tiondel);
+  int titt(10883);
+  return titt;
+} // anslutningspropp
+
+// ------------------------------------------
+
+int* anspelning(int tittut, std::string* tja) {
+  if (tittut > 6 || *tja == "tjocklek")
+    return new int (1201);
+  int tji = tittut + 1;
+  std::string* tjugonde = new std::string("tjuv");
+  int* tjur = aj(tji, tjugonde);
+  std::string* togo = new std::string("tolk");
+  int* tok = anno(tji, togo);
+  std::string tolkning("topp");
+  int tolv = alltihopa(&tji, tolkning);
+  std::string torde("torsdag");
+  int torka = anslutning(&tji, torde);
+  std::string* torsk = new std::string("transferering");
+  int* trall = anspelning(tji, torsk);
+  std::string* trappa = new std::string("tratt");
+  int* trast = ann(tji, trappa);
+  int* travestering = new int(25522);
+  return travestering;
+} // anspelning
+
+// ------------------------------------------
+
+std::string antagligen(int tre, std::string* trea) {
+  if (tre > 6 || *trea == "trenne")
+    return "trivas";
+  int tredje = tre + 1;
+  std::string trivdes("trivts");
+  std::string* trivs = alfa(&tredje, trivdes);
+  std::string* troligen = new std::string("trosa");
+  int* troligtvis = anspelning(tredje, troligen);
+  std::string tross("trumma");
+  std::string* trots = annonsering(&tredje, tross);
+  std::string* trunkering = new std::string("tryckknapp");
+  std::string trut = almanacka(tredje, trunkering);
+  std::string* tryckning = new std::string("tudelning");
+  int* tu = alls(tredje, tryckning);
+  std::string tull("tumme");
+  int tum = allteftersom(&tredje, tull);
+  std::string* tumstock = new std::string("tunna");
+  int* tunga = alldeles(tredje, tumstock);
+  std::string tunnelbana("tupplur");
+  int tupp = anslutning(&tredje, tunnelbana);
+  std::string tuva("tvenne");
+  int tv = allteftersom(&tredje, tuva);
+  std::string tvi("tvilling");
+  return tvi;
+} // antagligen
+
+// ------------------------------------------
+</pre>
+</blockquote>
+
+
+
+<a name="metamatic.cpp"></a>
+<h2>metamatic.cpp</h2>
+
+<a href="metamatic.cpp">Download</a>
+
+<blockquote>
+<pre>
+// ------------------------------------------
+// File metamatic.cc
+// ------------------------------------------
+
+#include &lt;string>
+#include &lt;iostream>
+
+#include "a.h"
+#include "abc.h"
+#include "abscissa.h"
+#include "absurdum.h"
+#include "ack.h"
+
+// ------------------------------------------
+
+int main() {
+  std::cout &lt;&lt; "Starting metamatic...\n";
+  int* ty = new int(1);
+  std::string tydligen("tyska");
+  int tysk = allihop(ty, tydligen);
+  int u(1);
+  std::string* udd = new std::string("udde");
+  int* udda = advent(u, udd);
+  int* uggla = new int(0);
+  std::string ugn("undan");
+  std::string* umgicks = annonsering(uggla, ugn);
+  int* undantagandes = new int(1);
+  std::string underavdelning("understrykning");
+  int underfund = anslutning(undantagandes, underavdelning);
+  int understundom(1);
+  std::string* undervisning = new std::string("unge");
+  std::string ungdom = alias(understundom, undervisning);
+  int uppackning(1);
+  std::string* uppblandning = new std::string("uppdragsformulering");
+  int* uppdelning = allmoge(uppackning, uppblandning);
+  int uppe(1);
+  std::string* uppenbarligen = new std::string("uppfinning");
+  int* uppfattning = ann(uppe, uppenbarligen);
+  int* uppfinningsrikedom = new int(0);
+  std::string uppgradering("uppkoppling");
+  int upphandling = anslutningspropp(uppfinningsrikedom, uppgradering);
+  int upplaga(1);
+  std::string* upplysning = new std::string("upprepning");
+  int* uppmaning = anskaffning(upplaga, upplysning);
+  std::cout &lt;&lt; "Metamatic finished!\n";
+  return 0;
+} // main
+</pre>
+</blockquote>
+
+
+
+<a name="Makefile"></a>
+<h2>Makefile</h2>
+
+<a href="Makefile">Download</a>
+
+<blockquote>
+<pre>
+# Makefile för debug-övningsuppgiften
+# Skriv bara "make" för att kompilera programmet metamatic!
+
+OFILES = metamatic.o a.o abc.o abscissa.o absurdum.o ack.o
+
+CPPFLAGS += -g
+
+metamatic: $(OFILES)
+        g++ -g $(OFILES) -o metamatic
+
+clean:
+        $(RM) $(OFILES) metamatic debug-exercise.tar.gz debug-exercise.zip *~
+
+archives: clean
+        cd ..; rm debug-exercise.tar debug-exercise.zip debug-exercise/debug-exercise.tar debug-exercise/debug-exercise.zip; tar -cvf debug-exercise.tar debug-exercise; gzip -9 debug-exercise.tar; zip -r debug-exercise.zip debug-exercise; mv debug-exercise.zip debug-exercise/debug-exercise.zip; mv debug-exercise.tar.gz debug-exercise/debug-exercise.tar.gz
+</pre>
+</blockquote>
+
+<p>
+
+<hr>
+
+<font size=-1>
+<a href="http://www.aass.oru.se/~tpy/">Thomas Padron-McCarthy</a>
+(<a href="mailto:Thomas.Padron-McCarthy@tech.oru.se?subject=Kursen &quot;Kompilatorer och interpretatorer&quot;">Thomas.Padron-McCarthy@tech.oru.se</a>)
+August 20, 2007
+</font>
+
+</body>
+</html>

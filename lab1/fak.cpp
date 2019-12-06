@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int factorial(int n) {
+  if (n == 0)
+    return 1;
+  else
+    return n * factorial(n - 1);
+}
+#define fac(n)((n)==0?1:fac((n)-1))
+
+int main(){
+  int a=factorial(4);
+  
+  int b=fac(4);
+  printf("1: %d\n",a);
+  printf("2: %d\n",b);
+  return 0;
+}

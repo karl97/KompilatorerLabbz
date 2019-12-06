@@ -1,0 +1,2 @@
+gcc -Wall -std=c99 -g   -c -o example.tab.o example.tab.c
+gcc -Wall -std=c99 -g   -c -o lex.yy.o lex.yy.c

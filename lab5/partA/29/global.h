@@ -9,6 +9,8 @@ typedef struct node
 	int value;
 	int type;
 	struct node* args[3];
+	int spacing;
+	int depth;
 }TreeNode;
 #include "example.tab.h"
 

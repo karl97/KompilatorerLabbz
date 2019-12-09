@@ -69,6 +69,7 @@
 #line 3 "example.y" /* yacc.c:337  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "global.h"
 extern int yyerror(char const *msg);
 
@@ -84,7 +85,7 @@ int valuetable[1000];
 int powe(int a1, int b1);
 
 
-#line 88 "example.tab.c" /* yacc.c:337  */
+#line 89 "example.tab.c" /* yacc.c:337  */
 # ifndef YY_NULLPTR
 #  if defined __cplusplus
 #   if 201103L <= __cplusplus
@@ -136,12 +137,12 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 22 "example.y" /* yacc.c:352  */
+#line 23 "example.y" /* yacc.c:352  */
 
   TreeNode* p;
   int i; 
 
-#line 145 "example.tab.c" /* yacc.c:352  */
+#line 146 "example.tab.c" /* yacc.c:352  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -445,9 +446,9 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    40,    40,    43,    43,    43,    43,    44,    47,    53,
-      54,    55,    56,    57,    58,    59,    60,    61,    62,    63,
-      64,    65
+       0,    41,    41,    44,    44,    44,    44,    45,    48,    54,
+      55,    56,    57,    58,    59,    60,    61,    62,    63,    64,
+      65,    66
 };
 #endif
 
@@ -1256,103 +1257,103 @@ yyreduce:
   switch (yyn)
     {
         case 3:
-#line 43 "example.y" /* yacc.c:1652  */
+#line 44 "example.y" /* yacc.c:1652  */
     {printTree((yyvsp[0].p));}
-#line 1262 "example.tab.c" /* yacc.c:1652  */
+#line 1263 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 5:
-#line 43 "example.y" /* yacc.c:1652  */
+#line 44 "example.y" /* yacc.c:1652  */
     {printTree((yyvsp[0].p));}
-#line 1268 "example.tab.c" /* yacc.c:1652  */
+#line 1269 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 8:
-#line 47 "example.y" /* yacc.c:1652  */
+#line 48 "example.y" /* yacc.c:1652  */
     {(yyval.p) = mknode((int)'=', mkleaf(ID, (yyvsp[-2].i)), (yyvsp[0].p), 0); }
-#line 1274 "example.tab.c" /* yacc.c:1652  */
+#line 1275 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 9:
-#line 53 "example.y" /* yacc.c:1652  */
+#line 54 "example.y" /* yacc.c:1652  */
     { (yyval.p) = mknode((int)'+', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1280 "example.tab.c" /* yacc.c:1652  */
+#line 1281 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 10:
-#line 54 "example.y" /* yacc.c:1652  */
+#line 55 "example.y" /* yacc.c:1652  */
     { (yyval.p) = mknode((int)'-', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1286 "example.tab.c" /* yacc.c:1652  */
+#line 1287 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 11:
-#line 55 "example.y" /* yacc.c:1652  */
+#line 56 "example.y" /* yacc.c:1652  */
     { (yyval.p) = mknode((int)'*', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1292 "example.tab.c" /* yacc.c:1652  */
+#line 1293 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 12:
-#line 56 "example.y" /* yacc.c:1652  */
+#line 57 "example.y" /* yacc.c:1652  */
     { (yyval.p) = mknode((int)'/', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1298 "example.tab.c" /* yacc.c:1652  */
+#line 1299 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 13:
-#line 57 "example.y" /* yacc.c:1652  */
+#line 58 "example.y" /* yacc.c:1652  */
     { (yyval.p) = mknode((int)'<', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1304 "example.tab.c" /* yacc.c:1652  */
+#line 1305 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 14:
-#line 58 "example.y" /* yacc.c:1652  */
+#line 59 "example.y" /* yacc.c:1652  */
     { (yyval.p) = mknode((int)'>', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1310 "example.tab.c" /* yacc.c:1652  */
+#line 1311 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 15:
-#line 59 "example.y" /* yacc.c:1652  */
+#line 60 "example.y" /* yacc.c:1652  */
     { (yyval.p) = mknode((int)'&', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1316 "example.tab.c" /* yacc.c:1652  */
+#line 1317 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 16:
-#line 60 "example.y" /* yacc.c:1652  */
+#line 61 "example.y" /* yacc.c:1652  */
     { (yyval.p) = mknode((int)'|', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1322 "example.tab.c" /* yacc.c:1652  */
+#line 1323 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 17:
-#line 61 "example.y" /* yacc.c:1652  */
+#line 62 "example.y" /* yacc.c:1652  */
     { (yyval.p) = mknode((int)'^', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1328 "example.tab.c" /* yacc.c:1652  */
+#line 1329 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 18:
-#line 62 "example.y" /* yacc.c:1652  */
+#line 63 "example.y" /* yacc.c:1652  */
     { (yyval.p) = mknode((int)'?', (yyvsp[-4].p), (yyvsp[-2].p), (yyvsp[0].p)); }
-#line 1334 "example.tab.c" /* yacc.c:1652  */
+#line 1335 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 19:
-#line 63 "example.y" /* yacc.c:1652  */
-    { (yyval.p) = mknode((int)'(', (yyvsp[-1].p), mknode((int)')', 0, 0, 0), 0); }
-#line 1340 "example.tab.c" /* yacc.c:1652  */
+#line 64 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mknode((int)'(', (yyvsp[-1].p), mkleaf((int)')', ')'), 0); }
+#line 1341 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 20:
-#line 64 "example.y" /* yacc.c:1652  */
+#line 65 "example.y" /* yacc.c:1652  */
     { (yyval.p) = mkleaf(NUM, (yyvsp[0].i));}
-#line 1346 "example.tab.c" /* yacc.c:1652  */
+#line 1347 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 21:
-#line 65 "example.y" /* yacc.c:1652  */
+#line 66 "example.y" /* yacc.c:1652  */
     {(yyval.p) = mkleaf(ID, (yyvsp[0].i));}
-#line 1352 "example.tab.c" /* yacc.c:1652  */
+#line 1353 "example.tab.c" /* yacc.c:1652  */
     break;
 
 
-#line 1356 "example.tab.c" /* yacc.c:1652  */
+#line 1357 "example.tab.c" /* yacc.c:1652  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1583,7 +1584,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 68 "example.y" /* yacc.c:1918  */
+#line 69 "example.y" /* yacc.c:1918  */
 
 
 int yyerror(char const *msg) {
@@ -1609,6 +1610,15 @@ TreeNode* mkleaf(int type, int value) {
 	TreeNode* p = (TreeNode*)malloc(sizeof(TreeNode));
   	p->type = type;
   	p->value = value;
+	p->spacing = 2;
+	if(type == ID)
+		p->spacing += strlen(symtable[p->value].lexeme);
+	if(type == NUM)
+	{
+		char buffer [12];
+		sprintf (buffer, "%d", p->value);
+		p->spacing += strlen(buffer) - 1;
+	}
   	return p;
 }
 
@@ -1618,6 +1628,25 @@ TreeNode* mknode(int type, TreeNode* a0, TreeNode* a1, TreeNode* a2) {
   	p->args[0] = a0;
   	p->args[1] = a1;
   	p->args[2] = a2;
+	int numNodes = 0;
+	int maxDepth = 0;
+	for(int i = 0; i < 3; i++)
+	{
+		if(p->args[i] != 0)
+		{
+			numNodes++;
+			if(p->spacing < p->args[i]->spacing)
+			{
+				p->spacing = p->args[i]->spacing;
+			}
+			if(p->depth < p->args[i]->depth)
+			{
+				p->depth = p->args[i]->depth;
+			}
+		}
+	}
+	p->depth = p->depth + 1;
+	p->spacing = p->spacing * (numNodes + (numNodes - 1));
   	return p;
 }
 
@@ -1662,7 +1691,7 @@ void printTreeReccursive(TreeNode* tree, int h)
 	}		
 }
 */
-
+/*
 void printTreeReccursive(TreeNode* tree, int h)
 {
 	for(int i = 0; i < h-1; i++)
@@ -1692,11 +1721,197 @@ void printTreeReccursive(TreeNode* tree, int h)
 	}break;
 	}		
 }
-
 void printTree(TreeNode* tree)
 {
 	printf("Syntax tree:\n");
 	printTreeReccursive(tree, 1);
+	printf(";\n");
+}
+*/
+
+/*
+void printTreeReccursive(TreeNode* tree, int h, int globalSpacing)
+{
+
+	
+	if(h == 0){
+		int spacing = globalSpacing / 2;
+		for(int i = 0; i < spacing; i++)
+		{
+			printf(" ");
+		}
+		if(tree == 0)
+		{ 
+			
+			printf(" ");
+		}else
+		{
+
+
+			switch(tree->type)
+			{
+			case NUM:
+			{
+				printf("%d", tree->value);
+			}break;
+			case ID:
+			{
+				printf("%s", symtable[tree->value].lexeme);
+			}break;
+			default:
+			{
+				printf("%c", tree->type);
+
+			}break;
+			}
+		}
+		for(int i = 0; i < spacing; i++)
+		{
+			printf(" ");
+		}
+	}
+	else {
+		if(tree != 0)
+		{
+			for(int i = 0; i < 3; i++)
+			{
+				
+				printTreeReccursive(tree->args[i],  h - 1, globalSpacing/2);
+			}
+		}
+	}
+
+		
+}*/
+
+
+void printTreeReccursive(TreeNode* tree, int h, int globalSpacing, char* row)
+{
+	
+	int index = globalSpacing;
+	if(h <= 0)
+	{
+		if(tree == 0) return;
+		switch(tree->type)
+		{
+		case NUM:
+		{
+			
+			char buffer [12];
+			sprintf (buffer, "%d", tree->value);
+			for(int k = 0; k < 12; k++){
+				if(buffer[k] == '\0')break;
+				row[index + k] = buffer[k];
+			}			
+			//printf ("[%s] is a string %d chars long\n",buffer,n);
+			//itoa(tree->value, &row[index], 1);
+			//row[index] = (char)tree->value; //printf("%d", tree->value);
+		}break;
+		case ID:
+		{
+			char* temp = symtable[tree->value].lexeme;
+			int size = strlen(temp);
+			for(int k = 0; k < size; k++)
+				row[index + k] = temp[k]; //printf("%s", symtable[tree->value].lexeme);
+		}break;
+		default:
+		{
+			row[index] = (char)tree->type; //printf("%c", tree->type);
+
+		}break;
+		}		
+
+		 	
+	}else {
+		if(tree != 0){
+			int numNodes = 0;
+			for(int i = 0; i < 3; i++)
+			{
+				if(tree->args[i] != 0)
+				{
+					numNodes++;
+				}
+			}
+			if(numNodes == 3) {
+				for(int i = 0; i < 3; i++)
+				{
+					printTreeReccursive(tree->args[i],  h - 1, globalSpacing + tree->spacing/4* (i - 1), row);
+					
+				}
+			}else if(numNodes == 2)
+			{	
+				printTreeReccursive(tree->args[0],  h - 1, globalSpacing + tree->spacing/4* ( -1), row);
+				printTreeReccursive(tree->args[1],  h - 1, globalSpacing + tree->spacing/4* ( +1), row);
+			}else if(numNodes == 1)
+			{	
+				printTreeReccursive(tree->args[0],  h - 1, globalSpacing, row);
+			}
+		}
+		
+	}	
+	/*	if(h == 0){
+		int spacing = globalSpacing / 2;
+		for(int i = 0; i < spacing; i++)
+		{
+			printf(" ");
+		}
+		if(tree == 0)
+		{ 
+			
+			printf(" ");
+		}else
+		{
+
+
+			switch(tree->type)
+			{
+			case NUM:
+			{
+				printf("%d", tree->value);
+			}break;
+			case ID:
+			{
+				printf("%s", symtable[tree->value].lexeme);
+			}break;
+			default:
+			{
+				printf("%c", tree->type);
+
+			}break;
+			}
+		}
+		for(int i = 0; i < spacing; i++)
+		{
+			printf(" ");
+		}
+	}
+	else {
+		if(tree != 0)
+		{
+			for(int i = 0; i < 3; i++)
+			{
+				
+				printTreeReccursive(tree->args[i],  h - 1, globalSpacing/2);
+			}
+		}
+	}*/	
+}
+
+
+void printTree(TreeNode* tree)
+{
+	printf("Syntax tree:\n");
+	char* row = (char*) malloc(sizeof(char)*tree->spacing + 1);
+	row[tree->spacing] = '\0';
+	for(int i = 0; i <= tree->depth; i++){
+		for(int j = 0; j < tree->spacing; j++)
+		{
+			row[j] = ' ';
+		}
+		printTreeReccursive(tree, i, tree->spacing/2, row);	
+		printf("%s\n", row);
+	}
+	free(row);
 	printf(";\n");
 }
 

@@ -12,7 +12,8 @@ TreeNode* mkleaf(int type, int value);
 TreeNode* mknode(int type, TreeNode* a0, TreeNode* a1, TreeNode* a2);
 
 void printTree(TreeNode* tree);
-
+int runTree(TreeNode* tree);
+extern int yylex();
 int valuetable[1000];
 
 int powe(int a1, int b1);
@@ -27,58 +28,44 @@ int powe(int a1, int b1);
 
 %type <p> expr;
 %type <p> assignment;
-%type <p> list;
+//%type <p> list;
 %type <p> statement;
 %type <p> statements;
-%type <p> morestatements;
-%type <p> blockstatement;
+//%type <p> morestatements;
+//%type <p> blockstatement;
 %type <p> optionalelse;
 %type <i> ID;
 %type <i> NUM;
 
 %token DIV MOD DONE ID NUM EXPR WHILE PRINT READ IF ELSE
-%left '?' WHILE PRINT READ IF ELSE
+%left '?' ':'
+%left '<' '>'
 %left '+' '-'
 %left '*' '/'
 %left '^'
-%left '<' '>' '&' '|'
+%left '&' '|' '%'
 
 
 %%
-start: list DONE {printf("Syntax trees\n"); printTree($1);}
+start: statements DONE { runTree($1);}
         ;
 
-list: statements list {$$ = mknode(';', $1, $2, 0);} | WHILE '(' expr ')' statements list {$$ = mknode(';', mknode(WHILE, $3, $5, 0), $6, 0);}
-	| IF '(' expr ')' statements optionalelse list {$$ = mknode(';', mknode(IF, $3, $5, $6), $7, 0);}
+statements: statement statements{$$ = mknode(';', $1, $2, 0);} 
 	| {$$ = 0;}
-	;	
-
-/*
-blockstatement: assignment ';' statement {$$ = mknode(';', $1, $3, 0);} | expr ';' statement {$$ = mknode(';', $1, $3, 0);} 
-	| '{' statement '}' {$$ = mknode('{', $2, 0, 0);}
-	| {$$ = 0; }
-        ;
-*/
-statements: statement {$$ = $1;}
-	| blockstatement {$$ = $1;}
-	;
-
-morestatements: statement {$$ = $1;}
-	| statement morestatements {$$ = mknode(';', $1, $2, 0);}
-	;
-
-blockstatement: '{' morestatements '}' {$$ = mknode('{', $2, 0, 0);}
-	| '{' '}' {$$ = 0;}
 	;
 
 statement: 
-	  assignment ';' {$$ = $1;}//mknode(';', $1, 0, 0);}
-	| expr  ';' {$$ = $1;}//mknode(';', $1, 0, 0);}
+	  assignment ';' {$$ = $1;}
+	| expr  ';' {$$ = $1;}
+	| WHILE '(' expr ')' statement {$$ = mknode(WHILE, $3, $5, 0);}
+	| IF '(' expr ')' statement optionalelse {$$ = mknode(IF, $3, $5, $6);}
+	| '{' statements '}' {$$ = $2;}
 	;
+
 
 assignment: ID '=' expr{$$ = mknode((int)'=', mkleaf(ID, $1), $3, 0); }
 	;
-optionalelse: ELSE statements {$$ = mknode(ELSE, $2, 0, 0);}
+optionalelse: ELSE statement {$$ = mknode(ELSE, $2, 0, 0);}
 	| {$$ = 0;}
 	;
 expr :    expr '+' expr { $$ = mknode((int)'+', $1, $3, 0); }
@@ -90,12 +77,13 @@ expr :    expr '+' expr { $$ = mknode((int)'+', $1, $3, 0); }
 	| expr '&' expr { $$ = mknode((int)'&', $1, $3, 0); }
 	| expr '|' expr { $$ = mknode((int)'|', $1, $3, 0); }
 	| expr '^' expr { $$ = mknode((int)'^', $1, $3, 0); }
+	| expr '%' expr { $$ = mknode((int)'%', $1, $3, 0); }
 	| expr '?' expr ':' expr { $$ = mknode((int)'?', $1, $3, $5); }
 	| PRINT '(' ID ')' { $$ = mknode(PRINT, mkleaf(ID, $3), 0, 0); }
 	| READ '(' ID ')' { $$ = mknode(READ, mkleaf(ID, $3), 0, 0); }
 	| '(' expr ')' { $$ = mknode((int)'(', $2, mkleaf((int)')', ')'), 0); }
 	| NUM { $$ = mkleaf(NUM, $1);}
-	| ID  {$$ = mkleaf(ID, $1);}
+	| ID  { $$ = mkleaf(ID, $1);}
 	;
 
 
@@ -126,6 +114,7 @@ TreeNode* mkleaf(int type, int value) {
 	TreeNode* p = (TreeNode*)malloc(sizeof(TreeNode));
   	p->type = type;
   	p->value = value;
+//print tree extra -----------------------------------------------------------------------------------------------------
 	p->spacing = 2;
 	if(type == ID)
 		p->spacing += strlen(symtable[p->value].lexeme);
@@ -135,6 +124,7 @@ TreeNode* mkleaf(int type, int value) {
 		sprintf (buffer, "%d", p->value);
 		p->spacing += strlen(buffer) - 1;
 	}
+//print tree extra -----------------------------------------------------------------------------------------------------
   	return p;
 }
 
@@ -144,6 +134,7 @@ TreeNode* mknode(int type, TreeNode* a0, TreeNode* a1, TreeNode* a2) {
   	p->args[0] = a0;
   	p->args[1] = a1;
   	p->args[2] = a2;
+//print tree extra -----------------------------------------------------------------------------------------------------
 	int numNodes = 0;
 	
 	for(int i = 0; i < 3; i++)
@@ -166,10 +157,12 @@ TreeNode* mknode(int type, TreeNode* a0, TreeNode* a1, TreeNode* a2) {
 	else if(type == PRINT || type == WHILE){p->spacing += 6;}
 	else if(type == IF){p->spacing += 2;}
 	p->spacing = p->spacing *(numNodes + (numNodes - 1));
-
+//print tree extra ---------------------------------------------------------------------------------------------------
   	return p;
 }
 
+
+//Print tree here -----------------------------------------------------------------------------------------------------
 void printTreeReccursive(TreeNode* tree, int h, int globalSpacing, char* row)
 {
 	
@@ -283,5 +276,418 @@ void printTree(TreeNode* tree)
 	}
 	free(row);
 }
+//Print tree here -----------------------------------------------------------------------------------------------------
+#define DEBUG_PRINTS 0
 
+
+#if !DEBUG_PRINTS
+int runTree(TreeNode* tree)
+{
+	if(tree == NULL) return 0;
+	switch(tree->type)
+		{
+		case NUM:
+		{
+			return tree->value;
+						
+		}break;
+		case ID:
+		{
+			
+			return tree->value;
+		}break;
+		case PRINT:
+		{
+			int idPosition = runTree(tree->args[0]);
+			int idVal=valuetable[idPosition];			
+			printf("%s = %d\n", symtable[idPosition].lexeme, idVal);
+			return idVal;
+		}break;
+		case WHILE:
+		{
+			
+			while(runTree(tree->args[0]) != 0)
+			{
+				runTree(tree->args[1]);
+			}
+		}break;
+		case READ:
+		{
+			int idVal=0;
+			int idPosition = runTree(tree->args[0]);
+			printf("Input value for %s\n", symtable[idPosition].lexeme);			
+			scanf("%d",&idVal);			
+			valuetable[idPosition]=idVal;
+			return idVal;
+		}break;
+		case (int)'?':
+		case IF:
+		{
+			
+			if(runTree(tree->args[0]) != 0)
+			{
+				runTree(tree->args[1]);
+			}else{
+				runTree(tree->args[2]);
+			}
+		}break;
+		case ELSE:
+		{
+			runTree(tree->args[0]);
+		}break;
+		case (int)'+':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue + rightValue;
+		}break;
+		case (int)'-':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue - rightValue;
+		}break;
+		case (int)'/':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue / rightValue;
+		}break;
+		case (int)'*':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue * rightValue;
+		}break;
+		case (int)'<':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue < rightValue;
+		}break;
+		case (int)'>':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue > rightValue;
+		}break;
+		case (int)'&':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue & rightValue;
+		}break;
+		case (int)'|':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue | rightValue;
+		}break;
+		case (int)'^':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return powe(leftValue, rightValue);
+		}break;
+		case (int)'%':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue % rightValue;
+		}break;
+		case (int)';':
+		{
+			
+			runTree(tree->args[0]);
+			runTree(tree->args[1]);
+
+		}break;
+		case (int)'=':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			int idVal = valuetable[leftValue] = rightValue;
+
+			return idVal;
+		}break;
+		default:
+		{
+			
+			int arg0 = runTree(tree->args[0]);
+			runTree(tree->args[1]);
+			runTree(tree->args[2]);
+			return arg0;
+		}break;
+	}		
+	return 0;
+
+}
+#else
+
+int runTree(TreeNode* tree)
+{
+	if(tree == NULL) return 0;
+	switch(tree->type)
+		{
+		case NUM:
+		{
+			printf("NUM\n");
+			return tree->value;
+						
+		}break;
+		case ID:
+		{
+			
+			printf("ID\n");
+			return tree->value;
+		}break;
+		case PRINT:
+		{
+			
+			printf("PRINT\n");
+			int idPosition = runTree(tree->args[0]);
+			int idVal=valuetable[idPosition];			
+			printf("%s = %d\n", symtable[idPosition].lexeme, idVal);
+			return idVal;
+		}break;
+		case WHILE:
+		{
+			
+			printf("WHILE\n");
+			while(runTree(tree->args[0]) != 0)
+			{
+				runTree(tree->args[1]);
+			}
+		}break;
+		case READ:
+		{
+			printf("NUM\n");
+			int idVal=0;
+			int idPosition = runTree(tree->args[0]);
+			printf("Input value for %s\n", symtable[idPosition].lexeme);			
+			scanf("%d",&idVal);			
+			valuetable[idPosition]=idVal;
+			return idVal;
+		}break;
+		case (int)'?':
+		case IF:
+		{
+			
+			printf("IF\n");
+			if(runTree(tree->args[0]) != 0)
+			{
+				runTree(tree->args[1]);
+			}else{
+				runTree(tree->args[2]);
+			}
+		}break;
+		case ELSE:
+		{
+			printf("ELSE\n");
+			runTree(tree->args[0]);
+		}break;
+		case (int)'+':
+		{
+			
+			printf("+\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue + rightValue;
+		}break;
+		case (int)'-':
+		{
+			
+			printf("-\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue - rightValue;
+		}break;
+		case (int)'/':
+		{
+			
+			printf("/\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue / rightValue;
+		}break;
+		case (int)'*':
+		{
+			
+			printf("*\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue * rightValue;
+		}break;
+		case (int)'<':
+		{
+			
+			printf("<\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue < rightValue;
+		}break;
+		case (int)'>':
+		{
+			
+			printf(">\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue > rightValue;
+		}break;
+		case (int)'&':
+		{
+			
+			printf("&\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue & rightValue;
+		}break;
+		case (int)'|':
+		{
+			
+			printf("|\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue | rightValue;
+		}break;
+		case (int)'^':
+		{
+			
+			printf("^\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return powe(leftValue, rightValue);
+		}break;
+		case (int)'%':
+		{
+			printf("%\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue % rightValue;
+		}break;
+		case (int)';':
+		{
+			
+			printf("%d\n", runTree(tree->args[0]));
+			runTree(tree->args[1]);
+
+		}break;
+		case (int)'=':
+		{
+			
+			printf("=\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			int idVal = valuetable[leftValue] = rightValue;
+
+			return idVal;
+		}break;
+		default:
+		{
+			
+			int arg0 = runTree(tree->args[0]);
+			int arg1 = runTree(tree->args[1]);
+			int arg2 = runTree(tree->args[2]);
+			printf("DEFAULT: %c, %d, %d, %d\n", tree->type, arg0, arg1, arg2);
+			return arg0;
+		}break;
+	}		
+	return 0;
+
+}
+
+#endif
 

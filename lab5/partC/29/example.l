@@ -39,6 +39,7 @@ extern int lookup(char *s);         /* returns position of entry for s, or -1 if
 "&"       { yylval.i = (int) (yytext[0]); return (int) (yytext[0]);}
 "|"       { yylval.i = (int) (yytext[0]); return (int) (yytext[0]);}
 "="       { yylval.i = (int) (yytext[0]); return (int) (yytext[0]);}
+"%"       { yylval.i = (int) (yytext[0]); return (int) (yytext[0]);}
 "("       { yylval.i = (int) (yytext[0]); return (int) (yytext[0]);}
 ")"       { yylval.i = (int) (yytext[0]); return (int) (yytext[0]);}
 [0-9]+    { yylval.i = atoi(yytext); return NUM; }

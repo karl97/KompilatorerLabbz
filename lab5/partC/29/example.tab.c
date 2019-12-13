@@ -79,13 +79,14 @@ TreeNode* mkleaf(int type, int value);
 TreeNode* mknode(int type, TreeNode* a0, TreeNode* a1, TreeNode* a2);
 
 void printTree(TreeNode* tree);
-
+int runTree(TreeNode* tree);
+extern int yylex();
 int valuetable[1000];
 
 int powe(int a1, int b1);
 
 
-#line 89 "example.tab.c" /* yacc.c:337  */
+#line 90 "example.tab.c" /* yacc.c:337  */
 # ifndef YY_NULLPTR
 #  if defined __cplusplus
 #   if 201103L <= __cplusplus
@@ -142,12 +143,12 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 23 "example.y" /* yacc.c:352  */
+#line 24 "example.y" /* yacc.c:352  */
 
   TreeNode* p;
   int i; 
 
-#line 151 "example.tab.c" /* yacc.c:352  */
+#line 152 "example.tab.c" /* yacc.c:352  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -393,18 +394,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  26
+#define YYFINAL  22
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   157
+#define YYLAST   153
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  31
+#define YYNTOKENS  32
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  10
+#define YYNNTS  7
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  32
+#define YYNRULES  28
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  72
+#define YYNSTATES  67
 
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   268
@@ -421,16 +422,16 @@ static const yytype_uint8 yytranslate[] =
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,    22,     2,
-      24,    25,    17,    15,     2,    16,     2,    18,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,    30,    28,
-      20,    29,    21,    14,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,    25,    23,     2,
+      27,    28,    20,    18,     2,    19,     2,    21,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,    15,    26,
+      16,    31,    17,    14,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,    19,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,    22,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,    26,    23,    27,     2,     2,     2,     2,
+       2,     2,     2,    29,    24,    30,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -451,10 +452,9 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    48,    48,    51,    51,    52,    53,    62,    63,    66,
-      67,    70,    71,    75,    76,    79,    81,    82,    84,    85,
-      86,    87,    88,    89,    90,    91,    92,    93,    94,    95,
-      96,    97,    98
+       0,    50,    50,    53,    54,    58,    59,    60,    61,    62,
+      66,    68,    69,    71,    72,    73,    74,    75,    76,    77,
+      78,    79,    80,    81,    82,    83,    84,    85,    86
 };
 #endif
 
@@ -464,11 +464,10 @@ static const yytype_uint8 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "DIV", "MOD", "DONE", "ID", "NUM",
-  "EXPR", "WHILE", "PRINT", "READ", "IF", "ELSE", "'?'", "'+'", "'-'",
-  "'*'", "'/'", "'^'", "'<'", "'>'", "'&'", "'|'", "'('", "')'", "'{'",
-  "'}'", "';'", "'='", "':'", "$accept", "start", "list", "statements",
-  "morestatements", "blockstatement", "statement", "assignment",
-  "optionalelse", "expr", YY_NULLPTR
+  "EXPR", "WHILE", "PRINT", "READ", "IF", "ELSE", "'?'", "':'", "'<'",
+  "'>'", "'+'", "'-'", "'*'", "'/'", "'^'", "'&'", "'|'", "'%'", "';'",
+  "'('", "')'", "'{'", "'}'", "'='", "$accept", "start", "statements",
+  "statement", "assignment", "optionalelse", "expr", YY_NULLPTR
 };
 #endif
 
@@ -478,16 +477,16 @@ static const char *const yytname[] =
 static const yytype_uint16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,    63,    43,    45,    42,    47,    94,
-      60,    62,    38,   124,    40,    41,   123,   125,    59,    61,
-      58
+     265,   266,   267,   268,    63,    58,    60,    62,    43,    45,
+      42,    47,    94,    38,   124,    37,    59,    40,    41,   123,
+     125,    61
 };
 # endif
 
-#define YYPACT_NINF -48
+#define YYPACT_NINF -20
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-48)))
+  (!!((Yystate) == (-20)))
 
 #define YYTABLE_NINF -1
 
@@ -498,14 +497,13 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-      28,   -16,   -48,    -8,    -7,    19,    20,    -2,    -4,    18,
-      46,    28,   -48,   -48,    32,    71,    -2,    -2,    49,    50,
-      -2,   -48,    86,   -48,    37,    56,   -48,   -48,   -48,   -48,
-      -2,    -2,    -2,    -2,    -2,    -2,    -2,    -2,    -2,    -2,
-     -48,   122,    98,    40,    53,   110,   -48,   -48,   -48,    54,
-     129,   129,   134,   134,    27,   -48,   -48,   -48,   -48,    35,
-     -48,   -48,    35,    -2,    28,    66,   122,   -48,    35,    28,
-     -48,   -48
+       3,   -15,   -20,   -10,    -9,     4,     8,    27,     3,    36,
+      35,     3,    26,    25,    27,    27,    50,    61,    27,   -20,
+      41,    63,   -20,   -20,   -20,   -20,    27,    27,    27,    27,
+      27,    27,    27,    27,    27,    27,    27,   -20,    94,    54,
+      52,    66,    67,   -20,   -20,    82,   121,   121,   -19,   -19,
+     112,   112,   128,   -20,   -20,   -20,     3,   -20,   -20,     3,
+      27,   -20,    96,   104,     3,   -20,   -20
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -513,26 +511,25 @@ static const yytype_int16 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       6,    32,    31,     0,     0,     0,     0,     0,     0,     0,
-       0,     6,     8,     7,     0,     0,     0,     0,     0,     0,
-       0,    32,     0,    12,     0,     9,     1,     2,     3,    13,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-      14,    15,     0,     0,     0,     0,    30,    11,    10,     0,
-      18,    19,    20,    21,    26,    22,    23,    24,    25,     0,
-      28,    29,     0,     0,     6,    17,    27,     4,     0,     6,
-      16,     5
+       4,    28,    27,     0,     0,     0,     0,     0,     4,     0,
+       0,     4,     0,     0,     0,     0,     0,     0,     0,    28,
+       0,     0,     1,     2,     3,     5,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     6,    10,     0,
+       0,     0,     0,    26,     9,     0,    17,    18,    13,    14,
+      15,    16,    21,    19,    20,    22,     0,    24,    25,     0,
+       0,     7,    12,    23,     0,     8,    11
 };
 
   /* YYPGOTO[NTERM-NUM].  */
-static const yytype_int8 yypgoto[] =
+static const yytype_int16 yypgoto[] =
 {
-     -48,   -48,   -11,   -47,    57,   -48,    11,   -48,   -48,    -6
+     -20,   -20,   139,    74,   -20,   -20,    -7
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     9,    10,    11,    24,    12,    13,    14,    69,    15
+      -1,     9,    10,    11,    12,    65,    13
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -540,74 +537,71 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-      28,    22,     1,     2,    21,     2,     4,     5,     4,     5,
-      41,    42,    64,    16,    45,    65,    17,    18,    26,    25,
-       7,    70,     7,    23,    49,    50,    51,    52,    53,    54,
-      55,    56,    57,    58,     1,     2,    25,     3,     4,     5,
-       6,     1,     2,    19,    20,     4,     5,    36,    37,    38,
-      39,    27,     7,    67,     8,    43,    44,    66,    71,     7,
-      29,     8,     1,     2,    47,    60,     4,     5,    30,    31,
-      32,    33,    34,    35,    36,    37,    38,    39,    61,    68,
-       7,     0,    48,     0,    63,    30,    31,    32,    33,    34,
-      35,    36,    37,    38,    39,     0,     0,     0,     0,    40,
-      30,    31,    32,    33,    34,    35,    36,    37,    38,    39,
-       0,    46,    30,    31,    32,    33,    34,    35,    36,    37,
-      38,    39,     0,    59,    30,    31,    32,    33,    34,    35,
-      36,    37,    38,    39,     0,    62,    30,    31,    32,    33,
-      34,    35,    36,    37,    38,    39,    33,    34,    35,    36,
-      37,    38,    39,    35,    36,    37,    38,    39
+      20,    31,    32,    33,    34,    35,    36,    38,    39,     1,
+       2,    42,     3,     4,     5,     6,    14,    15,    16,    45,
+      46,    47,    48,    49,    50,    51,    52,    53,    54,    55,
+       7,    17,     8,    19,     2,    18,    22,     4,     5,    26,
+      23,    27,    28,    29,    30,    31,    32,    33,    34,    35,
+      36,    37,    25,    63,     7,    26,    40,    27,    28,    29,
+      30,    31,    32,    33,    34,    35,    36,    41,    26,    43,
+      27,    28,    29,    30,    31,    32,    33,    34,    35,    36,
+      57,    26,    56,    27,    28,    29,    30,    31,    32,    33,
+      34,    35,    36,    44,    58,    59,    26,    60,    27,    28,
+      29,    30,    31,    32,    33,    34,    35,    36,    26,    64,
+      27,    28,    29,    30,    31,    32,    33,    34,    35,    36,
+      27,    28,    29,    30,    31,    32,    33,    34,    35,    36,
+      61,     0,     0,    62,    33,    34,    35,    36,    66,    29,
+      30,    31,    32,    33,    34,    35,    36,    21,     0,     0,
+      24,    34,    35,    36
 };
 
 static const yytype_int8 yycheck[] =
 {
-      11,     7,     6,     7,     6,     7,    10,    11,    10,    11,
-      16,    17,    59,    29,    20,    62,    24,    24,     0,     8,
-      24,    68,    24,    27,    30,    31,    32,    33,    34,    35,
-      36,    37,    38,    39,     6,     7,    25,     9,    10,    11,
-      12,     6,     7,    24,    24,    10,    11,    20,    21,    22,
-      23,     5,    24,    64,    26,     6,     6,    63,    69,    24,
-      28,    26,     6,     7,    27,    25,    10,    11,    14,    15,
-      16,    17,    18,    19,    20,    21,    22,    23,    25,    13,
-      24,    -1,    25,    -1,    30,    14,    15,    16,    17,    18,
-      19,    20,    21,    22,    23,    -1,    -1,    -1,    -1,    28,
-      14,    15,    16,    17,    18,    19,    20,    21,    22,    23,
-      -1,    25,    14,    15,    16,    17,    18,    19,    20,    21,
-      22,    23,    -1,    25,    14,    15,    16,    17,    18,    19,
-      20,    21,    22,    23,    -1,    25,    14,    15,    16,    17,
-      18,    19,    20,    21,    22,    23,    17,    18,    19,    20,
-      21,    22,    23,    19,    20,    21,    22,    23
+       7,    20,    21,    22,    23,    24,    25,    14,    15,     6,
+       7,    18,     9,    10,    11,    12,    31,    27,    27,    26,
+      27,    28,    29,    30,    31,    32,    33,    34,    35,    36,
+      27,    27,    29,     6,     7,    27,     0,    10,    11,    14,
+       5,    16,    17,    18,    19,    20,    21,    22,    23,    24,
+      25,    26,    26,    60,    27,    14,     6,    16,    17,    18,
+      19,    20,    21,    22,    23,    24,    25,     6,    14,    28,
+      16,    17,    18,    19,    20,    21,    22,    23,    24,    25,
+      28,    14,    28,    16,    17,    18,    19,    20,    21,    22,
+      23,    24,    25,    30,    28,    28,    14,    15,    16,    17,
+      18,    19,    20,    21,    22,    23,    24,    25,    14,    13,
+      16,    17,    18,    19,    20,    21,    22,    23,    24,    25,
+      16,    17,    18,    19,    20,    21,    22,    23,    24,    25,
+      56,    -1,    -1,    59,    22,    23,    24,    25,    64,    18,
+      19,    20,    21,    22,    23,    24,    25,     8,    -1,    -1,
+      11,    23,    24,    25
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     6,     7,     9,    10,    11,    12,    24,    26,    32,
-      33,    34,    36,    37,    38,    40,    29,    24,    24,    24,
-      24,     6,    40,    27,    35,    37,     0,     5,    33,    28,
-      14,    15,    16,    17,    18,    19,    20,    21,    22,    23,
-      28,    40,    40,     6,     6,    40,    25,    27,    35,    40,
-      40,    40,    40,    40,    40,    40,    40,    40,    40,    25,
-      25,    25,    25,    30,    34,    34,    40,    33,    13,    39,
-      34,    33
+       0,     6,     7,     9,    10,    11,    12,    27,    29,    33,
+      34,    35,    36,    38,    31,    27,    27,    27,    27,     6,
+      38,    34,     0,     5,    34,    26,    14,    16,    17,    18,
+      19,    20,    21,    22,    23,    24,    25,    26,    38,    38,
+       6,     6,    38,    28,    30,    38,    38,    38,    38,    38,
+      38,    38,    38,    38,    38,    38,    28,    28,    28,    28,
+      15,    35,    35,    38,    13,    37,    35
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    31,    32,    33,    33,    33,    33,    34,    34,    35,
-      35,    36,    36,    37,    37,    38,    39,    39,    40,    40,
-      40,    40,    40,    40,    40,    40,    40,    40,    40,    40,
-      40,    40,    40
+       0,    32,    33,    34,    34,    35,    35,    35,    35,    35,
+      36,    37,    37,    38,    38,    38,    38,    38,    38,    38,
+      38,    38,    38,    38,    38,    38,    38,    38,    38
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     2,     2,     6,     7,     0,     1,     1,     1,
-       2,     3,     2,     2,     2,     3,     2,     0,     3,     3,
-       3,     3,     3,     3,     3,     3,     3,     5,     4,     4,
-       3,     1,     1
+       0,     2,     2,     2,     0,     2,     2,     5,     6,     3,
+       3,     2,     0,     3,     3,     3,     3,     3,     3,     3,
+       3,     3,     3,     5,     4,     4,     3,     1,     1
 };
 
 
@@ -1293,193 +1287,169 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 48 "example.y" /* yacc.c:1652  */
-    {printf("Syntax trees\n"); printTree((yyvsp[-1].p));}
-#line 1299 "example.tab.c" /* yacc.c:1652  */
+#line 50 "example.y" /* yacc.c:1652  */
+    { runTree((yyvsp[-1].p));}
+#line 1293 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 3:
-#line 51 "example.y" /* yacc.c:1652  */
+#line 53 "example.y" /* yacc.c:1652  */
     {(yyval.p) = mknode(';', (yyvsp[-1].p), (yyvsp[0].p), 0);}
-#line 1305 "example.tab.c" /* yacc.c:1652  */
+#line 1299 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 4:
-#line 51 "example.y" /* yacc.c:1652  */
-    {(yyval.p) = mknode(';', mknode(WHILE, (yyvsp[-3].p), (yyvsp[-1].p), 0), (yyvsp[0].p), 0);}
-#line 1311 "example.tab.c" /* yacc.c:1652  */
+#line 54 "example.y" /* yacc.c:1652  */
+    {(yyval.p) = 0;}
+#line 1305 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 5:
-#line 52 "example.y" /* yacc.c:1652  */
-    {(yyval.p) = mknode(';', mknode(IF, (yyvsp[-4].p), (yyvsp[-2].p), (yyvsp[-1].p)), (yyvsp[0].p), 0);}
-#line 1317 "example.tab.c" /* yacc.c:1652  */
+#line 58 "example.y" /* yacc.c:1652  */
+    {(yyval.p) = (yyvsp[-1].p);}
+#line 1311 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 6:
-#line 53 "example.y" /* yacc.c:1652  */
-    {(yyval.p) = 0;}
-#line 1323 "example.tab.c" /* yacc.c:1652  */
+#line 59 "example.y" /* yacc.c:1652  */
+    {(yyval.p) = (yyvsp[-1].p);}
+#line 1317 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 7:
-#line 62 "example.y" /* yacc.c:1652  */
-    {(yyval.p) = (yyvsp[0].p);}
-#line 1329 "example.tab.c" /* yacc.c:1652  */
+#line 60 "example.y" /* yacc.c:1652  */
+    {(yyval.p) = mknode(WHILE, (yyvsp[-2].p), (yyvsp[0].p), 0);}
+#line 1323 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 8:
-#line 63 "example.y" /* yacc.c:1652  */
-    {(yyval.p) = (yyvsp[0].p);}
-#line 1335 "example.tab.c" /* yacc.c:1652  */
+#line 61 "example.y" /* yacc.c:1652  */
+    {(yyval.p) = mknode(IF, (yyvsp[-3].p), (yyvsp[-1].p), (yyvsp[0].p));}
+#line 1329 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 9:
-#line 66 "example.y" /* yacc.c:1652  */
-    {(yyval.p) = (yyvsp[0].p);}
-#line 1341 "example.tab.c" /* yacc.c:1652  */
+#line 62 "example.y" /* yacc.c:1652  */
+    {(yyval.p) = (yyvsp[-1].p);}
+#line 1335 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 10:
-#line 67 "example.y" /* yacc.c:1652  */
-    {(yyval.p) = mknode(';', (yyvsp[-1].p), (yyvsp[0].p), 0);}
-#line 1347 "example.tab.c" /* yacc.c:1652  */
+#line 66 "example.y" /* yacc.c:1652  */
+    {(yyval.p) = mknode((int)'=', mkleaf(ID, (yyvsp[-2].i)), (yyvsp[0].p), 0); }
+#line 1341 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 11:
-#line 70 "example.y" /* yacc.c:1652  */
-    {(yyval.p) = mknode('{', (yyvsp[-1].p), 0, 0);}
-#line 1353 "example.tab.c" /* yacc.c:1652  */
+#line 68 "example.y" /* yacc.c:1652  */
+    {(yyval.p) = mknode(ELSE, (yyvsp[0].p), 0, 0);}
+#line 1347 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 12:
-#line 71 "example.y" /* yacc.c:1652  */
+#line 69 "example.y" /* yacc.c:1652  */
     {(yyval.p) = 0;}
-#line 1359 "example.tab.c" /* yacc.c:1652  */
+#line 1353 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 13:
-#line 75 "example.y" /* yacc.c:1652  */
-    {(yyval.p) = (yyvsp[-1].p);}
-#line 1365 "example.tab.c" /* yacc.c:1652  */
+#line 71 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mknode((int)'+', (yyvsp[-2].p), (yyvsp[0].p), 0); }
+#line 1359 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 14:
-#line 76 "example.y" /* yacc.c:1652  */
-    {(yyval.p) = (yyvsp[-1].p);}
-#line 1371 "example.tab.c" /* yacc.c:1652  */
+#line 72 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mknode((int)'-', (yyvsp[-2].p), (yyvsp[0].p), 0); }
+#line 1365 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 15:
-#line 79 "example.y" /* yacc.c:1652  */
-    {(yyval.p) = mknode((int)'=', mkleaf(ID, (yyvsp[-2].i)), (yyvsp[0].p), 0); }
-#line 1377 "example.tab.c" /* yacc.c:1652  */
+#line 73 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mknode((int)'*', (yyvsp[-2].p), (yyvsp[0].p), 0); }
+#line 1371 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 16:
-#line 81 "example.y" /* yacc.c:1652  */
-    {(yyval.p) = mknode(ELSE, (yyvsp[0].p), 0, 0);}
-#line 1383 "example.tab.c" /* yacc.c:1652  */
+#line 74 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mknode((int)'/', (yyvsp[-2].p), (yyvsp[0].p), 0); }
+#line 1377 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 17:
-#line 82 "example.y" /* yacc.c:1652  */
-    {(yyval.p) = 0;}
-#line 1389 "example.tab.c" /* yacc.c:1652  */
+#line 75 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mknode((int)'<', (yyvsp[-2].p), (yyvsp[0].p), 0); }
+#line 1383 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 18:
-#line 84 "example.y" /* yacc.c:1652  */
-    { (yyval.p) = mknode((int)'+', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1395 "example.tab.c" /* yacc.c:1652  */
+#line 76 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mknode((int)'>', (yyvsp[-2].p), (yyvsp[0].p), 0); }
+#line 1389 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 19:
-#line 85 "example.y" /* yacc.c:1652  */
-    { (yyval.p) = mknode((int)'-', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1401 "example.tab.c" /* yacc.c:1652  */
+#line 77 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mknode((int)'&', (yyvsp[-2].p), (yyvsp[0].p), 0); }
+#line 1395 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 20:
-#line 86 "example.y" /* yacc.c:1652  */
-    { (yyval.p) = mknode((int)'*', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1407 "example.tab.c" /* yacc.c:1652  */
+#line 78 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mknode((int)'|', (yyvsp[-2].p), (yyvsp[0].p), 0); }
+#line 1401 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 21:
-#line 87 "example.y" /* yacc.c:1652  */
-    { (yyval.p) = mknode((int)'/', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1413 "example.tab.c" /* yacc.c:1652  */
+#line 79 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mknode((int)'^', (yyvsp[-2].p), (yyvsp[0].p), 0); }
+#line 1407 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 22:
-#line 88 "example.y" /* yacc.c:1652  */
-    { (yyval.p) = mknode((int)'<', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1419 "example.tab.c" /* yacc.c:1652  */
+#line 80 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mknode((int)'%', (yyvsp[-2].p), (yyvsp[0].p), 0); }
+#line 1413 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 23:
-#line 89 "example.y" /* yacc.c:1652  */
-    { (yyval.p) = mknode((int)'>', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1425 "example.tab.c" /* yacc.c:1652  */
+#line 81 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mknode((int)'?', (yyvsp[-4].p), (yyvsp[-2].p), (yyvsp[0].p)); }
+#line 1419 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 24:
-#line 90 "example.y" /* yacc.c:1652  */
-    { (yyval.p) = mknode((int)'&', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1431 "example.tab.c" /* yacc.c:1652  */
+#line 82 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mknode(PRINT, mkleaf(ID, (yyvsp[-1].i)), 0, 0); }
+#line 1425 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 25:
-#line 91 "example.y" /* yacc.c:1652  */
-    { (yyval.p) = mknode((int)'|', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1437 "example.tab.c" /* yacc.c:1652  */
+#line 83 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mknode(READ, mkleaf(ID, (yyvsp[-1].i)), 0, 0); }
+#line 1431 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 26:
-#line 92 "example.y" /* yacc.c:1652  */
-    { (yyval.p) = mknode((int)'^', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1443 "example.tab.c" /* yacc.c:1652  */
+#line 84 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mknode((int)'(', (yyvsp[-1].p), mkleaf((int)')', ')'), 0); }
+#line 1437 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 27:
-#line 93 "example.y" /* yacc.c:1652  */
-    { (yyval.p) = mknode((int)'?', (yyvsp[-4].p), (yyvsp[-2].p), (yyvsp[0].p)); }
-#line 1449 "example.tab.c" /* yacc.c:1652  */
+#line 85 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mkleaf(NUM, (yyvsp[0].i));}
+#line 1443 "example.tab.c" /* yacc.c:1652  */
     break;
 
   case 28:
-#line 94 "example.y" /* yacc.c:1652  */
-    { (yyval.p) = mknode(PRINT, mkleaf(ID, (yyvsp[-1].i)), 0, 0); }
-#line 1455 "example.tab.c" /* yacc.c:1652  */
-    break;
-
-  case 29:
-#line 95 "example.y" /* yacc.c:1652  */
-    { (yyval.p) = mknode(READ, mkleaf(ID, (yyvsp[-1].i)), 0, 0); }
-#line 1461 "example.tab.c" /* yacc.c:1652  */
-    break;
-
-  case 30:
-#line 96 "example.y" /* yacc.c:1652  */
-    { (yyval.p) = mknode((int)'(', (yyvsp[-1].p), mkleaf((int)')', ')'), 0); }
-#line 1467 "example.tab.c" /* yacc.c:1652  */
-    break;
-
-  case 31:
-#line 97 "example.y" /* yacc.c:1652  */
-    { (yyval.p) = mkleaf(NUM, (yyvsp[0].i));}
-#line 1473 "example.tab.c" /* yacc.c:1652  */
-    break;
-
-  case 32:
-#line 98 "example.y" /* yacc.c:1652  */
-    {(yyval.p) = mkleaf(ID, (yyvsp[0].i));}
-#line 1479 "example.tab.c" /* yacc.c:1652  */
+#line 86 "example.y" /* yacc.c:1652  */
+    { (yyval.p) = mkleaf(ID, (yyvsp[0].i));}
+#line 1449 "example.tab.c" /* yacc.c:1652  */
     break;
 
 
-#line 1483 "example.tab.c" /* yacc.c:1652  */
+#line 1453 "example.tab.c" /* yacc.c:1652  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1710,7 +1680,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 104 "example.y" /* yacc.c:1918  */
+#line 92 "example.y" /* yacc.c:1918  */
 
 
 int yyerror(char const *msg) {
@@ -1736,6 +1706,7 @@ TreeNode* mkleaf(int type, int value) {
 	TreeNode* p = (TreeNode*)malloc(sizeof(TreeNode));
   	p->type = type;
   	p->value = value;
+//print tree extra -----------------------------------------------------------------------------------------------------
 	p->spacing = 2;
 	if(type == ID)
 		p->spacing += strlen(symtable[p->value].lexeme);
@@ -1745,6 +1716,7 @@ TreeNode* mkleaf(int type, int value) {
 		sprintf (buffer, "%d", p->value);
 		p->spacing += strlen(buffer) - 1;
 	}
+//print tree extra -----------------------------------------------------------------------------------------------------
   	return p;
 }
 
@@ -1754,6 +1726,7 @@ TreeNode* mknode(int type, TreeNode* a0, TreeNode* a1, TreeNode* a2) {
   	p->args[0] = a0;
   	p->args[1] = a1;
   	p->args[2] = a2;
+//print tree extra -----------------------------------------------------------------------------------------------------
 	int numNodes = 0;
 	
 	for(int i = 0; i < 3; i++)
@@ -1776,10 +1749,12 @@ TreeNode* mknode(int type, TreeNode* a0, TreeNode* a1, TreeNode* a2) {
 	else if(type == PRINT || type == WHILE){p->spacing += 6;}
 	else if(type == IF){p->spacing += 2;}
 	p->spacing = p->spacing *(numNodes + (numNodes - 1));
-
+//print tree extra ---------------------------------------------------------------------------------------------------
   	return p;
 }
 
+
+//Print tree here -----------------------------------------------------------------------------------------------------
 void printTreeReccursive(TreeNode* tree, int h, int globalSpacing, char* row)
 {
 	
@@ -1893,5 +1868,418 @@ void printTree(TreeNode* tree)
 	}
 	free(row);
 }
+//Print tree here -----------------------------------------------------------------------------------------------------
+#define DEBUG_PRINTS 0
 
+
+#if !DEBUG_PRINTS
+int runTree(TreeNode* tree)
+{
+	if(tree == NULL) return 0;
+	switch(tree->type)
+		{
+		case NUM:
+		{
+			return tree->value;
+						
+		}break;
+		case ID:
+		{
+			
+			return tree->value;
+		}break;
+		case PRINT:
+		{
+			int idPosition = runTree(tree->args[0]);
+			int idVal=valuetable[idPosition];			
+			printf("%s = %d\n", symtable[idPosition].lexeme, idVal);
+			return idVal;
+		}break;
+		case WHILE:
+		{
+			
+			while(runTree(tree->args[0]) != 0)
+			{
+				runTree(tree->args[1]);
+			}
+		}break;
+		case READ:
+		{
+			int idVal=0;
+			int idPosition = runTree(tree->args[0]);
+			printf("Input value for %s\n", symtable[idPosition].lexeme);			
+			scanf("%d",&idVal);			
+			valuetable[idPosition]=idVal;
+			return idVal;
+		}break;
+		case (int)'?':
+		case IF:
+		{
+			
+			if(runTree(tree->args[0]) != 0)
+			{
+				runTree(tree->args[1]);
+			}else{
+				runTree(tree->args[2]);
+			}
+		}break;
+		case ELSE:
+		{
+			runTree(tree->args[0]);
+		}break;
+		case (int)'+':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue + rightValue;
+		}break;
+		case (int)'-':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue - rightValue;
+		}break;
+		case (int)'/':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue / rightValue;
+		}break;
+		case (int)'*':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue * rightValue;
+		}break;
+		case (int)'<':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue < rightValue;
+		}break;
+		case (int)'>':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue > rightValue;
+		}break;
+		case (int)'&':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue & rightValue;
+		}break;
+		case (int)'|':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue | rightValue;
+		}break;
+		case (int)'^':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return powe(leftValue, rightValue);
+		}break;
+		case (int)'%':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue % rightValue;
+		}break;
+		case (int)';':
+		{
+			
+			runTree(tree->args[0]);
+			runTree(tree->args[1]);
+
+		}break;
+		case (int)'=':
+		{
+			
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			int idVal = valuetable[leftValue] = rightValue;
+
+			return idVal;
+		}break;
+		default:
+		{
+			
+			int arg0 = runTree(tree->args[0]);
+			runTree(tree->args[1]);
+			runTree(tree->args[2]);
+			return arg0;
+		}break;
+	}		
+	return 0;
+
+}
+#else
+
+int runTree(TreeNode* tree)
+{
+	if(tree == NULL) return 0;
+	switch(tree->type)
+		{
+		case NUM:
+		{
+			printf("NUM\n");
+			return tree->value;
+						
+		}break;
+		case ID:
+		{
+			
+			printf("ID\n");
+			return tree->value;
+		}break;
+		case PRINT:
+		{
+			
+			printf("PRINT\n");
+			int idPosition = runTree(tree->args[0]);
+			int idVal=valuetable[idPosition];			
+			printf("%s = %d\n", symtable[idPosition].lexeme, idVal);
+			return idVal;
+		}break;
+		case WHILE:
+		{
+			
+			printf("WHILE\n");
+			while(runTree(tree->args[0]) != 0)
+			{
+				runTree(tree->args[1]);
+			}
+		}break;
+		case READ:
+		{
+			printf("NUM\n");
+			int idVal=0;
+			int idPosition = runTree(tree->args[0]);
+			printf("Input value for %s\n", symtable[idPosition].lexeme);			
+			scanf("%d",&idVal);			
+			valuetable[idPosition]=idVal;
+			return idVal;
+		}break;
+		case (int)'?':
+		case IF:
+		{
+			
+			printf("IF\n");
+			if(runTree(tree->args[0]) != 0)
+			{
+				runTree(tree->args[1]);
+			}else{
+				runTree(tree->args[2]);
+			}
+		}break;
+		case ELSE:
+		{
+			printf("ELSE\n");
+			runTree(tree->args[0]);
+		}break;
+		case (int)'+':
+		{
+			
+			printf("+\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue + rightValue;
+		}break;
+		case (int)'-':
+		{
+			
+			printf("-\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue - rightValue;
+		}break;
+		case (int)'/':
+		{
+			
+			printf("/\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue / rightValue;
+		}break;
+		case (int)'*':
+		{
+			
+			printf("*\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue * rightValue;
+		}break;
+		case (int)'<':
+		{
+			
+			printf("<\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue < rightValue;
+		}break;
+		case (int)'>':
+		{
+			
+			printf(">\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue > rightValue;
+		}break;
+		case (int)'&':
+		{
+			
+			printf("&\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue & rightValue;
+		}break;
+		case (int)'|':
+		{
+			
+			printf("|\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue | rightValue;
+		}break;
+		case (int)'^':
+		{
+			
+			printf("^\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return powe(leftValue, rightValue);
+		}break;
+		case (int)'%':
+		{
+			printf("%\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
+			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			return leftValue % rightValue;
+		}break;
+		case (int)';':
+		{
+			
+			printf("%d\n", runTree(tree->args[0]));
+			runTree(tree->args[1]);
+
+		}break;
+		case (int)'=':
+		{
+			
+			printf("=\n");
+			int leftValue = runTree(tree->args[0]);
+			int rightValue = runTree(tree->args[1]);
+
+			int idVal = valuetable[leftValue] = rightValue;
+
+			return idVal;
+		}break;
+		default:
+		{
+			
+			int arg0 = runTree(tree->args[0]);
+			int arg1 = runTree(tree->args[1]);
+			int arg2 = runTree(tree->args[2]);
+			printf("DEFAULT: %c, %d, %d, %d\n", tree->type, arg0, arg1, arg2);
+			return arg0;
+		}break;
+	}		
+	return 0;
+
+}
+
+#endif
 

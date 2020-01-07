@@ -1970,12 +1970,29 @@ int runTree(TreeNode* tree)
 		case IF:
 		{
 			DEBUG_CALL(printf("IF\n"));
+			/*
 			if(runTree(tree->args[0]) != 0)
 			{
 				runTree(tree->args[1]);
 			}else{
 				runTree(tree->args[2]);
 			}
+			*/
+			//Villkor
+			runTree(tree->args[0]);
+			int label_1 = labelCounter++;
+			int label_2 = labelCounter++;
+			
+			//if
+			sm.append(Instruction(gofalse, label_1));
+			runTree(tree->args[1]);
+			sm.append(Instruction(jump, label_2));
+
+			//else
+			sm.append(Instruction(label, label_1));
+			runTree(tree->args[2]);
+			sm.append(Instruction(label, label_2));
+
 		}break;
 		case ELSE:
 		{

@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.3.2.  */
+/* A Bison parser, made by GNU Bison 3.4.1.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
@@ -48,7 +48,7 @@
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "3.3.2"
+#define YYBISON_VERSION "3.4.1"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -66,7 +66,7 @@
 
 
 /* First part of user prologue.  */
-#line 3 "example.y" /* yacc.c:337  */
+#line 3 "example.y"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -86,7 +86,8 @@ int valuetable[1000];
 int powe(int a1, int b1);
 
 
-#line 90 "example.tab.c" /* yacc.c:337  */
+#line 90 "example.tab.c"
+
 # ifndef YY_NULLPTR
 #  if defined __cplusplus
 #   if 201103L <= __cplusplus
@@ -107,8 +108,8 @@ int powe(int a1, int b1);
 # define YYERROR_VERBOSE 0
 #endif
 
-/* In a future release of Bison, this section will be replaced
-   by #include "example.tab.h".  */
+/* Use api.header.include to #include this header
+   instead of duplicating it here.  */
 #ifndef YY_YY_EXAMPLE_TAB_H_INCLUDED
 # define YY_YY_EXAMPLE_TAB_H_INCLUDED
 /* Debug traces.  */
@@ -140,17 +141,16 @@ extern int yydebug;
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-
 union YYSTYPE
 {
-#line 24 "example.y" /* yacc.c:352  */
+#line 24 "example.y"
 
   TreeNode* p;
   int i; 
 
-#line 152 "example.tab.c" /* yacc.c:352  */
-};
+#line 152 "example.tab.c"
 
+};
 typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -264,6 +264,8 @@ typedef short yytype_int16;
 # define YY_INITIAL_VALUE(Value) /* Nothing. */
 #endif
 
+
+#define YY_ASSERT(E) ((void) (0 && (E)))
 
 #if ! defined yyoverflow || YYERROR_VERBOSE
 
@@ -1120,6 +1122,8 @@ yynewstate:
 | yynewstate -- set current state (the top of the stack) to yystate.  |
 `--------------------------------------------------------------------*/
 yysetstate:
+  YYDPRINTF ((stderr, "Entering state %d\n", yystate));
+  YY_ASSERT (0 <= yystate && yystate < YYNSTATES);
   *yyssp = (yytype_int16) yystate;
 
   if (yyss + yystacksize - 1 <= yyssp)
@@ -1181,8 +1185,6 @@ yysetstate:
         YYABORT;
     }
 #endif /* !defined yyoverflow && !defined YYSTACK_RELOCATE */
-
-  YYDPRINTF ((stderr, "Entering state %d\n", yystate));
 
   if (yystate == YYFINAL)
     YYACCEPT;
@@ -1251,7 +1253,6 @@ yybackup:
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
   *++yyvsp = yylval;
   YY_IGNORE_MAYBE_UNINITIALIZED_END
-
   goto yynewstate;
 
 
@@ -1286,170 +1287,171 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 2:
-#line 50 "example.y" /* yacc.c:1652  */
+  case 2:
+#line 50 "example.y"
     { runTree((yyvsp[-1].p));}
-#line 1293 "example.tab.c" /* yacc.c:1652  */
+#line 1294 "example.tab.c"
     break;
 
   case 3:
-#line 53 "example.y" /* yacc.c:1652  */
+#line 53 "example.y"
     {(yyval.p) = mknode(';', (yyvsp[-1].p), (yyvsp[0].p), 0);}
-#line 1299 "example.tab.c" /* yacc.c:1652  */
+#line 1300 "example.tab.c"
     break;
 
   case 4:
-#line 54 "example.y" /* yacc.c:1652  */
+#line 54 "example.y"
     {(yyval.p) = 0;}
-#line 1305 "example.tab.c" /* yacc.c:1652  */
+#line 1306 "example.tab.c"
     break;
 
   case 5:
-#line 58 "example.y" /* yacc.c:1652  */
+#line 58 "example.y"
     {(yyval.p) = (yyvsp[-1].p);}
-#line 1311 "example.tab.c" /* yacc.c:1652  */
+#line 1312 "example.tab.c"
     break;
 
   case 6:
-#line 59 "example.y" /* yacc.c:1652  */
+#line 59 "example.y"
     {(yyval.p) = (yyvsp[-1].p);}
-#line 1317 "example.tab.c" /* yacc.c:1652  */
+#line 1318 "example.tab.c"
     break;
 
   case 7:
-#line 60 "example.y" /* yacc.c:1652  */
+#line 60 "example.y"
     {(yyval.p) = mknode(WHILE, (yyvsp[-2].p), (yyvsp[0].p), 0);}
-#line 1323 "example.tab.c" /* yacc.c:1652  */
+#line 1324 "example.tab.c"
     break;
 
   case 8:
-#line 61 "example.y" /* yacc.c:1652  */
+#line 61 "example.y"
     {(yyval.p) = mknode(IF, (yyvsp[-3].p), (yyvsp[-1].p), (yyvsp[0].p));}
-#line 1329 "example.tab.c" /* yacc.c:1652  */
+#line 1330 "example.tab.c"
     break;
 
   case 9:
-#line 62 "example.y" /* yacc.c:1652  */
+#line 62 "example.y"
     {(yyval.p) = (yyvsp[-1].p);}
-#line 1335 "example.tab.c" /* yacc.c:1652  */
+#line 1336 "example.tab.c"
     break;
 
   case 10:
-#line 66 "example.y" /* yacc.c:1652  */
+#line 66 "example.y"
     {(yyval.p) = mknode((int)'=', mkleaf(ID, (yyvsp[-2].i)), (yyvsp[0].p), 0); }
-#line 1341 "example.tab.c" /* yacc.c:1652  */
+#line 1342 "example.tab.c"
     break;
 
   case 11:
-#line 68 "example.y" /* yacc.c:1652  */
+#line 68 "example.y"
     {(yyval.p) = mknode(ELSE, (yyvsp[0].p), 0, 0);}
-#line 1347 "example.tab.c" /* yacc.c:1652  */
+#line 1348 "example.tab.c"
     break;
 
   case 12:
-#line 69 "example.y" /* yacc.c:1652  */
+#line 69 "example.y"
     {(yyval.p) = 0;}
-#line 1353 "example.tab.c" /* yacc.c:1652  */
+#line 1354 "example.tab.c"
     break;
 
   case 13:
-#line 71 "example.y" /* yacc.c:1652  */
+#line 71 "example.y"
     { (yyval.p) = mknode((int)'+', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1359 "example.tab.c" /* yacc.c:1652  */
+#line 1360 "example.tab.c"
     break;
 
   case 14:
-#line 72 "example.y" /* yacc.c:1652  */
+#line 72 "example.y"
     { (yyval.p) = mknode((int)'-', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1365 "example.tab.c" /* yacc.c:1652  */
+#line 1366 "example.tab.c"
     break;
 
   case 15:
-#line 73 "example.y" /* yacc.c:1652  */
+#line 73 "example.y"
     { (yyval.p) = mknode((int)'*', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1371 "example.tab.c" /* yacc.c:1652  */
+#line 1372 "example.tab.c"
     break;
 
   case 16:
-#line 74 "example.y" /* yacc.c:1652  */
+#line 74 "example.y"
     { (yyval.p) = mknode((int)'/', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1377 "example.tab.c" /* yacc.c:1652  */
+#line 1378 "example.tab.c"
     break;
 
   case 17:
-#line 75 "example.y" /* yacc.c:1652  */
+#line 75 "example.y"
     { (yyval.p) = mknode((int)'<', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1383 "example.tab.c" /* yacc.c:1652  */
+#line 1384 "example.tab.c"
     break;
 
   case 18:
-#line 76 "example.y" /* yacc.c:1652  */
+#line 76 "example.y"
     { (yyval.p) = mknode((int)'>', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1389 "example.tab.c" /* yacc.c:1652  */
+#line 1390 "example.tab.c"
     break;
 
   case 19:
-#line 77 "example.y" /* yacc.c:1652  */
+#line 77 "example.y"
     { (yyval.p) = mknode((int)'&', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1395 "example.tab.c" /* yacc.c:1652  */
+#line 1396 "example.tab.c"
     break;
 
   case 20:
-#line 78 "example.y" /* yacc.c:1652  */
+#line 78 "example.y"
     { (yyval.p) = mknode((int)'|', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1401 "example.tab.c" /* yacc.c:1652  */
+#line 1402 "example.tab.c"
     break;
 
   case 21:
-#line 79 "example.y" /* yacc.c:1652  */
+#line 79 "example.y"
     { (yyval.p) = mknode((int)'^', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1407 "example.tab.c" /* yacc.c:1652  */
+#line 1408 "example.tab.c"
     break;
 
   case 22:
-#line 80 "example.y" /* yacc.c:1652  */
+#line 80 "example.y"
     { (yyval.p) = mknode((int)'%', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1413 "example.tab.c" /* yacc.c:1652  */
+#line 1414 "example.tab.c"
     break;
 
   case 23:
-#line 81 "example.y" /* yacc.c:1652  */
+#line 81 "example.y"
     { (yyval.p) = mknode((int)'?', (yyvsp[-4].p), (yyvsp[-2].p), (yyvsp[0].p)); }
-#line 1419 "example.tab.c" /* yacc.c:1652  */
+#line 1420 "example.tab.c"
     break;
 
   case 24:
-#line 82 "example.y" /* yacc.c:1652  */
+#line 82 "example.y"
     { (yyval.p) = mknode(PRINT, mkleaf(ID, (yyvsp[-1].i)), 0, 0); }
-#line 1425 "example.tab.c" /* yacc.c:1652  */
+#line 1426 "example.tab.c"
     break;
 
   case 25:
-#line 83 "example.y" /* yacc.c:1652  */
+#line 83 "example.y"
     { (yyval.p) = mknode(READ, mkleaf(ID, (yyvsp[-1].i)), 0, 0); }
-#line 1431 "example.tab.c" /* yacc.c:1652  */
+#line 1432 "example.tab.c"
     break;
 
   case 26:
-#line 84 "example.y" /* yacc.c:1652  */
+#line 84 "example.y"
     { (yyval.p) = mknode((int)'(', (yyvsp[-1].p), mkleaf((int)')', ')'), 0); }
-#line 1437 "example.tab.c" /* yacc.c:1652  */
+#line 1438 "example.tab.c"
     break;
 
   case 27:
-#line 85 "example.y" /* yacc.c:1652  */
+#line 85 "example.y"
     { (yyval.p) = mkleaf(NUM, (yyvsp[0].i));}
-#line 1443 "example.tab.c" /* yacc.c:1652  */
+#line 1444 "example.tab.c"
     break;
 
   case 28:
-#line 86 "example.y" /* yacc.c:1652  */
+#line 86 "example.y"
     { (yyval.p) = mkleaf(ID, (yyvsp[0].i));}
-#line 1449 "example.tab.c" /* yacc.c:1652  */
+#line 1450 "example.tab.c"
     break;
 
 
-#line 1453 "example.tab.c" /* yacc.c:1652  */
+#line 1454 "example.tab.c"
+
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1680,7 +1682,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 92 "example.y" /* yacc.c:1918  */
+#line 92 "example.y"
 
 
 int yyerror(char const *msg) {
@@ -1869,10 +1871,16 @@ void printTree(TreeNode* tree)
 	free(row);
 }
 //Print tree here -----------------------------------------------------------------------------------------------------
-#define DEBUG_PRINTS 0
+#define DEBUG_PRINTS 1
 
 
 #if !DEBUG_PRINTS
+#define DEBUG_CALL(x)
+#else 
+#define DEBUG_CALL(x) x
+#endif
+
+
 int runTree(TreeNode* tree)
 {
 	if(tree == NULL) return 0;
@@ -1880,16 +1888,18 @@ int runTree(TreeNode* tree)
 		{
 		case NUM:
 		{
+			DEBUG_CALL(printf("NUM\n"));
 			return tree->value;
 						
 		}break;
 		case ID:
 		{
-			
+			DEBUG_CALL(printf("ID\n"));
 			return tree->value;
 		}break;
 		case PRINT:
 		{
+			DEBUG_CALL(printf("PRINT\n"));
 			int idPosition = runTree(tree->args[0]);
 			int idVal=valuetable[idPosition];			
 			printf("%s = %d\n", symtable[idPosition].lexeme, idVal);
@@ -1897,7 +1907,7 @@ int runTree(TreeNode* tree)
 		}break;
 		case WHILE:
 		{
-			
+			DEBUG_CALL(printf("WHILE\n"));
 			while(runTree(tree->args[0]) != 0)
 			{
 				runTree(tree->args[1]);
@@ -1905,6 +1915,7 @@ int runTree(TreeNode* tree)
 		}break;
 		case READ:
 		{
+			DEBUG_CALL(printf("READ\n"));
 			int idVal=0;
 			int idPosition = runTree(tree->args[0]);
 			printf("Input value for %s\n", symtable[idPosition].lexeme);			
@@ -1915,7 +1926,7 @@ int runTree(TreeNode* tree)
 		case (int)'?':
 		case IF:
 		{
-			
+			DEBUG_CALL(printf("IF\n"));
 			if(runTree(tree->args[0]) != 0)
 			{
 				runTree(tree->args[1]);
@@ -1925,11 +1936,12 @@ int runTree(TreeNode* tree)
 		}break;
 		case ELSE:
 		{
+			DEBUG_CALL(printf("ELSE\n"));
 			runTree(tree->args[0]);
 		}break;
 		case (int)'+':
 		{
-			
+			DEBUG_CALL(printf("+\n"));
 			int leftValue = runTree(tree->args[0]);
 			int rightValue = runTree(tree->args[1]);
 
@@ -1940,7 +1952,7 @@ int runTree(TreeNode* tree)
 		}break;
 		case (int)'-':
 		{
-			
+			DEBUG_CALL(printf("-\n"));
 			int leftValue = runTree(tree->args[0]);
 			int rightValue = runTree(tree->args[1]);
 
@@ -1951,7 +1963,7 @@ int runTree(TreeNode* tree)
 		}break;
 		case (int)'/':
 		{
-			
+			DEBUG_CALL(printf("/\n"));
 			int leftValue = runTree(tree->args[0]);
 			int rightValue = runTree(tree->args[1]);
 
@@ -1962,7 +1974,7 @@ int runTree(TreeNode* tree)
 		}break;
 		case (int)'*':
 		{
-			
+			DEBUG_CALL(printf("*\n"));
 			int leftValue = runTree(tree->args[0]);
 			int rightValue = runTree(tree->args[1]);
 
@@ -1973,7 +1985,7 @@ int runTree(TreeNode* tree)
 		}break;
 		case (int)'<':
 		{
-			
+			DEBUG_CALL(printf("<\n"));
 			int leftValue = runTree(tree->args[0]);
 			int rightValue = runTree(tree->args[1]);
 
@@ -1984,7 +1996,7 @@ int runTree(TreeNode* tree)
 		}break;
 		case (int)'>':
 		{
-			
+			DEBUG_CALL(printf(">\n"));
 			int leftValue = runTree(tree->args[0]);
 			int rightValue = runTree(tree->args[1]);
 
@@ -1995,7 +2007,7 @@ int runTree(TreeNode* tree)
 		}break;
 		case (int)'&':
 		{
-			
+			DEBUG_CALL(printf("&\n"));
 			int leftValue = runTree(tree->args[0]);
 			int rightValue = runTree(tree->args[1]);
 
@@ -2006,7 +2018,7 @@ int runTree(TreeNode* tree)
 		}break;
 		case (int)'|':
 		{
-			
+			DEBUG_CALL(printf("|\n"));
 			int leftValue = runTree(tree->args[0]);
 			int rightValue = runTree(tree->args[1]);
 
@@ -2017,7 +2029,7 @@ int runTree(TreeNode* tree)
 		}break;
 		case (int)'^':
 		{
-			
+			DEBUG_CALL(printf("^\n"));
 			int leftValue = runTree(tree->args[0]);
 			int rightValue = runTree(tree->args[1]);
 
@@ -2028,7 +2040,7 @@ int runTree(TreeNode* tree)
 		}break;
 		case (int)'%':
 		{
-			
+			DEBUG_CALL(printf("%%\n"));
 			int leftValue = runTree(tree->args[0]);
 			int rightValue = runTree(tree->args[1]);
 
@@ -2039,227 +2051,14 @@ int runTree(TreeNode* tree)
 		}break;
 		case (int)';':
 		{
-			
+			DEBUG_CALL(printf(";\n"));
 			runTree(tree->args[0]);
 			runTree(tree->args[1]);
 
 		}break;
 		case (int)'=':
 		{
-			
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
-
-			int idVal = valuetable[leftValue] = rightValue;
-
-			return idVal;
-		}break;
-		default:
-		{
-			
-			int arg0 = runTree(tree->args[0]);
-			runTree(tree->args[1]);
-			runTree(tree->args[2]);
-			return arg0;
-		}break;
-	}		
-	return 0;
-
-}
-#else
-
-int runTree(TreeNode* tree)
-{
-	if(tree == NULL) return 0;
-	switch(tree->type)
-		{
-		case NUM:
-		{
-			printf("NUM\n");
-			return tree->value;
-						
-		}break;
-		case ID:
-		{
-			
-			printf("ID\n");
-			return tree->value;
-		}break;
-		case PRINT:
-		{
-			
-			printf("PRINT\n");
-			int idPosition = runTree(tree->args[0]);
-			int idVal=valuetable[idPosition];			
-			printf("%s = %d\n", symtable[idPosition].lexeme, idVal);
-			return idVal;
-		}break;
-		case WHILE:
-		{
-			
-			printf("WHILE\n");
-			while(runTree(tree->args[0]) != 0)
-			{
-				runTree(tree->args[1]);
-			}
-		}break;
-		case READ:
-		{
-			printf("NUM\n");
-			int idVal=0;
-			int idPosition = runTree(tree->args[0]);
-			printf("Input value for %s\n", symtable[idPosition].lexeme);			
-			scanf("%d",&idVal);			
-			valuetable[idPosition]=idVal;
-			return idVal;
-		}break;
-		case (int)'?':
-		case IF:
-		{
-			
-			printf("IF\n");
-			if(runTree(tree->args[0]) != 0)
-			{
-				runTree(tree->args[1]);
-			}else{
-				runTree(tree->args[2]);
-			}
-		}break;
-		case ELSE:
-		{
-			printf("ELSE\n");
-			runTree(tree->args[0]);
-		}break;
-		case (int)'+':
-		{
-			
-			printf("+\n");
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
-
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
-
-			return leftValue + rightValue;
-		}break;
-		case (int)'-':
-		{
-			
-			printf("-\n");
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
-
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
-
-			return leftValue - rightValue;
-		}break;
-		case (int)'/':
-		{
-			
-			printf("/\n");
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
-
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
-
-			return leftValue / rightValue;
-		}break;
-		case (int)'*':
-		{
-			
-			printf("*\n");
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
-
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
-
-			return leftValue * rightValue;
-		}break;
-		case (int)'<':
-		{
-			
-			printf("<\n");
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
-
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
-
-			return leftValue < rightValue;
-		}break;
-		case (int)'>':
-		{
-			
-			printf(">\n");
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
-
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
-
-			return leftValue > rightValue;
-		}break;
-		case (int)'&':
-		{
-			
-			printf("&\n");
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
-
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
-
-			return leftValue & rightValue;
-		}break;
-		case (int)'|':
-		{
-			
-			printf("|\n");
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
-
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
-
-			return leftValue | rightValue;
-		}break;
-		case (int)'^':
-		{
-			
-			printf("^\n");
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
-
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
-
-			return powe(leftValue, rightValue);
-		}break;
-		case (int)'%':
-		{
-			printf("%\n");
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
-
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
-
-			return leftValue % rightValue;
-		}break;
-		case (int)';':
-		{
-			
-			printf("%d\n", runTree(tree->args[0]));
-			runTree(tree->args[1]);
-
-		}break;
-		case (int)'=':
-		{
-			
-			printf("=\n");
+			DEBUG_CALL(printf("=\n"));
 			int leftValue = runTree(tree->args[0]);
 			int rightValue = runTree(tree->args[1]);
 
@@ -2273,7 +2072,8 @@ int runTree(TreeNode* tree)
 			int arg0 = runTree(tree->args[0]);
 			int arg1 = runTree(tree->args[1]);
 			int arg2 = runTree(tree->args[2]);
-			printf("DEFAULT: %c, %d, %d, %d\n", tree->type, arg0, arg1, arg2);
+			DEBUG_CALL(printf("DEFAULT: %c, %d, %d, %d\n", tree->type, arg0, arg1, arg2));
+
 			return arg0;
 		}break;
 	}		
@@ -2281,5 +2081,4 @@ int runTree(TreeNode* tree)
 
 }
 
-#endif
 

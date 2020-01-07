@@ -1,0 +1,733 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Kompilatorer och interpretatorer: StackMachine</title>
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#0000cc" vlink="#551a8b" alink="#ff0000">
+
+<h1>StackMachine</h1>
+
+This is the source code for the stack machine class
+<b>StackMachine</b>,
+to be used in exercise 7.
+You can also download all the files as a
+<a href="StackMachine.tar.gz">compressed tar file</a>
+or as a
+<a href="StackMachine.zip">ZIP file</a>.
+
+<p>
+
+On a Unix or Linux system, with GCC installed,
+you can compile the program by just typing
+<tt>make</tt>.
+
+<p>
+
+<i>This is the currently newest version, from 2018.</i>
+
+<p>
+
+Jump:
+<a href="#StackMachine.h">StackMachine.h</a> |
+<a href="#StackMachine.cpp">StackMachine.cpp</a> |
+<a href="#stacktest.cpp">stacktest.cpp</a> |
+<a href="#Makefile">Makefile</a>
+<br>
+Download:
+<a href="StackMachine.h">StackMachine.h</a> |
+<a href="StackMachine.cpp">StackMachine.cpp</a> |
+<a href="stacktest.cpp">stacktest.cpp</a> |
+<a href="Makefile">Makefile</a>
+
+
+
+<a name="StackMachine.h"></a>
+<h2>StackMachine.h</h2>
+
+<a href="StackMachine.h">Download</a>
+
+<blockquote>
+<pre>
+// StackMachine.h -- interface file for the stack machine
+// Thomas Padron-McCarthy (Thomas.Padron-McCarthy@oru.se) 2003, 2012, 2018
+
+class Exception {
+ private:
+    std::string the_message;
+ public:
+ Exception(const std::string&amp; m) : the_message(m) { }
+    const std::string&amp; message() const { return the_message; }
+};
+
+// Stack operations according to ASU-86 pp 65-66
+// Warning! If you change this, you must change StackMachine.cpp too!
+enum StackOp {
+    push,         // Push a number
+    rvalue,       // Push the contents of a variable
+    lvalue,       // Push a reference to a variable
+    pop,
+    assign,
+    copy,
+    plus, minus, times, divide, modulo,
+    eq, ne, lt, gt, le, ge, // ==, !=, &lt;, &gt;, &lt;=, &gt;=
+    stackop_or, stackop_and, stackop_not, // |, &amp;, !
+    stackop_read, stackop_write,
+    label,        // Realistically, this shouldn't really be an instruction
+    jump,
+    gofalse,
+    gotrue,
+    halt
+};
+
+class Instruction {
+ private:
+    enum StackOp the_op;
+    int the_argument;
+
+    struct OpInfo {
+        enum StackOp op;
+        std::string name;
+        int nr_args;
+    };
+
+    static OpInfo op_info[];
+
+ public:
+    Instruction(enum StackOp op, int argument);
+    Instruction(enum StackOp op);
+    enum StackOp op() const { return the_op; }
+    int argument() const { return the_argument; }
+
+    friend std::ostream&amp; operator&lt;&lt; (std::ostream&amp; o, const Instruction&amp; i);
+};
+
+class StackMachine {
+ private:
+    std::vector&lt;int&gt; stack; // Not std::stack, if we want to print it
+    std::vector&lt;Instruction&gt; program;
+    std::map&lt;int, int, std::less&lt;int&gt; &gt; labels;
+    std::map&lt;int, int, std::less&lt;int&gt; &gt; variables;
+    unsigned int pc;
+    int running;
+    int trace;
+    std::ostream&amp; outstream;
+
+    void stackpush(int x);
+    int stackpop();
+    void internal_run();
+    void internal_cont();
+    void internal_step();
+
+ public:
+    StackMachine(std::ostream&amp; os = std::cout);
+    void append(const Instruction&amp; i);
+    void showstate() const;
+    void list_program() const;
+    void run();
+    void cont();
+    void single_step();
+    void set_trace(int t);
+};
+</pre>
+</blockquote>
+
+
+
+<a name="StackMachine.cpp"></a>
+<h2>StackMachine.cpp</h2>
+
+<a href="StackMachine.cpp">Download</a>
+
+<blockquote>
+<pre>
+// StackMachine.cpp -- implementation file for the stack machine
+// Thomas Padron-McCarthy (Thomas.Padron-McCarthy@oru.se) 2003, 2012, 2018
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+// #include &lt;stack&gt; -- (Perhaps surprisingly) not.
+#include &lt;map&gt;
+#include &lt;string&gt;
+#include &lt;sstream&gt;
+
+#include "StackMachine.h"
+
+Instruction::Instruction(enum StackOp op, int argument)
+    : the_op(op), the_argument(argument)
+{
+    if (op_info[op].nr_args != 1) {
+        std::stringstream s;
+        s &lt;&lt; "Tried to create " &lt;&lt; op_info[op].name
+          &lt;&lt; " instruction with an argument (" &lt;&lt; argument &lt;&lt; ").";
+        throw Exception(s.str());
+    }
+}
+
+Instruction::Instruction(enum StackOp op)
+    : the_op(op), the_argument(0)
+{
+    if (op_info[op].nr_args != 0) {
+        std::stringstream s;
+        s &lt;&lt; "Tried to create " &lt;&lt; op_info[op].name
+          &lt;&lt; " instruction without an argument.";
+        throw Exception(s.str());
+    }
+}
+
+std::ostream&amp; operator&lt;&lt; (std::ostream&amp; o, const Instruction&amp; i) {
+    o &lt;&lt; i.op_info[i.op()].name;
+    if (i.op_info[i.op()].nr_args == 1)
+        o &lt;&lt; "," &lt;&lt; i.argument();
+    return o;
+}
+
+// Warning! If you change this, you must change StackMachine.h too!
+Instruction::OpInfo Instruction::op_info[] = {
+    { push, "push", 1 },
+    { rvalue, "rvalue", 1 },
+    { lvalue, "lvalue", 1 },
+    { pop, "pop", 0 },
+    { assign, "assign", 0 },
+    { copy, "copy", 0 },
+    { plus, "plus", 0 },
+    { minus, "minus", 0 },
+    { times, "times",  0 },
+    { divide, "divide", 0 },
+    { modulo, "modulo", 0 },
+    { eq, "eq", 0 },
+    { ne, "ne", 0 },
+    { lt, "lt", 0 },
+    { gt, "gt", 0 },
+    { le, "le", 0 },
+    { ge, "ge", 0 },
+    { stackop_or, "or", 0 },
+    { stackop_and, "and", 0 },
+    { stackop_not, "not", 0 },
+    { stackop_read, "read", 0 },
+    { stackop_write, "write", 0 },
+    { label, "label", 1 },
+    { jump, "jump", 1 },
+    { gofalse, "gofalse", 1 },
+    { gotrue, "gotrue", 1 },
+    { halt, "halt", 0 }
+};
+
+void StackMachine::stackpush(int x) {
+    stack.push_back(x);
+}
+
+int StackMachine::stackpop() {
+    if (stack.empty())
+        throw Exception("Program tried to pop from empty stack.");
+    int result = stack.back();
+    stack.pop_back();
+    return result;
+}
+
+void StackMachine::internal_run() {
+    pc = 0;
+    stack.clear();
+    variables.clear();
+    internal_cont();
+}
+
+void StackMachine::internal_cont() {
+    running = 1;
+    while (running) {
+        internal_step();
+    }
+}
+
+void StackMachine::internal_step() {
+    int r, l;
+    if (pc &gt;= program.size()) {
+        std::stringstream s;
+        s &lt;&lt; "PC " &lt;&lt; pc &lt;&lt; " outside program (0.." &lt;&lt; program.size() - 1 &lt;&lt; ").";
+        throw Exception(s.str());
+    }
+    int op = program[pc].op();
+    int arg = program[pc].argument();
+    if (trace) {
+        outstream &lt;&lt; "Trace: " &lt;&lt; pc &lt;&lt; ": ";
+        outstream &lt;&lt; program[pc];
+        outstream &lt;&lt; std::endl;
+    }
+    switch (op) {
+    case push:
+        stackpush(arg);
+        pc++;
+        break;
+    case rvalue:
+        if (variables.find(arg) == variables.end()) {
+            std::stringstream s;
+            s &lt;&lt; "Program tried to get value of unset variable (number " &lt;&lt; arg &lt;&lt; ").";
+            throw Exception(s.str());
+        }
+        stackpush(variables[arg]);
+        pc++;
+        break;
+    case lvalue:
+        stackpush(arg);
+        pc++;
+        break;
+    case pop:
+        stackpop();
+        pc++;
+        break;
+    case assign:
+        r = stackpop();
+        l = stackpop();
+        variables[l] = r;
+        pc++;
+        break;
+    case copy:
+        r = stackpop();
+        stackpush(r);
+        stackpush(r);
+        pc++;
+        break;
+    case plus:
+        r = stackpop();
+        l = stackpop();
+        stackpush(l + r);
+        pc++;
+        break;
+    case minus:
+        r = stackpop();
+        l = stackpop();
+        stackpush(l - r);
+        pc++;
+        break;
+    case times:
+        r = stackpop();
+        l = stackpop();
+        stackpush(l * r);
+        pc++;
+        break;
+    case divide:
+        r = stackpop();
+        l = stackpop();
+        if (r == 0) {
+            std::stringstream s;
+            s &lt;&lt; "Program tried to calculate " &lt;&lt; l &lt;&lt; " / " &lt;&lt; r &lt;&lt; ".";
+            throw Exception(s.str());
+        }
+        stackpush(l / r);
+        pc++;
+        break;
+    case modulo:
+        r = stackpop();
+        l = stackpop();
+        if (r == 0) {
+            std::stringstream s;
+            s &lt;&lt; "Program tried to calculate " &lt;&lt; l &lt;&lt; " % " &lt;&lt; r &lt;&lt; ".";
+            throw Exception(s.str());
+        }
+        stackpush(l % r);
+        pc++;
+        break;
+    case eq:
+        r = stackpop();
+        l = stackpop();
+        stackpush(l == r);
+        pc++;
+        break;
+    case ne:
+        r = stackpop();
+        l = stackpop();
+        stackpush(l != r);
+        pc++;
+        break;
+    case lt:
+        r = stackpop();
+        l = stackpop();
+        stackpush(l &lt; r);
+        pc++;
+        break;
+    case gt:
+        r = stackpop();
+        l = stackpop();
+        stackpush(l &gt; r);
+        pc++;
+        break;
+    case le:
+        r = stackpop();
+        l = stackpop();
+        stackpush(l &lt;= r);
+        pc++;
+        break;
+    case ge:
+        r = stackpop();
+        l = stackpop();
+        stackpush(l &gt;= r);
+        pc++;
+        break;
+    case stackop_or:
+        r = stackpop();
+        l = stackpop();
+        stackpush(l | r);
+        pc++;
+        break;
+    case stackop_and:
+        r = stackpop();
+        l = stackpop();
+        stackpush(l &amp; r);
+        pc++;
+        break;
+    case stackop_not:
+        r = stackpop();
+        stackpush(! r);
+        pc++;
+        break;
+    case stackop_read:
+        std::cout &lt;&lt; "Enter an integer: ";
+        int new_value;
+        std::cin &gt;&gt; new_value;
+        stackpush(new_value);
+        pc++;
+        break;
+    case stackop_write:
+        r = stackpop();
+        std::cout &lt;&lt; "Value: " &lt;&lt; r &lt;&lt; "\n";
+        pc++;
+        break;
+    case label:
+        // A nop ("no operation")
+        pc++;
+        break;
+    case jump:
+        if (labels.find(arg) == labels.end()) {
+            std::stringstream s;
+            s &lt;&lt; "Program tried to jump to nonexistent label (number " &lt;&lt; arg &lt;&lt; ").";
+            throw Exception(s.str());
+        }
+        pc = labels[arg]; // We know this is inside the program
+        break;
+    case gofalse:
+        r = stackpop();
+        if (!r) {
+            if (labels.find(arg) == labels.end()) {
+                std::stringstream s;
+                s &lt;&lt; "Program tried to jump to nonexistent label (number " &lt;&lt; arg &lt;&lt; ").";
+                throw Exception(s.str());
+            }
+            pc = labels[arg]; // We know this is inside the program
+        }
+        else
+            pc++;
+        break;
+    case gotrue:
+        r = stackpop();
+        if (r) {
+            if (labels.find(arg) == labels.end()) {
+                std::stringstream s;
+                s &lt;&lt; "Program tried to jump to nonexistent label (number " &lt;&lt; arg &lt;&lt; ").";
+                throw Exception(s.str());
+            }
+            pc = labels[arg]; // We know this is inside the program
+        }
+        else
+            pc++;
+        break;
+    case halt:
+        pc++;
+        running = 0;
+        if (trace)
+            outstream &lt;&lt; "Program halted." &lt;&lt; std::endl;
+        break;
+    default:
+        std::stringstream s;
+        s &lt;&lt; "Illegal instruction in program (instruction "
+          &lt;&lt; op &lt;&lt; " at position " &lt;&lt; pc &lt;&lt; ").";
+        throw Exception(s.str());
+        break;
+    } // switch
+} // internal_step
+
+StackMachine::StackMachine(std::ostream&amp; os)
+    : pc(0), running(0), trace(0), outstream(os)
+{ }
+
+void StackMachine::append(const Instruction&amp; i) {
+    if (i.op() == label) {
+        if (labels.find(i.argument()) != labels.end()) {
+            std::stringstream s;
+            s &lt;&lt; "Tried to re-define label " &lt;&lt; i.argument() &lt;&lt; ".";
+            throw Exception(s.str());
+        }
+        labels[i.argument()] = program.size();
+    }
+    program.push_back(i);
+}
+
+void StackMachine::showstate() const {
+    outstream &lt;&lt; "State of the stack machine:\n";
+    outstream &lt;&lt; "  pc = " &lt;&lt; pc;
+    if (pc &gt;= program.size())
+        outstream &lt;&lt; " (last program instruction is at " &lt;&lt; program.size() - 1 &lt;&lt; ")";
+    else {
+        outstream &lt;&lt; " (instruction: ";
+        outstream &lt;&lt; program[pc];
+        outstream &lt;&lt; ")";
+    }
+    outstream &lt;&lt; "\n";
+
+    outstream &lt;&lt; "  trace = " &lt;&lt; trace &lt;&lt; "\n";
+
+    outstream &lt;&lt; "  Stack (size " &lt;&lt; stack.size() &lt;&lt; ")\n";
+    if (!stack.empty()) {
+        outstream &lt;&lt; "    ";
+        for (std::vector&lt;int&gt;::const_iterator p = stack.begin();
+             p &lt; stack.end();
+             ++p)
+            outstream &lt;&lt; *p &lt;&lt; " ";
+        outstream &lt;&lt; "\n";
+    }
+
+    outstream &lt;&lt; "  Variables (" &lt;&lt; variables.size() &lt;&lt;  " " &lt;&lt;
+        (variables.size() == 1 ? "variable" : "variables") &lt;&lt; ")\n";
+    if (!variables.empty()) {
+        outstream &lt;&lt; "    ";
+        for (std::map&lt;int, int, std::less&lt;int&gt; &gt;::const_iterator p = variables.begin();
+             p != variables.end();
+             ++p)
+            outstream &lt;&lt; (*p).first &lt;&lt; "=" &lt;&lt; (*p).second &lt;&lt; " ";
+        outstream &lt;&lt; "\n";
+    }
+
+    outstream &lt;&lt; std::endl;
+} // showstate
+
+void StackMachine::list_program() const {
+    outstream &lt;&lt; "Program listing (length " &lt;&lt; program.size() &lt;&lt; ")\n";
+    if (!program.empty()) {
+        unsigned int pos = 0;
+        for (std::vector&lt;Instruction&gt;::const_iterator p = program.begin();
+             p &lt; program.end();
+             ++p) {
+            outstream &lt;&lt; "  " &lt;&lt; pos &lt;&lt; ": ";
+            outstream &lt;&lt; *p;
+            if (p-&gt;op() == label) {
+                for (unsigned int cfp = 0; cfp &lt; program.size(); ++cfp) {
+                    enum StackOp cfp_op = program[cfp].op();
+                    if (   program[cfp].argument() == p-&gt;argument()
+                        &amp;&amp; (cfp_op == jump || cfp_op == gofalse || cfp_op == gotrue)) {
+                        outstream &lt;&lt; " (target from " &lt;&lt; cfp &lt;&lt; ")";
+                    }
+                }
+            }
+            if (pos == pc)
+                outstream &lt;&lt; " &lt;-- PC";
+            outstream &lt;&lt; "\n";
+            ++pos;
+        }
+    }
+    outstream &lt;&lt; std::endl;
+} // showsprogram
+
+void StackMachine::run() {
+    if (trace)
+        outstream &lt;&lt; "run(): Starting execution at position 0..." &lt;&lt; std::endl;
+    internal_run();
+}
+
+void StackMachine::cont() {
+    if (trace)
+        outstream &lt;&lt; "cont(): Continuing execution at position "
+                  &lt;&lt; pc &lt;&lt; "..." &lt;&lt; std::endl;
+    internal_cont();
+}
+
+void StackMachine::single_step() {
+    if (trace)
+        outstream &lt;&lt; "single_step(): Stepping one instruction at position "
+                  &lt;&lt; pc &lt;&lt; "..." &lt;&lt; std::endl;
+    internal_step();
+}
+
+void StackMachine::set_trace(int t) {
+    trace = t;
+}
+</pre>
+</blockquote>
+
+
+<a name="stacktest.cpp"></a>
+<h2>stacktest.cpp</h2>
+
+<a href="stacktest.cpp">Download</a>
+
+<blockquote>
+<pre>
+// stacktest.cpp -- a small program to test the stack machine
+// Thomas Padron-McCarthy (Thomas.Padron-McCarthy@oru.se) 2003, 2012
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+#include &lt;string&gt;
+#include &lt;sstream&gt;
+
+#include "StackMachine.h"
+
+int main() {
+    StackMachine sm;
+    try {
+        sm.append(Instruction(push, 10));
+        sm.append(Instruction(lvalue, 17));
+        sm.append(Instruction(push, 4711));
+        sm.append(Instruction(assign));
+        sm.append(Instruction(push, 100));
+        sm.append(Instruction(gofalse, 1));
+        // sm.append(Instruction(pop, 100));
+        sm.append(Instruction(pop));
+        sm.append(Instruction(push, 20));
+        sm.append(Instruction(rvalue, 17));
+        sm.append(Instruction(rvalue, 17));
+        sm.append(Instruction(rvalue, 17));
+        // sm.append(Instruction(rvalue, 18));
+        sm.append(Instruction(push, 30));
+        sm.append(Instruction(push, 10000));
+        sm.append(Instruction(plus));
+        sm.append(Instruction(plus));
+        sm.append(Instruction(label, 1));
+        sm.append(Instruction(label, 2));
+
+        sm.append(Instruction(push, 10));
+        sm.append(Instruction(label, 999));
+        sm.append(Instruction(push, 1));
+        sm.append(Instruction(minus));
+        sm.append(Instruction(copy));
+        sm.append(Instruction(gotrue, 999));
+
+        sm.append(Instruction(label, 1000));
+        sm.append(Instruction(push, 1));
+        sm.append(Instruction(push, 2));
+        sm.append(Instruction(push, 3));
+        sm.append(Instruction(push, 4));
+        sm.append(Instruction(push, 5));
+        sm.append(Instruction(push, 6));
+        sm.append(Instruction(plus));
+        sm.append(Instruction(minus));
+        sm.append(Instruction(times));
+        // sm.append(Instruction(push, 0));
+        sm.append(Instruction(push, 47));
+        sm.append(Instruction(push, 48));
+        sm.append(Instruction(push, 49));
+        sm.append(Instruction(assign));
+        sm.append(Instruction(divide));
+        sm.append(Instruction(push, 50));
+        sm.append(Instruction(modulo));
+        sm.append(Instruction(halt));
+
+        sm.showstate();
+        sm.list_program();
+        sm.set_trace(1);
+        sm.run();
+        sm.showstate();
+    }
+    catch(Exception&amp; e) {
+        std::cout &lt;&lt; "*** Exception caught: " &lt;&lt; e.message() &lt;&lt; std::endl;
+        sm.showstate();
+        sm.list_program();
+    }
+    catch(...) {
+        std::cout &lt;&lt; "Unknown exception." &lt;&lt; std::endl;
+    }
+
+    StackMachine sm2;
+
+    try {
+        sm2.append(Instruction(push, 10));
+        sm2.append(Instruction(plus));
+        std::cout &lt;&lt; "--- Now, a deliberate error should be caught:" &lt;&lt; std::endl;
+        sm2.run();
+    }
+    catch(Exception&amp; e) {
+        std::cout &lt;&lt; "*** Exception caught: " &lt;&lt; e.message() &lt;&lt; std::endl;
+        sm2.showstate();
+        sm2.list_program();
+    }
+    catch(...) {
+        std::cout &lt;&lt; "Unknown exception." &lt;&lt; std::endl;
+    }
+
+    StackMachine sm3;
+
+    try {
+        sm3.append(Instruction(lvalue, 13));
+        sm3.append(Instruction(stackop_read));
+        sm3.append(Instruction(assign));
+        sm3.append(Instruction(lvalue, 22));
+        sm3.append(Instruction(stackop_read));
+        sm3.append(Instruction(assign));
+        sm3.append(Instruction(rvalue, 13));
+        sm3.append(Instruction(rvalue, 22));
+        sm3.append(Instruction(plus));
+        sm3.append(Instruction(stackop_write));
+        sm3.append(Instruction(halt));
+
+        sm3.list_program();
+        sm3.run();
+    }
+    catch(Exception&amp; e) {
+        std::cout &lt;&lt; "*** Exception caught: " &lt;&lt; e.message() &lt;&lt; std::endl;
+        sm3.showstate();
+        sm3.list_program();
+    }
+    catch(...) {
+        std::cout &lt;&lt; "Unknown exception." &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+</pre>
+</blockquote>
+
+
+
+<a name="Makefile"></a>
+<h2>Makefile</h2>
+
+<a href="Makefile">Download</a>
+
+<blockquote>
+<pre>
+OFILES = stacktest.o StackMachine.o
+CPPFLAGS = -g -Wall
+
+stacktest: $(OFILES)
+	g++ $(CPPFLAGS) -o stacktest $(OFILES)
+
+StackMachine.o: StackMachine.h
+stacktest.o: StackMachine.h
+
+clean:
+	$(RM) $(OFILES) stacktest
+
+archives: clean
+	cd ..; \
+	$(RM) StackMachine.tar StackMachine.tar.gz StackMachine.zip StackMachine-2018/StackMachine.tar StackMachine-2018/StackMachine.tar.gz StackMachine-2018/StackMachine.zip; \
+	tar -cvf StackMachine.tar StackMachine-2018; \
+	gzip -9 StackMachine.tar; \
+	zip -r StackMachine.zip StackMachine-2018; \
+	mv StackMachine.zip StackMachine-2018/StackMachine.zip; \
+	mv StackMachine.tar.gz StackMachine-2018/StackMachine.tar.gz
+</pre>
+</blockquote>
+
+<p>
+
+<hr>
+
+<font size=-1>
+<a href="http://www.aass.oru.se/~tpy/">Thomas Padron-McCarthy</a>
+(<a href="mailto:thomas.padron-mccarthy@oru.se?subject=Kursen &quot;Kompilatorer och interpretatorer&quot;">thomas.padron-mccarthy@oru.se</a>)
+October 15, 2018
+</font>
+
+</body>
+</html>

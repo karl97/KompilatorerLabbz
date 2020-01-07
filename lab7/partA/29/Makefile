@@ -1,35 +1,36 @@
-OBJECTS = example.tab.o symbol.o init.o main.o lex.yy.o 
-SOURCES = example.tab.c symbol.c init.c main.c lex.yy.c
+OBJECTS = example.tab.o symbol.o init.o main.o lex.yy.o StackMachine.o
+SOURCES = example.tab.cpp symbol.cpp  init.cpp  main.cpp  lex.yy.cpp StackMachine.cpp
 EXE = infix2postfix
 CFLAGS += -Wall -g
 
 
 $(EXE):	$(OBJECTS)
-	gcc $(CFLAGS) -o $(EXE) $(OBJECTS)
+	g++ $(CFLAGS) -o $(EXE) $(OBJECTS)
 
-main.o: 	main.c example.tab.h global.h	
-	gcc $(CFLAGS) -c main.c
+main.o: 	main.cpp  example.tab.h global.h	
+	g++ $(CFLAGS) -c main.cpp 
 
-symbol.o: 	symbol.c global.h
-	gcc $(CFLAGS) -c symbol.c
+symbol.o: 	symbol.cpp  global.h
+	g++ $(CFLAGS) -c symbol.cpp 
 
-init.o: 	init.c global.h
-	gcc $(CFLAGS) -c init.c
+init.o: 	init.cpp  global.h
+	g++ $(CFLAGS) -c init.cpp 
 
-lexer.o: 	lexer.c global.h
-	gcc $(CFLAGS) -c lexer.c
+lexer.o: 	lexer.cpp  global.h
+	g++ $(CFLAGS) -c lexer.cpp 
 
-error.o: 	error.c global.h
-	gcc $(CFLAGS) -c error.c
+error.o: 	error.cpp  global.h
+	g++ $(CFLAGS) -c error.cpp 
 
-example.tab.o: example.tab.c global.h example.tab.h
-	gcc $(CFLAGS) -c example.tab.c
-	
-example.tab.c example.tab.h: example.y
-	bison -d example.y
+example.tab.o: example.tab.cpp  global.h example.tab.hpp
+	g++ $(CFLAGS) -c example.tab.cpp 
 
-lex.yy.c: example.l
+example.tab.cpp  example.tab.h: example.ypp
+	bison -d example.ypp
+
+lex.yy.cpp : example.l
 	flex example.l
+	mv lex.yy.c lex.yy.cpp
 clean: 
 	rm -f $(EXE) $(OBJECTS) 29.tar.gz 29.zip *~
 

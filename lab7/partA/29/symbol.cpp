@@ -18,7 +18,7 @@ int lookup(char *s)         /* returns position of entry for s, or -1 if not fou
 int insert(char *s, int token_type)    /*  returns position of entry for s */
 {
     if (nr_symbols >= MAX_SYMBOLS)
-        error("Symbol table full");
+        printf("Error: Symbol table full\n");
     symtable[nr_symbols].token_type = token_type;
     symtable[nr_symbols].lexeme = strdup(s);
 	

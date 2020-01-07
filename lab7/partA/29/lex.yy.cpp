@@ -489,7 +489,7 @@ typedef struct node
 	int type;
 	struct node* args[3];
 }TreeNode;
-#include "example.tab.h"
+#include "example.tab.hpp"
 extern int insert(char *s, int token_type);    /*  returns position of entry for s */
 extern int lookup(char *s);         /* returns position of entry for s, or -1 if not found */
 #line 496 "lex.yy.c"

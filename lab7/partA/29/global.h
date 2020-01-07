@@ -15,7 +15,7 @@ typedef struct node
 	int depth;
 //print tree extra -----------------------------------------------------------------------------------------------------
 }TreeNode;
-#include "example.tab.h"
+#include "example.tab.hpp"
 
 
 
@@ -35,7 +35,6 @@ struct symentry {  /*  form of symbol table entry  */
 extern struct symentry symtable[];  /* symbol table  */
 
 extern void init();  /*  loads keywords into symtable  */
-extern void error(char* message);  /*  generates all error messages  */
 extern int lexan();  /*  lexical analyzer  */
 extern void parse();  /*  parses and translates expression list  */
 extern int insert(char *s, int token_type);    /*  returns position of entry for s */

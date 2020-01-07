@@ -66,11 +66,14 @@
 
 
 /* First part of user prologue.  */
-#line 3 "example.y"
+#line 3 "example.ypp"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "global.h"
+
+//#include "StackMachine.h"
+//StackMachine sm;
 extern int yyerror(char const *msg);
 
 
@@ -86,7 +89,7 @@ int valuetable[1000];
 int powe(int a1, int b1);
 
 
-#line 90 "example.tab.c"
+#line 93 "example.tab.cpp"
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus
@@ -110,8 +113,8 @@ int powe(int a1, int b1);
 
 /* Use api.header.include to #include this header
    instead of duplicating it here.  */
-#ifndef YY_YY_EXAMPLE_TAB_H_INCLUDED
-# define YY_YY_EXAMPLE_TAB_H_INCLUDED
+#ifndef YY_YY_EXAMPLE_TAB_HPP_INCLUDED
+# define YY_YY_EXAMPLE_TAB_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -143,12 +146,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 24 "example.y"
+#line 27 "example.ypp"
 
   TreeNode* p;
   int i; 
 
-#line 152 "example.tab.c"
+#line 155 "example.tab.cpp"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -161,7 +164,7 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_EXAMPLE_TAB_H_INCLUDED  */
+#endif /* !YY_YY_EXAMPLE_TAB_HPP_INCLUDED  */
 
 
 
@@ -454,9 +457,9 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    50,    50,    53,    54,    58,    59,    60,    61,    62,
-      66,    68,    69,    71,    72,    73,    74,    75,    76,    77,
-      78,    79,    80,    81,    82,    83,    84,    85,    86
+       0,    53,    53,    56,    57,    61,    62,    63,    64,    65,
+      69,    71,    72,    74,    75,    76,    77,    78,    79,    80,
+      81,    82,    83,    84,    85,    86,    87,    88,    89
 };
 #endif
 
@@ -1288,169 +1291,169 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 50 "example.y"
+#line 53 "example.ypp"
     { runTree((yyvsp[-1].p));}
-#line 1294 "example.tab.c"
+#line 1297 "example.tab.cpp"
     break;
 
   case 3:
-#line 53 "example.y"
+#line 56 "example.ypp"
     {(yyval.p) = mknode(';', (yyvsp[-1].p), (yyvsp[0].p), 0);}
-#line 1300 "example.tab.c"
+#line 1303 "example.tab.cpp"
     break;
 
   case 4:
-#line 54 "example.y"
+#line 57 "example.ypp"
     {(yyval.p) = 0;}
-#line 1306 "example.tab.c"
+#line 1309 "example.tab.cpp"
     break;
 
   case 5:
-#line 58 "example.y"
+#line 61 "example.ypp"
     {(yyval.p) = (yyvsp[-1].p);}
-#line 1312 "example.tab.c"
+#line 1315 "example.tab.cpp"
     break;
 
   case 6:
-#line 59 "example.y"
+#line 62 "example.ypp"
     {(yyval.p) = (yyvsp[-1].p);}
-#line 1318 "example.tab.c"
+#line 1321 "example.tab.cpp"
     break;
 
   case 7:
-#line 60 "example.y"
+#line 63 "example.ypp"
     {(yyval.p) = mknode(WHILE, (yyvsp[-2].p), (yyvsp[0].p), 0);}
-#line 1324 "example.tab.c"
+#line 1327 "example.tab.cpp"
     break;
 
   case 8:
-#line 61 "example.y"
+#line 64 "example.ypp"
     {(yyval.p) = mknode(IF, (yyvsp[-3].p), (yyvsp[-1].p), (yyvsp[0].p));}
-#line 1330 "example.tab.c"
+#line 1333 "example.tab.cpp"
     break;
 
   case 9:
-#line 62 "example.y"
+#line 65 "example.ypp"
     {(yyval.p) = (yyvsp[-1].p);}
-#line 1336 "example.tab.c"
+#line 1339 "example.tab.cpp"
     break;
 
   case 10:
-#line 66 "example.y"
+#line 69 "example.ypp"
     {(yyval.p) = mknode((int)'=', mkleaf(ID, (yyvsp[-2].i)), (yyvsp[0].p), 0); }
-#line 1342 "example.tab.c"
+#line 1345 "example.tab.cpp"
     break;
 
   case 11:
-#line 68 "example.y"
+#line 71 "example.ypp"
     {(yyval.p) = mknode(ELSE, (yyvsp[0].p), 0, 0);}
-#line 1348 "example.tab.c"
+#line 1351 "example.tab.cpp"
     break;
 
   case 12:
-#line 69 "example.y"
+#line 72 "example.ypp"
     {(yyval.p) = 0;}
-#line 1354 "example.tab.c"
+#line 1357 "example.tab.cpp"
     break;
 
   case 13:
-#line 71 "example.y"
+#line 74 "example.ypp"
     { (yyval.p) = mknode((int)'+', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1360 "example.tab.c"
+#line 1363 "example.tab.cpp"
     break;
 
   case 14:
-#line 72 "example.y"
+#line 75 "example.ypp"
     { (yyval.p) = mknode((int)'-', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1366 "example.tab.c"
+#line 1369 "example.tab.cpp"
     break;
 
   case 15:
-#line 73 "example.y"
+#line 76 "example.ypp"
     { (yyval.p) = mknode((int)'*', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1372 "example.tab.c"
+#line 1375 "example.tab.cpp"
     break;
 
   case 16:
-#line 74 "example.y"
+#line 77 "example.ypp"
     { (yyval.p) = mknode((int)'/', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1378 "example.tab.c"
+#line 1381 "example.tab.cpp"
     break;
 
   case 17:
-#line 75 "example.y"
+#line 78 "example.ypp"
     { (yyval.p) = mknode((int)'<', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1384 "example.tab.c"
+#line 1387 "example.tab.cpp"
     break;
 
   case 18:
-#line 76 "example.y"
+#line 79 "example.ypp"
     { (yyval.p) = mknode((int)'>', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1390 "example.tab.c"
+#line 1393 "example.tab.cpp"
     break;
 
   case 19:
-#line 77 "example.y"
+#line 80 "example.ypp"
     { (yyval.p) = mknode((int)'&', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1396 "example.tab.c"
+#line 1399 "example.tab.cpp"
     break;
 
   case 20:
-#line 78 "example.y"
+#line 81 "example.ypp"
     { (yyval.p) = mknode((int)'|', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1402 "example.tab.c"
+#line 1405 "example.tab.cpp"
     break;
 
   case 21:
-#line 79 "example.y"
+#line 82 "example.ypp"
     { (yyval.p) = mknode((int)'^', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1408 "example.tab.c"
+#line 1411 "example.tab.cpp"
     break;
 
   case 22:
-#line 80 "example.y"
+#line 83 "example.ypp"
     { (yyval.p) = mknode((int)'%', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1414 "example.tab.c"
+#line 1417 "example.tab.cpp"
     break;
 
   case 23:
-#line 81 "example.y"
+#line 84 "example.ypp"
     { (yyval.p) = mknode((int)'?', (yyvsp[-4].p), (yyvsp[-2].p), (yyvsp[0].p)); }
-#line 1420 "example.tab.c"
+#line 1423 "example.tab.cpp"
     break;
 
   case 24:
-#line 82 "example.y"
+#line 85 "example.ypp"
     { (yyval.p) = mknode(PRINT, mkleaf(ID, (yyvsp[-1].i)), 0, 0); }
-#line 1426 "example.tab.c"
+#line 1429 "example.tab.cpp"
     break;
 
   case 25:
-#line 83 "example.y"
+#line 86 "example.ypp"
     { (yyval.p) = mknode(READ, mkleaf(ID, (yyvsp[-1].i)), 0, 0); }
-#line 1432 "example.tab.c"
+#line 1435 "example.tab.cpp"
     break;
 
   case 26:
-#line 84 "example.y"
+#line 87 "example.ypp"
     { (yyval.p) = mknode((int)'(', (yyvsp[-1].p), mkleaf((int)')', ')'), 0); }
-#line 1438 "example.tab.c"
+#line 1441 "example.tab.cpp"
     break;
 
   case 27:
-#line 85 "example.y"
+#line 88 "example.ypp"
     { (yyval.p) = mkleaf(NUM, (yyvsp[0].i));}
-#line 1444 "example.tab.c"
+#line 1447 "example.tab.cpp"
     break;
 
   case 28:
-#line 86 "example.y"
+#line 89 "example.ypp"
     { (yyval.p) = mkleaf(ID, (yyvsp[0].i));}
-#line 1450 "example.tab.c"
+#line 1453 "example.tab.cpp"
     break;
 
 
-#line 1454 "example.tab.c"
+#line 1457 "example.tab.cpp"
 
       default: break;
     }
@@ -1682,7 +1685,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 92 "example.y"
+#line 95 "example.ypp"
 
 
 int yyerror(char const *msg) {
@@ -1871,7 +1874,10 @@ void printTree(TreeNode* tree)
 	free(row);
 }
 //Print tree here -----------------------------------------------------------------------------------------------------
-#define DEBUG_PRINTS 1
+
+
+
+#define DEBUG_PRINTS 0
 
 
 #if !DEBUG_PRINTS
@@ -1948,6 +1954,8 @@ int runTree(TreeNode* tree)
 			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
 			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
 
+
+			// push times
 			return leftValue + rightValue;
 		}break;
 		case (int)'-':

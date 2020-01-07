@@ -34,8 +34,8 @@
 /* Undocumented macros, especially those whose name start with YY_,
    are private implementation details.  Do not rely on them.  */
 
-#ifndef YY_YY_EXAMPLE_TAB_H_INCLUDED
-# define YY_YY_EXAMPLE_TAB_H_INCLUDED
+#ifndef YY_YY_EXAMPLE_TAB_HPP_INCLUDED
+# define YY_YY_EXAMPLE_TAB_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -67,12 +67,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 24 "example.y"
+#line 33 "example.ypp"
 
   TreeNode* p;
   int i; 
 
-#line 76 "example.tab.h"
+#line 76 "example.tab.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -85,4 +85,4 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_EXAMPLE_TAB_H_INCLUDED  */
+#endif /* !YY_YY_EXAMPLE_TAB_HPP_INCLUDED  */

@@ -500,9 +500,60 @@ int runTree(TreeNode* tree)
 			DEBUG_CALL(printf("^\n"));
 			int leftValue = runTree(tree->args[0]);
 			int rightValue = runTree(tree->args[1]);
-
+			/*
 			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
 			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+			*/
+			
+/*
+			
+			int label_1 = labelCounter++;
+			int label_2 = labelCounter++;
+			
+			//Sno lediga platser att spara temporära variabler
+			sm.append(Instruction(lvalue, 0));
+			sm.append(Instruction(push, 1));
+			sm.append(Instruction(assign));
+			
+			sm.append(Instruction(lvalue, 1));
+			sm.append(Instruction(push, rightValue));
+			sm.append(Instruction(assign));
+
+			//While part
+			sm.append(Instruction(label, label_1));
+						
+
+			//villkor
+			sm.append(Instruction(rvalue, 1));
+			sm.append(Instruction(push, 0));
+			sm.append(Instruction(gt));
+
+
+			sm.append(Instruction(gofalse, label_2));
+
+			//Kroppen
+			
+			//a1 = a1 * leftValue;
+			sm.append(Instruction(lvalue, 0));
+			sm.append(Instruction(rvalue, 0));			
+			sm.append(Instruction(push, leftValue));			
+			sm.append(Instruction(times));			
+			sm.append(Instruction(assign));
+
+			//b1 = b1 - 1;
+			sm.append(Instruction(lvalue, 1));
+			sm.append(Instruction(rvalue, 1));
+			sm.append(Instruction(push, 1));
+			sm.append(Instruction(minus));			
+			sm.append(Instruction(assign));
+			
+
+			sm.append(Instruction(jump, label_1));
+			sm.append(Instruction(label, label_2));
+			
+			//Push result to stack
+			sm.append(Instruction(rvalue, 0));
+*/
 			//exp
 			return powe(leftValue, rightValue);
 		}break;

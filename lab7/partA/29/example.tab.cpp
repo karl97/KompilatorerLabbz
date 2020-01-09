@@ -69,6 +69,15 @@
 #line 3 "example.ypp"
 
 
+#define DEBUG_PRINTS 0
+
+
+#if !DEBUG_PRINTS
+#define DEBUG_CALL(x)
+#else 
+#define DEBUG_CALL(x) x
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "global.h"
@@ -89,14 +98,15 @@ TreeNode* mkleaf(int type, int value);
 TreeNode* mknode(int type, TreeNode* a0, TreeNode* a1, TreeNode* a2);
 
 void printTree(TreeNode* tree);
-int runTree(TreeNode* tree);
+int putTreeOnStackMachine(TreeNode* tree);
+TreeNode* optimizeTree(TreeNode* tree);
 extern int yylex();
 int valuetable[1000];
 
 int powe(int a1, int b1);
 
 
-#line 100 "example.tab.cpp"
+#line 110 "example.tab.cpp"
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus
@@ -153,12 +163,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 34 "example.ypp"
+#line 44 "example.ypp"
 
   TreeNode* p;
   int i; 
 
-#line 162 "example.tab.cpp"
+#line 172 "example.tab.cpp"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -464,9 +474,9 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    60,    60,    63,    64,    68,    69,    70,    71,    72,
-      76,    78,    79,    81,    82,    83,    84,    85,    86,    87,
-      88,    89,    90,    91,    92,    93,    94,    95,    96
+       0,    70,    70,    73,    74,    78,    79,    80,    81,    82,
+      86,    88,    89,    91,    92,    93,    94,    95,    96,    97,
+      98,    99,   100,   101,   102,   103,   104,   105,   106
 };
 #endif
 
@@ -1298,169 +1308,169 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 60 "example.ypp"
-    { runTree((yyvsp[-1].p)); sm.append(Instruction(halt)); sm.list_program(); sm.run();}
-#line 1304 "example.tab.cpp"
+#line 70 "example.ypp"
+    { printTree((yyvsp[-1].p)); TreeNode* opTree = optimizeTree((yyvsp[-1].p)); printTree(opTree); putTreeOnStackMachine(opTree); sm.append(Instruction(halt)); sm.list_program(); sm.run();}
+#line 1314 "example.tab.cpp"
     break;
 
   case 3:
-#line 63 "example.ypp"
+#line 73 "example.ypp"
     {(yyval.p) = mknode(';', (yyvsp[-1].p), (yyvsp[0].p), 0);}
-#line 1310 "example.tab.cpp"
+#line 1320 "example.tab.cpp"
     break;
 
   case 4:
-#line 64 "example.ypp"
+#line 74 "example.ypp"
     {(yyval.p) = 0;}
-#line 1316 "example.tab.cpp"
+#line 1326 "example.tab.cpp"
     break;
 
   case 5:
-#line 68 "example.ypp"
+#line 78 "example.ypp"
     {(yyval.p) = (yyvsp[-1].p);}
-#line 1322 "example.tab.cpp"
+#line 1332 "example.tab.cpp"
     break;
 
   case 6:
-#line 69 "example.ypp"
+#line 79 "example.ypp"
     {(yyval.p) = (yyvsp[-1].p);}
-#line 1328 "example.tab.cpp"
+#line 1338 "example.tab.cpp"
     break;
 
   case 7:
-#line 70 "example.ypp"
+#line 80 "example.ypp"
     {(yyval.p) = mknode(WHILE, (yyvsp[-2].p), (yyvsp[0].p), 0);}
-#line 1334 "example.tab.cpp"
+#line 1344 "example.tab.cpp"
     break;
 
   case 8:
-#line 71 "example.ypp"
+#line 81 "example.ypp"
     {(yyval.p) = mknode(IF, (yyvsp[-3].p), (yyvsp[-1].p), (yyvsp[0].p));}
-#line 1340 "example.tab.cpp"
+#line 1350 "example.tab.cpp"
     break;
 
   case 9:
-#line 72 "example.ypp"
+#line 82 "example.ypp"
     {(yyval.p) = (yyvsp[-1].p);}
-#line 1346 "example.tab.cpp"
+#line 1356 "example.tab.cpp"
     break;
 
   case 10:
-#line 76 "example.ypp"
+#line 86 "example.ypp"
     {(yyval.p) = mknode((int)'=', mkleaf(ID, (yyvsp[-2].i)), (yyvsp[0].p), 0); }
-#line 1352 "example.tab.cpp"
+#line 1362 "example.tab.cpp"
     break;
 
   case 11:
-#line 78 "example.ypp"
+#line 88 "example.ypp"
     {(yyval.p) = mknode(ELSE, (yyvsp[0].p), 0, 0);}
-#line 1358 "example.tab.cpp"
+#line 1368 "example.tab.cpp"
     break;
 
   case 12:
-#line 79 "example.ypp"
+#line 89 "example.ypp"
     {(yyval.p) = 0;}
-#line 1364 "example.tab.cpp"
+#line 1374 "example.tab.cpp"
     break;
 
   case 13:
-#line 81 "example.ypp"
+#line 91 "example.ypp"
     { (yyval.p) = mknode((int)'+', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1370 "example.tab.cpp"
+#line 1380 "example.tab.cpp"
     break;
 
   case 14:
-#line 82 "example.ypp"
+#line 92 "example.ypp"
     { (yyval.p) = mknode((int)'-', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1376 "example.tab.cpp"
+#line 1386 "example.tab.cpp"
     break;
 
   case 15:
-#line 83 "example.ypp"
+#line 93 "example.ypp"
     { (yyval.p) = mknode((int)'*', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1382 "example.tab.cpp"
+#line 1392 "example.tab.cpp"
     break;
 
   case 16:
-#line 84 "example.ypp"
+#line 94 "example.ypp"
     { (yyval.p) = mknode((int)'/', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1388 "example.tab.cpp"
+#line 1398 "example.tab.cpp"
     break;
 
   case 17:
-#line 85 "example.ypp"
+#line 95 "example.ypp"
     { (yyval.p) = mknode((int)'<', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1394 "example.tab.cpp"
+#line 1404 "example.tab.cpp"
     break;
 
   case 18:
-#line 86 "example.ypp"
+#line 96 "example.ypp"
     { (yyval.p) = mknode((int)'>', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1400 "example.tab.cpp"
+#line 1410 "example.tab.cpp"
     break;
 
   case 19:
-#line 87 "example.ypp"
+#line 97 "example.ypp"
     { (yyval.p) = mknode((int)'&', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1406 "example.tab.cpp"
+#line 1416 "example.tab.cpp"
     break;
 
   case 20:
-#line 88 "example.ypp"
+#line 98 "example.ypp"
     { (yyval.p) = mknode((int)'|', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1412 "example.tab.cpp"
+#line 1422 "example.tab.cpp"
     break;
 
   case 21:
-#line 89 "example.ypp"
+#line 99 "example.ypp"
     { (yyval.p) = mknode((int)'^', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1418 "example.tab.cpp"
+#line 1428 "example.tab.cpp"
     break;
 
   case 22:
-#line 90 "example.ypp"
+#line 100 "example.ypp"
     { (yyval.p) = mknode((int)'%', (yyvsp[-2].p), (yyvsp[0].p), 0); }
-#line 1424 "example.tab.cpp"
+#line 1434 "example.tab.cpp"
     break;
 
   case 23:
-#line 91 "example.ypp"
+#line 101 "example.ypp"
     { (yyval.p) = mknode((int)'?', (yyvsp[-4].p), (yyvsp[-2].p), (yyvsp[0].p)); }
-#line 1430 "example.tab.cpp"
+#line 1440 "example.tab.cpp"
     break;
 
   case 24:
-#line 92 "example.ypp"
+#line 102 "example.ypp"
     { (yyval.p) = mknode(PRINT, mkleaf(ID, (yyvsp[-1].i)), 0, 0); }
-#line 1436 "example.tab.cpp"
+#line 1446 "example.tab.cpp"
     break;
 
   case 25:
-#line 93 "example.ypp"
+#line 103 "example.ypp"
     { (yyval.p) = mknode(READ, mkleaf(ID, (yyvsp[-1].i)), 0, 0); }
-#line 1442 "example.tab.cpp"
+#line 1452 "example.tab.cpp"
     break;
 
   case 26:
-#line 94 "example.ypp"
+#line 104 "example.ypp"
     { (yyval.p) = mknode((int)'(', (yyvsp[-1].p), mkleaf((int)')', ')'), 0); }
-#line 1448 "example.tab.cpp"
+#line 1458 "example.tab.cpp"
     break;
 
   case 27:
-#line 95 "example.ypp"
+#line 105 "example.ypp"
     { (yyval.p) = mkleaf(NUM, (yyvsp[0].i));}
-#line 1454 "example.tab.cpp"
+#line 1464 "example.tab.cpp"
     break;
 
   case 28:
-#line 96 "example.ypp"
+#line 106 "example.ypp"
     { (yyval.p) = mkleaf(ID, (yyvsp[0].i));}
-#line 1460 "example.tab.cpp"
+#line 1470 "example.tab.cpp"
     break;
 
 
-#line 1464 "example.tab.cpp"
+#line 1474 "example.tab.cpp"
 
       default: break;
     }
@@ -1692,7 +1702,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 102 "example.ypp"
+#line 112 "example.ypp"
 
 
 int yyerror(char const *msg) {
@@ -1884,17 +1894,10 @@ void printTree(TreeNode* tree)
 
 
 
-#define DEBUG_PRINTS 0
 
 
-#if !DEBUG_PRINTS
-#define DEBUG_CALL(x)
-#else 
-#define DEBUG_CALL(x) x
-#endif
 
-
-int runTree(TreeNode* tree)
+int putTreeOnStackMachine(TreeNode* tree)
 {
 	
 	if(tree == NULL) return 0;
@@ -1904,47 +1907,38 @@ int runTree(TreeNode* tree)
 		{	
 			DEBUG_CALL(printf("NUM\n"));
 			sm.append(Instruction(push,tree->value));
-			return tree->value;
+			return 1;
 						
 		}break;
 		case ID:{
 
 			DEBUG_CALL(printf("ID\n"));
 			sm.append(Instruction(rvalue,tree->value));
-			return tree->value;
+			return 1;
 		}break;
 		case PRINT:
 		{
 			DEBUG_CALL(printf("PRINT\n"));
-			int idPosition = (tree->args[0])->value; //runTree(tree->args[0]);
-			int idVal=valuetable[idPosition];			
-			printf("%s = %d\n", symtable[idPosition].lexeme, idVal);
-
-			sm.append(Instruction(rvalue, idPosition));
+			
+			putTreeOnStackMachine(tree->args[0]);
 			sm.append(Instruction(stackop_write));
-			return idVal;
+			return 1;
 		}break;
 		case WHILE:
 		{
 			DEBUG_CALL(printf("WHILE\n"));
-			/*
-			while(runTree(tree->args[0]) != 0)
-			{
-				runTree(tree->args[1]);
-			}
-			*/
 			int label_1 = labelCounter++;
 			int label_2 = labelCounter++;
 
 			sm.append(Instruction(label, label_1));
 			
 			//villkor
-			runTree(tree->args[0]);
+			putTreeOnStackMachine(tree->args[0]);
 
 			sm.append(Instruction(gofalse, label_2));
 
 			//Kroppen
-			runTree(tree->args[1]);
+			putTreeOnStackMachine(tree->args[1]);
 
 			sm.append(Instruction(jump, label_1));
 			sm.append(Instruction(label, label_2));
@@ -1955,241 +1949,220 @@ int runTree(TreeNode* tree)
 		case READ:
 		{
 			DEBUG_CALL(printf("READ\n"));
-			int idVal=0;
-			int idPosition = (tree->args[0])->value; //runTree(tree->args[0]);
-			printf("Input value for %s\n", symtable[idPosition].lexeme);			
-			scanf("%d",&idVal);			
-			valuetable[idPosition]=idVal;
-
-			sm.append(Instruction(lvalue, idPosition));
+			sm.append(Instruction(lvalue, (tree->args[0])->value));
 			sm.append(Instruction(stackop_read));
 			sm.append(Instruction(assign));
-			return idVal;
+			return 1;
 		}break;
 		case (int)'?':
 		case IF:
 		{
 			DEBUG_CALL(printf("IF\n"));
-			/*
-			if(runTree(tree->args[0]) != 0)
-			{
-				runTree(tree->args[1]);
-			}else{
-				runTree(tree->args[2]);
-			}
-			*/
 			//Villkor
-			runTree(tree->args[0]);
+			putTreeOnStackMachine(tree->args[0]);
 			int label_1 = labelCounter++;
 			int label_2 = labelCounter++;
 			
 			//if
 			sm.append(Instruction(gofalse, label_1));
-			runTree(tree->args[1]);
+			putTreeOnStackMachine(tree->args[1]);
 			sm.append(Instruction(jump, label_2));
 
 			//else
 			sm.append(Instruction(label, label_1));
-			runTree(tree->args[2]);
+			putTreeOnStackMachine(tree->args[2]);
 			sm.append(Instruction(label, label_2));
 
 		}break;
 		case ELSE:
 		{
 			DEBUG_CALL(printf("ELSE\n"));
-			runTree(tree->args[0]);
+			putTreeOnStackMachine(tree->args[0]);
 		}break;
 		case (int)'+':
 		{
 			DEBUG_CALL(printf("+\n"));
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
+			putTreeOnStackMachine(tree->args[0]);
+			putTreeOnStackMachine(tree->args[1]);
 
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
-
+		
 			sm.append(Instruction(plus));
-			// push times
-			return leftValue + rightValue;
+			return 1;
 		}break;
 		case (int)'-':
 		{
 			DEBUG_CALL(printf("-\n"));
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
+			putTreeOnStackMachine(tree->args[0]);
+			putTreeOnStackMachine(tree->args[1]);
 
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+		
 			sm.append(Instruction(minus));
-			return leftValue - rightValue;
+			
+			return 1;
 		}break;
 		case (int)'/':
 		{
 			DEBUG_CALL(printf("/\n"));
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
+			putTreeOnStackMachine(tree->args[0]);
+			putTreeOnStackMachine(tree->args[1]);
 
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+		
 			sm.append(Instruction(divide));
-			return leftValue / rightValue;
+			
+			return 1;
 		}break;
 		case (int)'*':
 		{
 			DEBUG_CALL(printf("*\n"));
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
+			putTreeOnStackMachine(tree->args[0]);
+			putTreeOnStackMachine(tree->args[1]);
 
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+		
 			sm.append(Instruction(times));
-			return leftValue * rightValue;
+			
+			return 1;		
 		}break;
 		case (int)'<':
 		{
 			DEBUG_CALL(printf("<\n"));
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
+						putTreeOnStackMachine(tree->args[0]);
+			putTreeOnStackMachine(tree->args[1]);
 
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+		
 			sm.append(Instruction(lt));
-			return leftValue < rightValue;
+			
+			return 1;
 		}break;
 		case (int)'>':
 		{
 			DEBUG_CALL(printf(">\n"));
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
+			putTreeOnStackMachine(tree->args[0]);
+			putTreeOnStackMachine(tree->args[1]);
 
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+		
 			sm.append(Instruction(gt));
-			return leftValue > rightValue;
+			
+			return 1;		
 		}break;
 		case (int)'&':
 		{
 			DEBUG_CALL(printf("&\n"));
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
+			putTreeOnStackMachine(tree->args[0]);
+			putTreeOnStackMachine(tree->args[1]);
 
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+		
 			sm.append(Instruction(stackop_and));
-			return leftValue & rightValue;
+			
+			return 1;
 		}break;
 		case (int)'|':
 		{
 			DEBUG_CALL(printf("|\n"));
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
-			
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+
+			putTreeOnStackMachine(tree->args[0]);
+			putTreeOnStackMachine(tree->args[1]);
+
+		
 			sm.append(Instruction(stackop_or));
-			return leftValue | rightValue;
+			
+			return 1;
 		}break;
 		case (int)'^':
 		{
 			DEBUG_CALL(printf("^\n"));
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
-			/*
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
-			*/
 			
-/*
+			int base_var = 0;
+			int exponent_var = 1;	
+			int loop_start = labelCounter++;
+			int after_loop = labelCounter++;
 			
-			int label_1 = labelCounter++;
-			int label_2 = labelCounter++;
+			//Base
+			sm.append(Instruction(lvalue, base_var)); //Store into base variable
+			putTreeOnStackMachine(tree->args[0]);	//Push base value on stack			
+			sm.append(Instruction(assign)); //Assign value to base variable
 			
-			//Sno lediga platser att spara temporära variabler
-			sm.append(Instruction(lvalue, 0));
-			sm.append(Instruction(push, 1));
-			sm.append(Instruction(assign));
-			
-			sm.append(Instruction(lvalue, 1));
-			sm.append(Instruction(push, rightValue));
-			sm.append(Instruction(assign));
+			//Exponent
+			sm.append(Instruction(lvalue, exponent_var));//Store into exponent variable
+			putTreeOnStackMachine(tree->args[1]);	//Push exponent value on stack		
+			sm.append(Instruction(assign)); //Assign value to exponent variable
 
+			//Start with result = 1, put result on stack
+			sm.append(Instruction(push, 1));
+ 
 			//While part
-			sm.append(Instruction(label, label_1));
+			sm.append(Instruction(label, loop_start));
 						
 
-			//villkor
-			sm.append(Instruction(rvalue, 1));
+			//If(Exponent > 0)
+			sm.append(Instruction(rvalue, exponent_var));
 			sm.append(Instruction(push, 0));
 			sm.append(Instruction(gt));
 
 
-			sm.append(Instruction(gofalse, label_2));
+			sm.append(Instruction(gofalse, after_loop));
 
-			//Kroppen
+			//Body
 			
-			//a1 = a1 * leftValue;
-			sm.append(Instruction(lvalue, 0));
-			sm.append(Instruction(rvalue, 0));			
-			sm.append(Instruction(push, leftValue));			
-			sm.append(Instruction(times));			
-			sm.append(Instruction(assign));
+				//result = result * base;
+				sm.append(Instruction(rvalue, base_var));
+				sm.append(Instruction(times));
 
-			//b1 = b1 - 1;
-			sm.append(Instruction(lvalue, 1));
-			sm.append(Instruction(rvalue, 1));
-			sm.append(Instruction(push, 1));
-			sm.append(Instruction(minus));			
-			sm.append(Instruction(assign));
-			
+				//exponent = exponent  - 1;
+				sm.append(Instruction(lvalue, exponent_var)); // put refrence to exponent on stack
 
-			sm.append(Instruction(jump, label_1));
-			sm.append(Instruction(label, label_2));
-			
-			//Push result to stack
-			sm.append(Instruction(rvalue, 0));
-*/
+				sm.append(Instruction(rvalue, exponent_var)); // put value from exponent on stack
+				sm.append(Instruction(push, 1));
+				sm.append(Instruction(minus));			
+				sm.append(Instruction(assign)); //Store new value to exponent variable
+
+				//Jump to loop start
+				sm.append(Instruction(jump, loop_start));
+
+
+			sm.append(Instruction(label, after_loop));
+
+
 			//exp
-			return powe(leftValue, rightValue);
+			return 1;
 		}break;
 		case (int)'%':
 		{
 			DEBUG_CALL(printf("%%\n"));
-			int leftValue = runTree(tree->args[0]);
-			int rightValue = runTree(tree->args[1]);
+			
+			putTreeOnStackMachine(tree->args[0]);
+			putTreeOnStackMachine(tree->args[1]);
 
-			if(tree->args[0]->type == ID)leftValue = valuetable[leftValue];
-			if(tree->args[1]->type == ID)rightValue = valuetable[rightValue];
+		
 			sm.append(Instruction(modulo));
-			return leftValue % rightValue;
+			
+			return 1;
 		}break;
 		case (int)';':
 		{
 			DEBUG_CALL(printf(";\n"));
-			runTree(tree->args[0]);
-			runTree(tree->args[1]);
+			putTreeOnStackMachine(tree->args[0]);
+			putTreeOnStackMachine(tree->args[1]);
 
 		}break;
 		case (int)'=':
 		{
 			DEBUG_CALL(printf("=\n"));
-			int leftValue = tree->args[0]->value;//runTree(tree->args[0]);
-			sm.append(Instruction(lvalue, leftValue));
-			int rightValue = runTree(tree->args[1]);
+			sm.append(Instruction(lvalue, tree->args[0]->value));
+			putTreeOnStackMachine(tree->args[1]);
 
-			int idVal = valuetable[leftValue] = rightValue;
 			
 			sm.append(Instruction(assign));
-			return idVal;
+			return 1;
 		}break;
 		default:
 		{
 			
-			int arg0 = runTree(tree->args[0]);
-			int arg1 = runTree(tree->args[1]);
-			int arg2 = runTree(tree->args[2]);
-			DEBUG_CALL(printf("DEFAULT: %c, %d, %d, %d\n", tree->type, arg0, arg1, arg2));
+			putTreeOnStackMachine(tree->args[0]);
+			putTreeOnStackMachine(tree->args[1]);
+			putTreeOnStackMachine(tree->args[2]);
+			DEBUG_CALL(printf("DEFAULT: %c\n", tree->type));
 
-			return arg0;
+			return 1;
 		}break;
 	}		
 	return 0;
@@ -2197,3 +2170,262 @@ int runTree(TreeNode* tree)
 }
 
 
+
+//TreeNode* mkleaf(int type, int value)
+
+//TreeNode* mknode(int type, TreeNode* a0, TreeNode* a1, TreeNode* a2)
+
+
+
+TreeNode* optimizeTree(TreeNode* tree)
+{
+	TreeNode* optimizedTree = NULL;
+	if(tree == NULL) return NULL;
+	switch(tree->type)
+		{
+		case NUM:
+		{	
+			DEBUG_CALL(printf("NUM\n"));
+			optimizedTree = mkleaf(tree->type, tree->value);						
+		}break;
+		case ID:{
+
+			DEBUG_CALL(printf("ID\n"));
+			optimizedTree = mkleaf(tree->type, tree->value);
+		}break;
+/*
+		case PRINT:
+		{
+			DEBUG_CALL(printf("PRINT\n"));
+			
+			optimizedTree = mknode(tree->type, optimizeTree(tree->args[0]), optimizeTree(tree->args[1]), optimizeTree(tree->args[2]));
+		}break;
+		case WHILE:
+		{
+			DEBUG_CALL(printf("WHILE\n"));
+			
+			optimizedTree = mknode(tree->type, optimizeTree(tree->args[0]), optimizeTree(tree->args[1]), optimizeTree(tree->args[2]));
+		}break;
+		case READ:
+		{
+			DEBUG_CALL(printf("READ\n"));
+			
+			optimizedTree = mknode(tree->type, optimizeTree(tree->args[0]), optimizeTree(tree->args[1]), optimizeTree(tree->args[2]));
+		}break;
+*/
+		case (int)'?':
+		case IF:
+		{
+			DEBUG_CALL(printf("IF\n"));
+			TreeNode* conditionArg = optimizeTree(tree->args[0]);
+			TreeNode* trueArg = optimizeTree(tree->args[1]);
+			TreeNode* elseArg = optimizeTree(tree->args[2]);
+			if(conditionArg->type  == NUM)
+			{
+				//Replace node if constant condition
+				if(conditionArg->value != 0)
+				{
+					optimizedTree = trueArg;
+				}
+				else
+				{
+					optimizedTree = elseArg;
+				}				
+ 			}
+			else
+			{
+				optimizedTree = mknode(tree->type, conditionArg, trueArg, elseArg); //otherwise
+			}
+		}break;
+		case ELSE:
+		{
+			DEBUG_CALL(printf("ELSE\n"));
+			
+			optimizedTree = optimizeTree(tree->args[0]); //ELSE node-type is just flavor, don't need it in the tree
+		}break;
+		case (int)'+':
+		{
+			DEBUG_CALL(printf("+\n"));
+			TreeNode* leftArg = optimizeTree(tree->args[0]);
+			TreeNode* rightArg = optimizeTree(tree->args[1]);
+
+			if(leftArg->type  == ID && rightArg->type  == NUM && rightArg->value == 0)
+			{
+				optimizedTree = leftArg; //Remove node if: variable + 0, replace with left node
+ 			}
+			else if(rightArg->type  == ID && leftArg->type  == NUM && leftArg->value == 0)
+			{
+				optimizedTree = rightArg; //Remove node if: 0 + variable, replace with right node
+ 			}
+			else if(leftArg->type  == NUM && rightArg->type == NUM)
+			{
+				optimizedTree = mkleaf(NUM, leftArg->value + rightArg->value); //precompute node if: number + number
+ 			}
+			else
+			{
+				optimizedTree = mknode(tree->type, leftArg, rightArg, optimizeTree(tree->args[2])); //otherwise
+			}
+
+			
+				
+		}break;
+		case (int)'-':
+		{
+			DEBUG_CALL(printf("-\n"));
+			TreeNode* leftArg = optimizeTree(tree->args[0]);
+			TreeNode* rightArg = optimizeTree(tree->args[1]);
+
+			if(leftArg->type  == ID && rightArg->type  == NUM && rightArg->value == 0)
+			{
+				optimizedTree = leftArg; //Remove node if: variable - 0, replace with left node
+ 			}
+			else if(leftArg->type  == NUM && rightArg->type == NUM)
+			{
+				optimizedTree = mkleaf(NUM, leftArg->value - rightArg->value); //precompute node if: number - number
+ 			}
+			else
+			{
+				optimizedTree = mknode(tree->type, leftArg, rightArg, optimizeTree(tree->args[2])); //otherwise
+			}
+		}break;
+		case (int)'/':
+		{
+			DEBUG_CALL(printf("/\n"));
+			TreeNode* leftArg = optimizeTree(tree->args[0]);
+			TreeNode* rightArg = optimizeTree(tree->args[1]);
+			if(leftArg->type  == NUM && leftArg->value == 0)
+			{
+				optimizedTree = mkleaf(NUM, 0); //Replace node with 0 if: 0 / something
+ 			}if(rightArg->type == NUM && rightArg->value == 1)
+			{
+				optimizedTree = leftArg; //Replace with left node if: something / 1
+ 			}
+			else if(rightArg->type == NUM && leftArg->type == NUM)
+			{
+				optimizedTree = mkleaf(NUM, leftArg->value / rightArg->value); //Precompute if: num / num
+ 			}
+			else if(rightArg->type == ID && leftArg->type == ID && leftArg->value == rightArg->value)
+			{
+				optimizedTree = mkleaf(NUM, 1); //Replace node with 1 if: ID / ID, when using the same variable.
+ 			}
+			else
+			{
+				optimizedTree = mknode(tree->type, leftArg, rightArg, optimizeTree(tree->args[2])); //otherwise
+			}
+		}break;
+		case (int)'*':
+		{
+			DEBUG_CALL(printf("*\n"));
+			TreeNode* leftArg = optimizeTree(tree->args[0]);
+			TreeNode* rightArg = optimizeTree(tree->args[1]);
+			if((leftArg->type  == NUM && leftArg->value == 0) || (rightArg->type  == NUM && rightArg->value == 0))
+			{
+				optimizedTree = mkleaf(NUM, 0); //Replace node with 0 if multipling with 0
+ 			}
+			else if(leftArg->type  == NUM && leftArg->value == 1)
+			{
+				optimizedTree = rightArg; //Replace with right node if: 1 * something
+ 			}
+			else if(rightArg->type  == NUM && rightArg->value == 1)
+			{
+				optimizedTree = leftArg; //Replace with left node if: something * 1
+ 			}
+			else if(rightArg->type  == NUM && leftArg->type == NUM)
+			{
+				optimizedTree = mkleaf(NUM, leftArg->value * rightArg->value); //Precompute if: num * num
+ 			}
+			else
+			{
+				optimizedTree = mknode(tree->type, leftArg, rightArg, optimizeTree(tree->args[2])); //otherwise
+			}	
+		}break;
+		case (int)'<':
+		{
+			DEBUG_CALL(printf("<\n"));
+			TreeNode* leftArg = optimizeTree(tree->args[0]);
+			TreeNode* rightArg = optimizeTree(tree->args[1]);
+			if(leftArg->type  == NUM && rightArg->type  == NUM)
+			{
+				optimizedTree = mkleaf(NUM, leftArg<rightArg); //precompute if num<num
+ 			}
+			else if(leftArg->type  == ID && rightArg->type  == ID && leftArg->value == rightArg->value)
+			{
+				optimizedTree = mkleaf(NUM, 0); //replace with 0 if ID<ID same variable
+ 			}
+			else
+			{
+				optimizedTree = mknode(tree->type, leftArg, rightArg, optimizeTree(tree->args[2])); //otherwise
+			}
+		}break;
+		case (int)'>':
+		{
+			DEBUG_CALL(printf(">\n"));
+			TreeNode* leftArg = optimizeTree(tree->args[0]);
+			TreeNode* rightArg = optimizeTree(tree->args[1]);
+			if(leftArg->type  == NUM && rightArg->type  == NUM)
+			{
+				optimizedTree = mkleaf(NUM, leftArg>rightArg); //precompute if num>num
+ 			}
+			else if(leftArg->type  == ID && rightArg->type  == ID && leftArg->value == rightArg->value)
+			{
+				optimizedTree = mkleaf(NUM, 0); //replace with 0 if ID>ID same variable
+ 			}
+			else
+			{
+				optimizedTree = mknode(tree->type, leftArg, rightArg, optimizeTree(tree->args[2])); //otherwise
+			}
+		}break;
+/* Optimize if we want:: 
+		case (int)'&':
+		{
+			DEBUG_CALL(printf("&\n"));
+			
+			
+			optimizedTree = mknode(tree->type, optimizeTree(tree->args[0]), optimizeTree(tree->args[1]), optimizeTree(tree->args[2]));
+		}break;
+		case (int)'|':
+		{
+			DEBUG_CALL(printf("|\n"));
+
+			
+			optimizedTree = mknode(tree->type, optimizeTree(tree->args[0]), optimizeTree(tree->args[1]), optimizeTree(tree->args[2]));
+		}break;
+		case (int)'^':
+		{
+			DEBUG_CALL(printf("^\n"));
+			
+			
+			optimizedTree = mknode(tree->type, optimizeTree(tree->args[0]), optimizeTree(tree->args[1]), optimizeTree(tree->args[2]));
+		}break;
+		case (int)'%':
+		{
+			DEBUG_CALL(printf("%%\n"));
+			
+			
+			optimizedTree = mknode(tree->type, optimizeTree(tree->args[0]), optimizeTree(tree->args[1]), optimizeTree(tree->args[2]));
+		}break;
+*/
+/*
+		case (int)';':
+		{
+			DEBUG_CALL(printf(";\n"));
+			
+			optimizedTree = mknode(tree->type, optimizeTree(tree->args[0]), optimizeTree(tree->args[1]), optimizeTree(tree->args[2]));
+		}break;
+		case (int)'=':
+		{
+			DEBUG_CALL(printf("=\n"));
+			
+			optimizedTree = mknode(tree->type, optimizeTree(tree->args[0]), optimizeTree(tree->args[1]), optimizeTree(tree->args[2]));
+		}break;
+*/
+		default:
+		{
+			
+			DEBUG_CALL(printf("DEFAULT: %c\n", tree->type));
+
+			optimizedTree = mknode(tree->type, optimizeTree(tree->args[0]), optimizeTree(tree->args[1]), optimizeTree(tree->args[2]));
+		}break;
+	}		
+	return optimizedTree;
+}
